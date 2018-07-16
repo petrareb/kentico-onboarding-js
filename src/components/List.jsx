@@ -3,6 +3,13 @@ import assignment from '../assignment.gif';
 
 import { TsComponent } from './TsComponent.tsx';
 
+import { TodoTable } from './TodoTable.jsx';
+
+const TODOS = [
+  { name: 'aaa' },
+  { name: 'bbb' }
+  ];
+
 export class List extends PureComponent {
   render() {
     return (
@@ -37,6 +44,7 @@ export class List extends PureComponent {
           <div className="col-sm-12 col-md-offset-2 col-md-8">
             <pre>
               TODO: implement the list here :)
+              <TodoTable items={TODOS}/>
             </pre>
           </div>
         </div>
@@ -44,3 +52,4 @@ export class List extends PureComponent {
     );
   }
 }
+
