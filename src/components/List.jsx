@@ -5,10 +5,6 @@ import { TsComponent } from './TsComponent.tsx';
 
 import { TodoTable } from './TodoTable.jsx';
 
-const TODOS = [
-  { name: 'aaa' },
-  { name: 'bbb' }
-  ];
 
 export class List extends PureComponent {
   render() {
@@ -44,7 +40,7 @@ export class List extends PureComponent {
           <div className="col-sm-12 col-md-offset-2 col-md-8">
             <pre>
               TODO: implement the list here :)
-              <TodoTable items={TODOS}/>
+              <TodoTable />
             </pre>
           </div>
         </div>

@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class RowItem extends React.PureComponent {
+export class RowItem extends React.PureComponent {
   static displayName = 'RowItem';
   static propTypes = {
     name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    number: PropTypes.number.isRequired,
+    onRowClick: PropTypes.func.isRequired
   };
 
   render() {
     return (
-      <li> {this.props.name} </li>
+      <tr>
+        <td>
+          <span onClick={() => this.props.onRowClick(this.props.id)}>{this.props.number + '. ' + this.props.name}</span>
+        </td>
+      </tr>
     );
   }
 }
 
-export { RowItem };
