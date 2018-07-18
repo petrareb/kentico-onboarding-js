@@ -1,15 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ModifiableItem } from './ModifiableItem';
-import { RowItem } from './RowItem';
+import { ViewItem } from './ViewItem';
 
 export const ListItem = ({
-  name, id, number, chosen, onRowClickFunction
+  name, id, number, chosen, onRowClick, onDeleteClick, onSaveClick, onCancelClick
 }) => {
   if (chosen) {
-    return <ModifiableItem text={name} id={id} number={number}/>;
+    return (<ModifiableItem
+      text={name}
+      id={id}
+      number={number}
+      onSaveClick={onSaveClick}
+      onDeleteClick={onDeleteClick}
+      onCancelClick={onCancelClick}
+    />);
   }
-  return <RowItem name={name} number={number} id={id} onRowClick={onRowClickFunction}/>;
+  return (<ViewItem
+    name={name}
+    number={number}
+    id={id}
+    onRowClick={onRowClick}
+  />);
 };
 
 ListItem.propTypes = {
@@ -17,5 +29,8 @@ ListItem.propTypes = {
   id: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   chosen: PropTypes.bool.isRequired,
-  onRowClickFunction: PropTypes.func.isRequired
+  onRowClick: PropTypes.func.isRequired,
+  onSaveClick: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
+  onCancelClick: PropTypes.func.isRequired
 };
