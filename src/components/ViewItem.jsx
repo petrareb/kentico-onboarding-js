@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export class RowItem extends React.PureComponent {
-  static displayName = 'RowItem';
+export class ViewItem extends React.PureComponent {
+  static displayName = 'ViewItem';
   static propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
@@ -14,10 +14,9 @@ export class RowItem extends React.PureComponent {
     return (
       <tr>
         <td>
-          <span onClick={() => this.props.onRowClick(this.props.id)}>{this.props.number + '. ' + this.props.name}</span>
+          <span onClick={() => this.props.onRowClick(this.props.id, true)}>{this.props.number + '. ' + this.props.name}</span>
         </td>
       </tr>
     );
   }
 }
-
