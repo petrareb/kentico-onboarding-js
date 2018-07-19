@@ -12,11 +12,11 @@ export class ViewItem extends React.PureComponent {
 
   render() {
     return (
-      <tr>
-        <td>
-          <span onClick={() => this.props.onRowClick(this.props.id, true)}>{this.props.number + '. ' + this.props.name}</span>
-        </td>
-      </tr>
+      <li className="list-group-item">
+          <span onClick={() => this.props.onRowClick(this.props.id, true)} className="text-left">
+            {this.props.number + '. ' + this.props.name}
+          </span>
+      </li>
     );
   }
 }

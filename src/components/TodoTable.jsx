@@ -10,28 +10,22 @@ export class TodoTable extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      values: [{
-        text: 'make coffee',
-        id: guid(),
-        chosen: false
-      }, {
-        text: 'sleep',
-        id: guid(),
-        chosen: false
-      }]
+      values: [
+        {
+          text: 'make coffee',
+          id: guid(),
+          chosen: false
+        },
+        {
+          text: 'sleep',
+          id: guid(),
+          chosen: false
+        }]
     };
   }
 
-  setChosen = (itemId, chosenValue) => {
-    this.setState(() => {
-      return {
-        values: this._modifyChosenAtId(itemId, chosenValue)
-      };
-    });
-  };
 
-  // TODO: save button
-  _modifyChosenAtId = (itemId, chosenVal) => {
+  modifyChosenAtId = (itemId, chosenVal) => {
     const newArray = this.state.values.slice();
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].id === itemId) {
@@ -39,8 +33,11 @@ export class TodoTable extends React.PureComponent {
         break;
       }
     }
-    return newArray;
+    this.setState({
+      values: newArray
+    });
   };
+
 
   deleteElementWithId = (itemId) => {
     const newArray = this.state.values.slice();
@@ -50,14 +47,12 @@ export class TodoTable extends React.PureComponent {
         break;
       }
     }
-    this.setState(() => {
-      return {
-        values: newArray
-      };
+    this.setState({
+      values: newArray
     });
   };
 
-  editElementWithId = (itemId, newValue) => {
+  editElementTextWithId = (itemId, newValue) => {
     const newArray = this.state.values.slice();
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].id === itemId) {
@@ -65,12 +60,10 @@ export class TodoTable extends React.PureComponent {
         break;
       }
     }
-    this.setState(() => {
-      return {
-        values: newArray
-      };
+    this.setState({
+      values: newArray
     });
-    this._modifyChosenAtId(itemId, false);
+    this.modifyChosenAtId(itemId, false);
   };
 
 
@@ -101,21 +94,19 @@ export class TodoTable extends React.PureComponent {
           name={item.text}
           number={i + 1}
           chosen={item.chosen}
-          onRowClick={this.setChosen}
-          onSaveClick={this.editElementWithId}
+          onRowClick={this.modifyChosenAtId}
+          onSaveClick={this.editElementTextWithId}
           onDeleteClick={this.deleteElementWithId}
-          onCancelClick={this.setChosen}
+          onCancelClick={this.modifyChosenAtId}
         />
       ));
 
     return (
       <div>
-        <table>
-          <tbody>
+        <ul className="list-group">
           {table_rows}
-          </tbody>
-        </table>
-        <ItemToAdd onAddClick={this.addNewItem}/>
+          <ItemToAdd onAddClick={this.addNewItem}/>
+        </ul>
       </div>
     );
   }
