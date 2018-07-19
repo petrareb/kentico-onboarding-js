@@ -28,7 +28,7 @@ export class ModifiableItem extends React.PureComponent {
   };
 
   _onSaveClick = () => {
-    this.props.onSaveClick(this.props.id);
+    this.props.onSaveClick(this.props.id, this.state.text);
   };
 
   _changedTextInput = (event) => {

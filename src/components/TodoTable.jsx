@@ -30,6 +30,7 @@ export class TodoTable extends React.PureComponent {
     });
   };
 
+  // TODO: save button
   _modifyChosenAtId = (itemId, chosenVal) => {
     const newArray = this.state.values.slice();
     for (let i = 0; i < newArray.length; i++) {
@@ -40,13 +41,12 @@ export class TodoTable extends React.PureComponent {
     }
     return newArray;
   };
-  // TODO: save button
-  // TODO: zmiznu vsetky riadky za deletnutym
+
   deleteElementWithId = (itemId) => {
     const newArray = this.state.values.slice();
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].id === itemId) {
-        newArray.splice(i);
+        newArray.splice(i, 1);
         break;
       }
     }
@@ -70,6 +70,7 @@ export class TodoTable extends React.PureComponent {
         values: newArray
       };
     });
+    this._modifyChosenAtId(itemId, false);
   };
 
 
