@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModifiableItem } from './ModifiableItem';
+import { ModifyItem } from './ModifyItem';
 import { ViewItem } from './ViewItem';
 
 export const ListItem = ({
   name, id, number, chosen, onRowClick, onDeleteClick, onSaveClick, onCancelClick
 }) => {
   if (chosen) {
-    return (<ModifiableItem
+    return (<ModifyItem
       text={name}
       id={id}
       number={number}

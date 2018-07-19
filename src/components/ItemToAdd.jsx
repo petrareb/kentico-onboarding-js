@@ -11,7 +11,7 @@ export class ItemToAdd extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      text: '',
+      text: ''
     };
   }
 
@@ -24,17 +24,36 @@ export class ItemToAdd extends React.PureComponent {
   _onAddClick = (event) => {
     event.preventDefault();
     this.props.onAddClick(this.state.text);
-    this.setState(() => ({
+    this.setState({
       text: ''
-    }));
+    });
   };
 
   render() {
     return (
-      <form>
-        <input type={'text'} name={'itemToAdd'} value={this.state.text} onChange={this._changedTextInput} />
-        <input type={'submit'} name={'itemToAddSubmitButton'} value={'Add'} onClick={this._onAddClick}/>
-      </form>
+      <div className="list-group-item">
+        <li className="input-group">
+        <input
+          type="text"
+          className="form-control"
+          name="itemToAddTextBox"
+          value={this.state.text}
+          onChange={this._changedTextInput}
+        />
+          <div className="input-group-append input-group-btn">
+            <button
+              className="btn btn-light"
+              type="button"
+              name={'itemToAddSubmitButton'}
+              value={'Add'}
+              onClick={this._onAddClick}
+            >
+              Add
+            </button>
+          </div>
+        </li>
+      </div>
+
     );
   }
 }
