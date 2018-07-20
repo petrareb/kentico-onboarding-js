@@ -3,10 +3,10 @@ import assignment from '../assignment.gif';
 
 import { TsComponent } from './TsComponent.tsx';
 
-import { TodoTable } from './TodoTable.jsx';
+import { TodoList } from './TodoList.jsx';
 
 
-export class List extends PureComponent {
+export class Page extends PureComponent {
   render() {
     return (
       <div className="row">
@@ -38,10 +38,8 @@ export class List extends PureComponent {
 
         <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
-            {/*<pre>*/}
               TODO: implement the list here :)
-              <TodoTable />
-            {/*</pre>*/}
+              <TodoList />
           </div>
         </div>
       </div>

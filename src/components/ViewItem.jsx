@@ -6,15 +6,20 @@ export class ViewItem extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
     onRowClick: PropTypes.func.isRequired
   };
+
+  _onClick = () => this.props.onRowClick(this.props.id, true);
 
   render() {
     return (
       <li className="list-group-item">
-          <span onClick={() => this.props.onRowClick(this.props.id, true)} className="text-left">
-            {this.props.number + '. ' + this.props.name}
+          <span
+            className="text-left"
+            onClick={this._onClick}
+          >
+            {this.props.index + '. ' + this.props.name}
           </span>
       </li>
     );
