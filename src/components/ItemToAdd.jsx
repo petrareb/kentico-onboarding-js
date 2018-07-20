@@ -15,37 +15,40 @@ export class ItemToAdd extends React.PureComponent {
     };
   }
 
+  // TODO: validation
+
   _changedTextInput = (event) => {
     this.setState({
       text: event.target.value
     });
   };
 
-  _onAddClick = (event) => {
-    event.preventDefault();
-    this.props.onAddClick(this.state.text);
-    this.setState({
-      text: ''
-    });
+  _onAddClick = () => {
+    if (this.state.text) {
+      this.props.onAddClick(this.state.text);
+      this.setState({
+        text: ''
+      });
+    }
   };
 
   render() {
     return (
       <div className="list-group-item">
         <li className="input-group">
-        <input
-          type="text"
-          className="form-control"
-          name="itemToAddTextBox"
-          value={this.state.text}
-          onChange={this._changedTextInput}
-        />
+          <input
+            type="text"
+            className="form-control"
+            name="itemToAddTextBox"
+            value={this.state.text}
+            onChange={this._changedTextInput}
+          />
           <div className="input-group-append input-group-btn">
             <button
               className="btn btn-light"
               type="button"
-              name={'itemToAddSubmitButton'}
-              value={'Add'}
+              name="itemToAddSubmitButton"
+              value="Add"
               onClick={this._onAddClick}
             >
               Add
@@ -53,7 +56,6 @@ export class ItemToAdd extends React.PureComponent {
           </div>
         </li>
       </div>
-
     );
   }
 }

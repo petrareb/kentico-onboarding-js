@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export class ModifyItem extends React.PureComponent {
-  static displayName = 'ModifyItem';
+export class EditItem extends React.PureComponent {
+  static displayName = 'EditItem';
   static propTypes = {
     text: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
     onCancelClick: PropTypes.func.isRequired,
     onSaveClick: PropTypes.func.isRequired,
@@ -28,34 +28,42 @@ export class ModifyItem extends React.PureComponent {
   };
 
   _onSaveClick = () => {
-    this.props.onSaveClick(this.props.id, this.state.text);
+    if (this.state.text) {
+      this.props.onSaveClick(this.props.id, this.state.text);
+    }
   };
 
+  // TODO: target vs currentTarget
   _changedTextInput = (event) => {
     this.setState({
       text: event.target.value
     });
   };
 
+
   render() {
     return (
-
       <div className="list-group-item">
-      <li className="input-group">
-        <input
-          type="text"
-          className="form-control"
-          name={'itemToModify'}
-          onChange={this._changedTextInput}
-          value={this.state.text}
-        />
+        <li className="input-group has-error"> // TODO classnames
+          <p className="input-group-addon">
+            {this.props.index}
+          </p>
+          <input
+            type="text"
+            className="form-control"
+            name="itemToModify"
+            onChange={this._changedTextInput}
+            value={this.state.text}
+            required
+          />
           <div className="input-group-append input-group-btn">
             <button
               className="btn btn-primary"
               type="button"
               name="itemToModifySaveButton"
-              value="Save"
+              //value="Save"
               onClick={this._onSaveClick}
+              // disabled={_isValid()}
             >
               Save
             </button>
@@ -78,7 +86,7 @@ export class ModifyItem extends React.PureComponent {
               Delete
             </button>
           </div>
-      </li>
+        </li>
       </div>
     );
   }

@@ -1,0 +1,13 @@
+const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
+  .toString(16)
+  .substring(1);
+
+export const generateGuid = () => s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+// // TODO
+//
+// const generateGuid = () => {
+//   const uuidv1 = import('uuid/v1');
+//   return (uuidv1());
+// };
+//
+
