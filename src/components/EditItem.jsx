@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Input } from './Input';
+import { isValidText } from '../utils/validateText';
+import classNames from 'classnames';
 
 export class EditItem extends React.PureComponent {
   static displayName = 'EditItem';
@@ -16,6 +19,7 @@ export class EditItem extends React.PureComponent {
     super(props);
     this.state = {
       text: props.text,
+      isValid: isValidText(this.props.text)
     };
   }
 
@@ -36,18 +40,25 @@ export class EditItem extends React.PureComponent {
   // TODO: target vs currentTarget
   _changedTextInput = (event) => {
     this.setState({
-      text: event.target.value
+      text: event.target.value,
+      isValid: isValidText(event.target.value)
     });
   };
-
 
   render() {
     return (
       <div className="list-group-item">
-        <li className="input-group has-error"> // TODO classnames
+        <li className={classNames({
+          "input-group": true,
+          "has-error": !this.state.isValid,
+          "has-success": this.state.isValid
+        })}
+        >
+          {/*has-error*/}
           <p className="input-group-addon">
             {this.props.index}
           </p>
+          {/*<Input/>*/}
           <input
             type="text"
             className="form-control"
@@ -61,9 +72,9 @@ export class EditItem extends React.PureComponent {
               className="btn btn-primary"
               type="button"
               name="itemToModifySaveButton"
-              //value="Save"
+              value="Save"
               onClick={this._onSaveClick}
-              // disabled={_isValid()}
+              disabled={!isValidText(this.state.text)}
             >
               Save
             </button>
