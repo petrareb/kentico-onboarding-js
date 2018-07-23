@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input } from './Input';
 import { isValidText } from '../utils/validateText';
 import classNames from 'classnames';
 
 export class EditItem extends React.PureComponent {
   static displayName = 'EditItem';
   static propTypes = {
-    text: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
+    itemProps: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      index: PropTypes.number.isRequired
+    }),
     onCancelClick: PropTypes.func.isRequired,
     onSaveClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired
@@ -18,30 +19,27 @@ export class EditItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      text: props.text,
-      isValid: isValidText(this.props.text)
+      text: props.itemProps.props.text,
     };
   }
 
   _onCancelClick = () => {
-    this.props.onCancelClick(this.props.id, false);
+    this.props.onCancelClick(this.props.itemProps.props.id, false);
   };
 
   _onDeleteClick = () => {
-    this.props.onDeleteClick(this.props.id);
+    this.props.onDeleteClick(this.props.itemProps.props.id);
   };
 
   _onSaveClick = () => {
     if (this.state.text) {
-      this.props.onSaveClick(this.props.id, this.state.text);
+      this.props.onSaveClick(this.props.itemProps.props.id, this.state.text);
     }
   };
 
-  // TODO: target vs currentTarget
   _changedTextInput = (event) => {
     this.setState({
       text: event.target.value,
-      isValid: isValidText(event.target.value)
     });
   };
 
@@ -50,15 +48,13 @@ export class EditItem extends React.PureComponent {
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !this.state.isValid,
-          "has-success": this.state.isValid
+          "has-error": !isValidText(this.state.text),
+          "has-success": isValidText(this.state.text)
         })}
         >
-          {/*has-error*/}
           <p className="input-group-addon">
-            {this.props.index}
+            {this.props.itemProps.props.index}
           </p>
-          {/*<Input/>*/}
           <input
             type="text"
             className="form-control"

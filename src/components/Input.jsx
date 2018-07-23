@@ -7,22 +7,22 @@ import classNames from 'classnames';
 export class Input extends React.PureComponent {
   static displayName = 'Input';
   static propTypes = {
-    // text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      text: '', //props.text,
-      isValid: isValidText(props.text)
+      text: props.text
     };
   }
 
   _changedTextInput = (event) => {
     this.setState({
       text: event.target.value,
-      isValid: isValidText(event.target.value)
     });
+    this.props.onChange(this.state.text);
   };
 
 
@@ -32,7 +32,8 @@ export class Input extends React.PureComponent {
         type="text"
         className={classNames({
           "form-control": true,
-          "has-error": !this.state.isValid
+          "has-error": !isValidText(this.state.text),
+          "has-success": isValidText(this.state.text)
         })}
         name="inputTextBox"
         value={this.state.text}
