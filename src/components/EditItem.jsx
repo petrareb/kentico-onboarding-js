@@ -19,7 +19,7 @@ export class EditItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      text: props.itemProps.props.text,
+      text: props.itemProps.props.text
     };
   }
 
@@ -39,7 +39,7 @@ export class EditItem extends React.PureComponent {
 
   _changedTextInput = (event) => {
     this.setState({
-      text: event.target.value,
+      text: event.target.value
     });
   };
 
