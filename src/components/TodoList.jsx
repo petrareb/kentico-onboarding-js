@@ -3,6 +3,7 @@ import React from 'react';
 import { ItemToAdd } from './ItemToAdd';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
+import { ItemProperties } from './ItemProperties';
 
 export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
@@ -23,7 +24,6 @@ export class TodoList extends React.PureComponent {
         }]
     };
   }
-
 
   setEdited = (itemId, edited) => {
     this.setState((prevState) => ({
@@ -78,10 +78,14 @@ export class TodoList extends React.PureComponent {
       .items
       .map((item, i) => (
           <TodoListItem
+            itemProps={
+              <ItemProperties
+                id={item.id}
+                text={item.text}
+                index={i + 1}
+              />
+            }
             key={item.id}
-            id={item.id}
-            name={item.text}
-            index={i + 1}
             isEdited={item.isEdited}
             onRowClick={this.setEdited}
             onSaveClick={this.saveItem}

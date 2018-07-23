@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { Input } from './Input';
 import classNames from 'classnames';
 
 
@@ -14,17 +13,13 @@ export class ItemToAdd extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      text: '',
-      isValid: false
+      text: ''
     };
   }
 
-  // TODO: validation
-
   _changedTextInput = (event) => {
     this.setState({
-      text: event.target.value,
-      isValid: isValidText(event.target.value)
+      text: event.target.value
     });
   };
 
@@ -32,8 +27,7 @@ export class ItemToAdd extends React.PureComponent {
     if (this.state.text) {
       this.props.onAddClick(this.state.text);
       this.setState({
-        text: '',
-        isValid: false
+        text: ''
       });
     }
   };
@@ -43,19 +37,18 @@ export class ItemToAdd extends React.PureComponent {
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !this.state.isValid,
-          "has-success": this.state.isValid
+          "has-error": !isValidText(this.state.text),
+          "has-success": isValidText(this.state.text)
         })}
         >
-          <input
-            type="text"
-            className="form-control"
-            name="itemToAddTextBox"
-            value={this.state.text}
-            onChange={this._changedTextInput}
+           <input
+             type="text"
+             className="form-control"
+             name="itemToAddTextBox"
+             value={this.state.text}
+             onChange={this._changedTextInput}
+           />
 
-          />
-          {/*<Input/>*/}
           <div className="input-group-append input-group-btn">
             <button
               className="btn btn-light"
