@@ -17,31 +17,28 @@ export class EditItem extends React.PureComponent {
   };
 
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       text: props.itemProps.props.text
     };
   }
 
-  _onCancelClick = () => {
+  _cancelEditing = () =>
     this.props.onCancelClick(this.props.itemProps.props.id, false);
-  };
 
-  _onDeleteClick = () => {
+  _deleteItem = () =>
     this.props.onDeleteClick(this.props.itemProps.props.id);
-  };
 
-  _onSaveClick = () => {
+  _editItem = () => {
     if (this.state.text) {
       this.props.onSaveClick(this.props.itemProps.props.id, this.state.text);
     }
   };
 
-  _changedTextInput = (event) => {
+  _updateText = (event) =>
     this.setState({
       text: event.target.value
     });
-  };
 
   render() {
     return (
@@ -59,7 +56,7 @@ export class EditItem extends React.PureComponent {
             type="text"
             className="form-control"
             name="itemToModify"
-            onChange={this._changedTextInput}
+            onChange={this._updateText}
             value={this.state.text}
             required
           />
@@ -69,7 +66,7 @@ export class EditItem extends React.PureComponent {
               type="button"
               name="itemToModifySaveButton"
               value="Save"
-              onClick={this._onSaveClick}
+              onClick={this._editItem}
               disabled={!isValidText(this.state.text)}
             >
               Save
@@ -79,7 +76,7 @@ export class EditItem extends React.PureComponent {
               type="button"
               name="itemToModifyCancelButton"
               value="Cancel"
-              onClick={this._onCancelClick}
+              onClick={this._cancelEditing}
             >
               Cancel
             </button>
@@ -88,7 +85,7 @@ export class EditItem extends React.PureComponent {
               type="button"
               name="itemToModifyDeleteButton"
               value="Delete"
-              onClick={this._onDeleteClick}
+              onClick={this._deleteItem}
             >
               Delete
             </button>

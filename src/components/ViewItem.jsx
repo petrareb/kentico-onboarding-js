@@ -12,14 +12,14 @@ export class ViewItem extends React.PureComponent {
     onRowClick: PropTypes.func.isRequired
   };
 
-  _onClick = () => this.props.onRowClick(this.props.itemProps.props.id, true);
+  _enableEditing = () => this.props.onRowClick(this.props.itemProps.props.id, true);
 
   render() {
     return (
       <li className="list-group-item">
           <span
             className="text-left"
-            onClick={this._onClick}
+            onClick={this._enableEditing}
           >
             {this.props.itemProps.props.index + '. ' + this.props.itemProps.props.text}
           </span>

@@ -1,3 +1,1 @@
-export const isValidText = (text) => {
-  return (text.trim()).length !== 0;
-};
+export const isValidText = (text) => (text.trim()).length !== 0;
