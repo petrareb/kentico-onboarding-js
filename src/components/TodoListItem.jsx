@@ -4,28 +4,28 @@ import { EditItem } from './EditItem';
 import { ViewItem } from './ViewItem';
 
 export const TodoListItem = ({
-  itemProps, isEdited, onRowClick, onDeleteClick, onSaveClick, onCancelClick
+  item, onRowClick, onDeleteClick, onSaveClick, onCancelClick
 }) => (
-  (isEdited)
+  (item.isEdited)
     ? <EditItem
-      itemProps={itemProps}
+      item={item}
       onSaveClick={onSaveClick}
       onDeleteClick={onDeleteClick}
       onCancelClick={onCancelClick}
     />
     : <ViewItem
-      itemProps={itemProps}
+      item={item}
       onRowClick={onRowClick}
     />
 );
 
 TodoListItem.propTypes = {
-  itemProps: PropTypes.shape({
+  item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    isEdited: PropTypes.bool.isRequired
   }),
-  isEdited: PropTypes.bool.isRequired,
   onRowClick: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,

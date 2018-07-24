@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { ItemToAdd } from './ItemToAdd';
+import { AddItem } from './AddItem';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
-import { Item } from './Item';
 
 export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
@@ -24,7 +22,7 @@ export class TodoList extends React.PureComponent {
   };
 
   setEdited = (itemId, edited) =>
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       items: prevState.items.map((item) =>
         ((item.id === itemId)
           ? ({
@@ -35,12 +33,12 @@ export class TodoList extends React.PureComponent {
     }));
 
   deleteItem = (itemId) =>
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       items: prevState.items.filter((item) => item.id !== itemId)
     }));
 
   saveItem = (itemId, newText) =>
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       items: prevState.items.map((item) =>
         ((item.id === itemId)
           ? ({
@@ -50,7 +48,6 @@ export class TodoList extends React.PureComponent {
           })
           : item))
     }));
-
 
   addNewItem = (changedText) => {
     const newValue = {
@@ -71,30 +68,27 @@ export class TodoList extends React.PureComponent {
     const table_rows = this
       .state
       .items
-      .map((item, i) => (
+      .map((_item, i) => {
+        const item = {
+          ..._item,
+          index: i + 1
+        };
+        return (
           <TodoListItem
-            itemProps={
-              <Item
-                id={item.id}
-                text={item.text}
-                index={i + 1}
-              />
-            }
-            // TODO (88-89)
-            key={item.id}
-            isEdited={item.isEdited}
+            item={item}
             onRowClick={this.setEdited}
             onSaveClick={this.saveItem}
             onDeleteClick={this.deleteItem}
             onCancelClick={this.setEdited}
           />
-      ));
+        );
+      });
 
     return (
         <div>
           <ul className="list-group">
             {table_rows}
-            <ItemToAdd onAddClick={this.addNewItem}/>
+            <AddItem onAddClick={this.addNewItem}/>
           </ul>
         </div>
     );
