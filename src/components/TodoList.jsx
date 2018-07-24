@@ -1,31 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ItemToAdd } from './ItemToAdd';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
-import { ItemProperties } from './ItemProperties';
+import { Item } from './Item';
 
 export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
 
-  constructor() {
-    super();
-    this.state = {
-      items: [
-        {
-          text: 'Make coffee',
-          id: generateGuid(),
-          isEdited: false
-        },
-        {
-          text: 'Sleep',
-          id: generateGuid(),
-          isEdited: false
-        }]
-    };
-  }
+  state = {
+    items: [
+      {
+        text: 'Make coffee',
+        id: generateGuid(),
+        isEdited: false
+      },
+      {
+        text: 'Sleep',
+        id: generateGuid(),
+        isEdited: false
+      }]
+  };
 
-  setEdited = (itemId, edited) => {
+  setEdited = (itemId, edited) =>
     this.setState((prevState) => ({
       items: prevState.items.map((item) =>
         ((item.id === itemId)
@@ -35,15 +33,13 @@ export class TodoList extends React.PureComponent {
           })
           : item))
     }));
-  };
 
-  deleteItem = (itemId) => {
+  deleteItem = (itemId) =>
     this.setState((prevState) => ({
       items: prevState.items.filter((item) => item.id !== itemId)
     }));
-  };
 
-  saveItem = (itemId, newText) => {
+  saveItem = (itemId, newText) =>
     this.setState((prevState) => ({
       items: prevState.items.map((item) =>
         ((item.id === itemId)
@@ -54,7 +50,6 @@ export class TodoList extends React.PureComponent {
           })
           : item))
     }));
-  };
 
 
   addNewItem = (changedText) => {
@@ -79,12 +74,13 @@ export class TodoList extends React.PureComponent {
       .map((item, i) => (
           <TodoListItem
             itemProps={
-              <ItemProperties
+              <Item
                 id={item.id}
                 text={item.text}
                 index={i + 1}
               />
             }
+            // TODO (88-89)
             key={item.id}
             isEdited={item.isEdited}
             onRowClick={this.setEdited}

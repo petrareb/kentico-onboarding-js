@@ -10,20 +10,14 @@ export class ItemToAdd extends React.PureComponent {
     onAddClick: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
-    this.state = {
-      text: ''
-    };
-  }
+  state = { text: '' };
 
-  _changedTextInput = (event) => {
+  _changedTextInput = (event) =>
     this.setState({
       text: event.target.value
     });
-  };
 
-  _onAddClick = () => {
+  _addNewItem = () => {
     if (this.state.text) {
       this.props.onAddClick(this.state.text);
       this.setState({
@@ -55,7 +49,7 @@ export class ItemToAdd extends React.PureComponent {
               type="button"
               name="itemToAddSubmitButton"
               value="Add"
-              onClick={this._onAddClick}
+              onClick={this._addNewItem}
               disabled={!isValidText(this.state.text)}
             >
               Add
