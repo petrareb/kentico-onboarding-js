@@ -4,7 +4,7 @@ import { isValidText } from '../utils/validateText';
 import classNames from 'classnames';
 
 
-export class ItemToAdd extends React.PureComponent {
+export class AddItem extends React.PureComponent {
   static displayName = 'ItemToAdd';
   static propTypes = {
     onAddClick: PropTypes.func.isRequired
