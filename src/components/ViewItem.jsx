@@ -6,9 +6,9 @@ export class ViewItem extends React.PureComponent {
   static propTypes = {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      index: PropTypes.number.isRequired
+      text: PropTypes.string.isRequired
     }),
+    index: PropTypes.number.isRequired,
     onRowClick: PropTypes.func.isRequired
   };
 
@@ -21,7 +21,7 @@ export class ViewItem extends React.PureComponent {
             className="text-left"
             onClick={this._enableEditing}
           >
-            {this.props.item.index + '. ' + this.props.item.text}
+            {this.props.index + '. ' + this.props.item.text}
           </span>
       </li>
     );
