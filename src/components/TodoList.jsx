@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AddItem } from './AddItem';
+import { ItemToAdd } from './ItemToAdd';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
 
@@ -80,6 +80,7 @@ export class TodoList extends React.PureComponent {
             onSaveClick={this.saveItem}
             onDeleteClick={this.deleteItem}
             onCancelClick={this.setEdited}
+            key={item.id}
           />
         );
       });
@@ -88,7 +89,7 @@ export class TodoList extends React.PureComponent {
         <div>
           <ul className="list-group">
             {table_rows}
-            <AddItem onAddClick={this.addNewItem}/>
+            <ItemToAdd onAddClick={this.addNewItem}/>
           </ul>
         </div>
     );

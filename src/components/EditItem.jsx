@@ -29,11 +29,8 @@ export class EditItem extends React.PureComponent {
   _deleteItem = () =>
     this.props.onDeleteClick(this.props.item.id);
 
-  _editItem = () => {
-    if (this.state.text) {
-      this.props.onSaveClick(this.props.item.id, this.state.text);
-    }
-  };
+  _editItem = () =>
+    this.props.onSaveClick(this.props.item.id, this.state.text);
 
   _updateText = (event) =>
     this.setState({
@@ -41,12 +38,13 @@ export class EditItem extends React.PureComponent {
     });
 
   render() {
+    const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !isValidText(this.state.text),
-          "has-success": isValidText(this.state.text)
+          "has-error": !validText,
+          "has-success": validText
         })}
         >
           <p className="input-group-addon">
@@ -67,7 +65,7 @@ export class EditItem extends React.PureComponent {
               name="itemToModifySaveButton"
               value="Save"
               onClick={this._editItem}
-              disabled={!isValidText(this.state.text)}
+              disabled={!validText}
             >
               Save
             </button>
