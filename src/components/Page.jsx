@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import assignment from '../../public/images/assignment.gif';
 import { TsComponent } from './TsComponent.tsx';
 
 import { TodoList } from './TodoList.jsx';
 
 
-export class Page extends PureComponent {
+export const Page = () => ({
   render() {
     return (
       <div className="row">
@@ -37,5 +37,6 @@ export class Page extends PureComponent {
       </div>
     );
   }
-}
+});
 
+Page.displayName = 'Page';

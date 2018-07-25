@@ -4,7 +4,7 @@ import { isValidText } from '../utils/validateText';
 import classNames from 'classnames';
 
 
-export class AddItem extends React.PureComponent {
+export class ItemToAdd extends React.PureComponent {
   static displayName = 'ItemToAdd';
   static propTypes = {
     onAddClick: PropTypes.func.isRequired
@@ -18,12 +18,10 @@ export class AddItem extends React.PureComponent {
     });
 
   _addNewItem = () => {
-    if (this.state.text) {
-      this.props.onAddClick(this.state.text);
-      this.setState({
-        text: ''
-      });
-    }
+    this.props.onAddClick(this.state.text);
+    this.setState({
+      text: ''
+    });
   };
 
   render() {

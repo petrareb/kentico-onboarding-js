@@ -4,7 +4,11 @@ import { EditItem } from './EditItem';
 import { ViewItem } from './ViewItem';
 
 export const TodoListItem = ({
-  item, onRowClick, onDeleteClick, onSaveClick, onCancelClick
+  item,
+  onRowClick,
+  onDeleteClick,
+  onSaveClick,
+  onCancelClick
 }) => (
   (item.isEdited)
     ? <EditItem
@@ -31,3 +35,5 @@ TodoListItem.propTypes = {
   onDeleteClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired
 };
+
+TodoListItem.displayName = 'TodoListItem';
