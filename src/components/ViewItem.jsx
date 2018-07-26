@@ -9,10 +9,11 @@ export class ViewItem extends React.PureComponent {
       text: PropTypes.string.isRequired
     }),
     index: PropTypes.number.isRequired,
+
     onRowClick: PropTypes.func.isRequired
   };
 
-  _enableEditing = () => this.props.onRowClick(this.props.item.id, true);
+  _enableEditing = () => this.props.onRowClick(this.props.item.id);
 
   render() {
     return (

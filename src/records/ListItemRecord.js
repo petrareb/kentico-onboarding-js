@@ -7,4 +7,3 @@ const defaultRecord = {
 export const ListItemRecord = Record(
   defaultRecord
 );
-

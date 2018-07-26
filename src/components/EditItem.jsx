@@ -25,7 +25,7 @@ export class EditItem extends React.PureComponent {
   }
 
   _cancelEditing = () =>
-    this.props.onCancelClick(this.props.item.id, false);
+    this.props.onCancelClick(this.props.item.id);
 
   _deleteItem = () =>
     this.props.onDeleteClick(this.props.item.id);
