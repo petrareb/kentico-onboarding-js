@@ -7,7 +7,7 @@ export class ViewItem extends React.PureComponent {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
-    }),
+    }).isRequired,
     index: PropTypes.number.isRequired,
 
     onRowClick: PropTypes.func.isRequired

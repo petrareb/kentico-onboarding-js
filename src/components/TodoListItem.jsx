@@ -31,7 +31,7 @@ TodoListItem.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     isEdited: PropTypes.bool.isRequired
-  }),
+  }).isRequired,
   index: PropTypes.number.isRequired,
 
   onRowClick: PropTypes.func.isRequired,
