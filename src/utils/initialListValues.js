@@ -1,4 +1,4 @@
-import { ListItemRecord } from '../records/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 import { generateGuid } from './generateId';
 
 const initItem1 = new ListItemRecord({

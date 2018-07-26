@@ -3,7 +3,7 @@ import React from 'react';
 import { ItemToAdd } from './ItemToAdd';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
-import { ListItemRecord } from '../records/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 import { OrderedMap } from 'immutable';
 import { initialValues } from '../utils/initialListValues';
 
@@ -15,7 +15,7 @@ export class TodoList extends React.PureComponent {
     items: OrderedMap(initialValues)
   };
 
-  _toddleEdited = (itemId) =>
+  _toggleEdited = itemId =>
     this.setState(prevState => ({
       items: prevState.items.update(itemId, oldItem =>
         oldItem.merge({
@@ -23,13 +23,13 @@ export class TodoList extends React.PureComponent {
         }))
     }));
 
-  _deleteItem = (itemId) =>
+  _deleteItem = itemId =>
     this.setState(prevState => ({
       items: prevState.items.delete(itemId)
     }));
 
   _saveItem = (itemId, newText) =>
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       items: prevState.items.update(itemId, oldItem =>
         oldItem.merge({
           isEdited: false,
@@ -37,13 +37,13 @@ export class TodoList extends React.PureComponent {
         }))
     }));
 
-  _createNewItem = (newText) =>
+  _createNewItem = newText =>
     new ListItemRecord({
       id: generateGuid(),
       text: newText
     });
 
-  _addNewItem = (text) => {
+  _addNewItem = text => {
     const newValue = this._createNewItem(text);
     this.setState((prevState => ({
       items: prevState.items.set(newValue.id, newValue)
@@ -60,10 +60,10 @@ export class TodoList extends React.PureComponent {
           <TodoListItem
             item={_item}
             index={i + 1}
-            onRowClick={this._toddleEdited}
+            onRowClick={this._toggleEdited}
             onSaveClick={this._saveItem}
             onDeleteClick={this._deleteItem}
-            onCancelClick={this._toddleEdited}
+            onCancelClick={this._toggleEdited}
             key={_item.id}
           />
         )

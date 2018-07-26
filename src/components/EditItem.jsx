@@ -9,7 +9,7 @@ export class EditItem extends React.PureComponent {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
-    }),
+    }).isRequired,
     index: PropTypes.number.isRequired,
 
     onCancelClick: PropTypes.func.isRequired,
@@ -33,7 +33,7 @@ export class EditItem extends React.PureComponent {
   _editItem = () =>
     this.props.onSaveClick(this.props.item.id, this.state.text);
 
-  _updateText = (event) =>
+  _updateText = event =>
     this.setState({
       text: event.target.value
     });

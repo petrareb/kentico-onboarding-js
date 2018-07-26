@@ -12,7 +12,7 @@ export class ItemToAdd extends React.PureComponent {
 
   state = { text: '' };
 
-  _changedTextInput = (event) =>
+  _changedTextInput = event =>
     this.setState({
       text: event.target.value
     });
