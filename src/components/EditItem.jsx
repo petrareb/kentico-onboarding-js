@@ -20,7 +20,7 @@ export class EditItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      text: props.item.get('text')
+      text: props.item.text
     };
   }
 

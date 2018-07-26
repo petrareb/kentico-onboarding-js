@@ -25,21 +25,22 @@ export class ItemToAdd extends React.PureComponent {
   };
 
   render() {
+    const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !isValidText(this.state.text),
-          "has-success": isValidText(this.state.text)
+          "has-error": !validText,
+          "has-success": validText
         })}
         >
-           <input
-             type="text"
-             className="form-control"
-             name="itemToAddTextBox"
-             value={this.state.text}
-             onChange={this._changedTextInput}
-           />
+          <input
+            type="text"
+            className="form-control"
+            name="itemToAddTextBox"
+            value={this.state.text}
+            onChange={this._changedTextInput}
+          />
 
           <div className="input-group-append input-group-btn">
             <button
@@ -48,7 +49,7 @@ export class ItemToAdd extends React.PureComponent {
               name="itemToAddSubmitButton"
               value="Add"
               onClick={this._addNewItem}
-              disabled={!isValidText(this.state.text)}
+              disabled={!validText}
             >
               Add
             </button>
