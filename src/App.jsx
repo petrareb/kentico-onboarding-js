@@ -1,6 +1,6 @@
 import './sticky-footer.css';
 import React, { PureComponent } from 'react';
-import { Page } from './components/Page';
+import { TodoList } from './components/TodoList';
 
 export class App extends PureComponent {
   render() {
@@ -33,7 +33,9 @@ export class App extends PureComponent {
           </div>
 
           <section id="app-content">
-            <Page />
+            <div className="col-sm-12 col-md-offset-2 col-md-8">
+              <TodoList/>
+            </div>
           </section>
         </div>
         <footer className="footer">

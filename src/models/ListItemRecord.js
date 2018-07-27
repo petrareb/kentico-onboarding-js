@@ -6,4 +6,4 @@ const defaultRecord = {
   isEdited: false
 };
 
-export const ListItemRecord = Record(defaultRecord);
+export const ListItemRecord = Record(defaultRecord, 'ListItemRecord');

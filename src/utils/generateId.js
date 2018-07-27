@@ -1,3 +1,3 @@
-import v4 from 'uuid/v4';
+import generateUuidV4 from 'uuid/v4';
 
-export const generateGuid = () => v4();
+export const generateGuid = () => generateUuidV4();

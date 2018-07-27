@@ -5,7 +5,7 @@ import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
 import { ListItemRecord } from '../models/ListItemRecord';
 import { OrderedMap } from 'immutable';
-import { initialValues } from '../utils/initialListValues';
+import { initialValues } from '../constants/initialListValues';
 
 
 export class TodoList extends React.PureComponent {
@@ -55,16 +55,16 @@ export class TodoList extends React.PureComponent {
       .state
       .items
       .valueSeq()
-      .map((_item, i) =>
+      .map((mapItem, i) =>
         (
           <TodoListItem
-            item={_item}
+            item={mapItem}
             index={i + 1}
             onRowClick={this._toggleEdited}
             onSaveClick={this._saveItem}
             onDeleteClick={this._deleteItem}
             onCancelClick={this._toggleEdited}
-            key={_item.id}
+            key={mapItem.id}
           />
         )
       );

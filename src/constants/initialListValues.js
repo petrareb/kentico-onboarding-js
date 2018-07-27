@@ -1,18 +1,18 @@
 import { ListItemRecord } from '../models/ListItemRecord';
-import { generateGuid } from './generateId';
+import { generateGuid } from '../utils/generateId';
 
-const initItem1 = new ListItemRecord({
+const makeCoffeeItem = new ListItemRecord({
   text: 'Make coffee',
   id: generateGuid(),
   isEdited: false
 });
 
-const initItem2 = new ListItemRecord({
+const sleepItem = new ListItemRecord({
   text: 'Sleep',
   id: generateGuid(),
   isEdited: false
 });
 
 export const initialValues = [
-  [initItem1.id, initItem1], [initItem2.id, initItem2]
+  [makeCoffeeItem.id, makeCoffeeItem], [sleepItem.id, sleepItem]
 ];

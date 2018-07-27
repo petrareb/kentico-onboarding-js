@@ -22,7 +22,8 @@ export class ViewItem extends React.PureComponent {
             className="text-left"
             onClick={this._enableEditing}
           >
-            {this.props.index + '. ' + this.props.item.text}
+            {this.props.index}.&nbsp;
+            {this.props.item.text}
           </span>
       </li>
     );
