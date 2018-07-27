@@ -10,17 +10,22 @@ export class ItemToAdd extends React.PureComponent {
     onAddClick: PropTypes.func.isRequired
   };
 
-  state = { text: '' };
+  state = {
+    text: '',
+    enableInputColors: false
+  };
 
   _changedTextInput = event =>
     this.setState({
-      text: event.target.value
+      text: event.target.value,
+      enableInputColors: true
     });
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);
     this.setState({
-      text: ''
+      text: '',
+      enableInputColors: false
     });
   };
 
@@ -30,8 +35,8 @@ export class ItemToAdd extends React.PureComponent {
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !validText,
-          "has-success": validText
+          "has-error": !validText && this.state.enableInputColors,
+          "has-success": validText && this.state.enableInputColors
         })}
         >
           <input
