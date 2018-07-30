@@ -1,1 +1,2 @@
-export const isValidText = (text) => (text.trim()).length !== 0;
+export const isValidText = text =>
+  typeof text === 'string' && !!text.trim();

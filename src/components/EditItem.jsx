@@ -8,9 +8,10 @@ export class EditItem extends React.PureComponent {
   static propTypes = {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      index: PropTypes.number.isRequired
-    }),
+      text: PropTypes.string.isRequired
+    }).isRequired,
+    index: PropTypes.number.isRequired,
+
     onCancelClick: PropTypes.func.isRequired,
     onSaveClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired
@@ -24,7 +25,7 @@ export class EditItem extends React.PureComponent {
   }
 
   _cancelEditing = () =>
-    this.props.onCancelClick(this.props.item.id, false);
+    this.props.onCancelClick(this.props.item.id);
 
   _deleteItem = () =>
     this.props.onDeleteClick(this.props.item.id);
@@ -32,7 +33,7 @@ export class EditItem extends React.PureComponent {
   _editItem = () =>
     this.props.onSaveClick(this.props.item.id, this.state.text);
 
-  _updateText = (event) =>
+  _updateText = event =>
     this.setState({
       text: event.target.value
     });
@@ -48,7 +49,7 @@ export class EditItem extends React.PureComponent {
         })}
         >
           <p className="input-group-addon">
-            {this.props.item.index}
+            {this.props.index}
           </p>
           <input
             type="text"

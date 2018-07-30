@@ -3,95 +3,79 @@ import React from 'react';
 import { ItemToAdd } from './ItemToAdd';
 import { generateGuid } from '../utils/generateId';
 import { TodoListItem } from './TodoListItem';
+import { ListItemRecord } from '../models/ListItemRecord';
+import { OrderedMap } from 'immutable';
+import { initialValues } from '../constants/initialListValues';
+
 
 export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
 
   state = {
-    items: [
-      {
-        text: 'Make coffee',
-        id: generateGuid(),
-        isEdited: false
-      },
-      {
-        text: 'Sleep',
-        id: generateGuid(),
-        isEdited: false
-      }]
+    items: OrderedMap(initialValues)
   };
 
-  setEdited = (itemId, edited) =>
+  _toggleEdited = itemId =>
     this.setState(prevState => ({
-      items: prevState.items.map((item) =>
-        ((item.id === itemId)
-          ? ({
-            ...item,
-            isEdited: edited
-          })
-          : item))
+      items: prevState.items.update(itemId, oldItem =>
+        oldItem.merge({
+          isEdited: !oldItem.isEdited
+        }))
     }));
 
-  deleteItem = (itemId) =>
+  _deleteItem = itemId =>
     this.setState(prevState => ({
-      items: prevState.items.filter((item) => item.id !== itemId)
+      items: prevState.items.delete(itemId)
     }));
 
-  saveItem = (itemId, newText) =>
+  _saveItem = (itemId, newText) =>
     this.setState(prevState => ({
-      items: prevState.items.map((item) =>
-        ((item.id === itemId)
-          ? ({
-            ...item,
-            text: newText,
-            isEdited: false
-          })
-          : item))
+      items: prevState.items.update(itemId, oldItem =>
+        oldItem.merge({
+          isEdited: false,
+          text: newText
+        }))
     }));
 
-  addNewItem = (changedText) => {
-    const newValue = {
-      text: changedText,
+  _createNewItem = newText =>
+    new ListItemRecord({
       id: generateGuid(),
-      isEdited: false
-    };
-    this.setState(prevState => ({
-      items: [
-        ...prevState.items,
-        newValue
-      ]
-    }));
-  };
+      text: newText
+    });
 
+  _addNewItem = text => {
+    const newValue = this._createNewItem(text);
+    this.setState((prevState => ({
+      items: prevState.items.set(newValue.id, newValue)
+    })));
+  };
 
   render() {
     const table_rows = this
       .state
       .items
-      .map((_item, i) => {
-        const item = {
-          ..._item,
-          index: i + 1
-        };
-        return (
+      .valueSeq()
+      .map((mapItem, i) =>
+        (
           <TodoListItem
-            item={item}
-            onRowClick={this.setEdited}
-            onSaveClick={this.saveItem}
-            onDeleteClick={this.deleteItem}
-            onCancelClick={this.setEdited}
-            key={item.id}
+            item={mapItem}
+            index={i + 1}
+            onRowClick={this._toggleEdited}
+            onSaveClick={this._saveItem}
+            onDeleteClick={this._deleteItem}
+            onCancelClick={this._toggleEdited}
+            key={mapItem.id}
           />
-        );
-      });
+        )
+      );
 
     return (
-        <div>
-          <ul className="list-group">
-            {table_rows}
-            <ItemToAdd onAddClick={this.addNewItem}/>
-          </ul>
-        </div>
+      <div>
+        <ul className="list-group">
+          {table_rows}
+          <ItemToAdd onAddClick={this._addNewItem}/>
+        </ul>
+      </div>
     );
   }
 }
