@@ -1,2 +1,2 @@
 export const isValidText = text =>
-  typeof text === 'string' && !!text.trim();
+  text && text.trim && !!text.trim();

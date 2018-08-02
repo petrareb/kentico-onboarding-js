@@ -1,6 +1,8 @@
 import './sticky-footer.css';
 import React, { PureComponent } from 'react';
-import { TodoList } from './components/TodoList';
+import { TodoList } from './containers/TodoList';
+import { store } from './store/store';
+import { Provider } from 'react-redux';
 
 export class App extends PureComponent {
   render() {
@@ -34,7 +36,9 @@ export class App extends PureComponent {
 
           <section id="app-content">
             <div className="col-sm-12 col-md-offset-2 col-md-8">
-              <TodoList/>
+              <Provider store={store}>
+                <TodoList/>
+              </Provider>
             </div>
           </section>
         </div>
