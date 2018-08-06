@@ -4,8 +4,7 @@ import { toggleEdited } from '../actionCreators/actionCreators';
 import { ViewItem } from '../components/ViewItem';
 
 const mapStateToProps = (state, ownProps) => ({
-  item: ownProps.item,
-  index: ownProps.index
+  ...ownProps
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

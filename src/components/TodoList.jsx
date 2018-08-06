@@ -9,21 +9,19 @@ export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
 
   static propTypes = {
-    items: Immutable.OrderedMap.isRequired
+    itemIds: PropTypes.array.isRequired
   };
-
 
   render() {
     const table_rows = this
       .props
-      .items
-      .valueSeq()
-      .map((mapItem, i) =>
+      .itemIds
+      .map((itemId, i) =>
         (
           <TodoListItem
-            item={mapItem}
+            id={itemId}
             index={i + 1}
-            key={mapItem.id}
+            key={itemId}
           />
         )
       );
@@ -32,7 +30,7 @@ export class TodoList extends React.PureComponent {
       <div>
         <ul className="list-group">
           {table_rows}
-          <ItemToAdd />
+          <ItemToAdd/>
         </ul>
       </div>
     );

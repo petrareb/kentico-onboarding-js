@@ -13,10 +13,10 @@ export class ItemToAdd extends React.PureComponent {
     onAddClick: PropTypes.func.isRequired
   };
 
-  // state = {
-  //   text: '',
-  //   enableInputColors: false
-  // };
+  state = {
+    text: '',
+    enableInputColors: false
+  };
 
   _changedTextInput = event =>
     this.setState({

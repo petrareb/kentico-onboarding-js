@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import { TodoList } from '../components/TodoList';
 
-
 const mapStateToProps = state => ({
-  items: state.items
-  // TODO itemIds
+  itemIds: state.items.valueSeq()
+    .map(item => item.id).toArray()
 });
 
 const TodoListContainer = connect(mapStateToProps)(TodoList);
