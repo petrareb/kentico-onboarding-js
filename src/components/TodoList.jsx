@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ItemToAdd } from './ItemToAdd';
+import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 import PropTypes from 'prop-types';
 
@@ -32,7 +32,7 @@ export class TodoList extends React.PureComponent {
       <div>
         <ul className="list-group">
           {table_rows}
-          <ItemToAdd onAddClick={this._addNewItem}/>
+          <ItemToAdd />
         </ul>
       </div>
     );

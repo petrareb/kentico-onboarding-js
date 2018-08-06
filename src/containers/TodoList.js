@@ -4,6 +4,7 @@ import { TodoList } from '../components/TodoList';
 
 const mapStateToProps = state => ({
   items: state.items
+  // TODO itemIds
 });
 
 const TodoListContainer = connect(mapStateToProps)(TodoList);
