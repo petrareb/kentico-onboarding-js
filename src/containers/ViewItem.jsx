@@ -7,8 +7,8 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onRowClick: () => dispatch(toggleEdited(ownProps.id))
+const mapDispatchToProps = (dispatch) => ({
+  onRowClick: (itemId) => dispatch(toggleEdited(itemId))
 });
 
 const ViewItemContainer = connect(mapStateToProps, mapDispatchToProps)(ViewItem);

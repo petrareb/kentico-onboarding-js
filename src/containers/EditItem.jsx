@@ -7,10 +7,10 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onCancelClick: () => dispatch(toggleEdited(ownProps.item.id)),
-  onSaveClick: () => dispatch(saveItem(ownProps.item.id, ownProps.item.text)),
-  onDeleteClick: () => dispatch(deleteItem(ownProps.item.id))
+const mapDispatchToProps = (dispatch) => ({
+  onCancelClick: (itemId) => dispatch(toggleEdited(itemId)),
+  onSaveClick: (itemId, text) => dispatch(saveItem(itemId, text)),
+  onDeleteClick: (itemId) => dispatch(deleteItem(itemId))
 });
 
 const EditItemContainer = connect(mapStateToProps, mapDispatchToProps)(EditItem);

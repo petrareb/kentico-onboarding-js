@@ -7,8 +7,8 @@ const mapStateToProps = (state, ownProps) => ({
   enableInputColors: ownProps.enableInputColors
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onAddClick: () => dispatch(addItem(ownProps.text))
+const mapDispatchToProps = (dispatch) => ({
+  onAddClick: (text) => dispatch(addItem(text))
 });
 
 const ItemToAddContainer = connect(mapStateToProps, mapDispatchToProps)(ItemToAdd);

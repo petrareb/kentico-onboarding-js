@@ -3,7 +3,8 @@ import { TodoList } from '../components/TodoList';
 
 const mapStateToProps = state => ({
   itemIds: state.items.valueSeq()
-    .map(item => item.id).toArray()
+    .map(item => item.id)
+    .toArray()
 });
 
 const TodoListContainer = connect(mapStateToProps)(TodoList);

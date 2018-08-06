@@ -10,7 +10,7 @@ const makeCoffeeItem = new ListItemRecord({
 const sleepItem = new ListItemRecord({
   text: 'Sleep',
   id: generateGuid(),
-  isEdited: false
+  isEdited: true
 });
 
 export const initialValues = [

@@ -4,7 +4,6 @@ import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 import PropTypes from 'prop-types';
 
-
 export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
 
