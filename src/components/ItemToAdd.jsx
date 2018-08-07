@@ -7,8 +7,6 @@ import classNames from 'classnames';
 export class ItemToAdd extends React.PureComponent {
   static displayName = 'ItemToAdd';
   static propTypes = {
-    // text: PropTypes.string.isRequired,
-    // enableInputColors: PropTypes.bool.isRequired,
     onAddClick: PropTypes.func.isRequired
   };
 

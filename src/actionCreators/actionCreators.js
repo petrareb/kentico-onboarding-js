@@ -1,6 +1,11 @@
-import { ADD_NEW_ITEM, DELETE_ITEM, SAVE_ITEM, TOGGLE_EDITED } from '../constants/actionTypes';
+import {
+  ADD_NEW_ITEM,
+  DELETE_ITEM,
+  SAVE_ITEM,
+  TOGGLE_EDITED
+} from '../constants/actionTypes';
 
-export const addNewItem = newText => ({
+export const addNewItem =  newText => ({
   type: ADD_NEW_ITEM,
   text: newText
 });
@@ -15,8 +20,8 @@ export const deleteItem = itemId => ({
   id: itemId
 });
 
-export const saveItem = (itemId, newText) => ({
+export const saveItem = (itemId, text) => ({
   type: SAVE_ITEM,
   id: itemId,
-  text: newText
+  text,
 });

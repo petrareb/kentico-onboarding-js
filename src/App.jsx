@@ -7,13 +7,14 @@ import { Provider } from 'react-redux';
 export class App extends PureComponent {
   render() {
     return (
-      <div>
-        <div className="container">
-          <div className="header clearfix">
-            <h3 className="text-muted">
-              Kentico Academy
-            </h3>
-          </div>
+      <Provider store={store}>
+        <div>
+          <div className="container">
+            <div className="header clearfix">
+              <h3 className="text-muted">
+                Kentico Academy
+              </h3>
+            </div>
 
           <div className="jumbotron">
             <h1>
@@ -34,20 +35,19 @@ export class App extends PureComponent {
             </p>
           </div>
 
-          <section id="app-content">
-            <div className="col-sm-12 col-md-offset-2 col-md-8">
-              <Provider store={store}>
+            <section id="app-content">
+              <div className="col-sm-12 col-md-offset-2 col-md-8">
                 <TodoList/>
-              </Provider>
-            </div>
-          </section>
+              </div>
+            </section>
+          </div>
+          <footer className="footer">
+            <p>
+              &copy; 2017 Kentico software, s.r.o
+            </p>
+          </footer>
         </div>
-        <footer className="footer">
-          <p>
-            &copy; 2017 Kentico software, s.r.o
-          </p>
-        </footer>
-      </div>
+      </Provider>
     );
   }
 }
