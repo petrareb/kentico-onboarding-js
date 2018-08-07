@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 import { toggleEdited } from '../actionCreators/actionCreators';
 import { ViewItem } from '../components/ViewItem';
 

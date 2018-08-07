@@ -4,26 +4,21 @@ import {
   SAVE_ITEM,
   TOGGLE_EDITED
 } from '../constants/actionTypes';
-import { OrderedMap } from "immutable";
-import { initialValues } from '../constants/initialListValues';
 import { generateGuid } from '../utils/generateId';
 import { ListItemRecord } from '../models/ListItemRecord';
+import { initialState } from '../store/store';
 
-
-const initialState = {
-  items: OrderedMap(initialValues)
-};
-
-const _createNewItem = newText =>
+export const createNewItem = newText =>
   new ListItemRecord({
     id: generateGuid(),
     text: newText
   });
 
-export const rootReducer = (state = initialState, action) => {
+// export const rootReducer = (state = initialState, action) => {
+export function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_NEW_ITEM: {
-      const newItem = _createNewItem(action.text);
+      const newItem = createNewItem(action.text);
       return {
         ...state,
         items: state.items.set(newItem.id, newItem)
@@ -57,4 +52,4 @@ export const rootReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

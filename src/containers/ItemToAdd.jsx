@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
-import { addItem } from '../actionCreators/actionCreators';
+import { addNewItem } from '../actionCreators/actionCreators';
 import { ItemToAdd } from '../components/ItemToAdd';
 
 const mapStateToProps = (state, ownProps) => ({
-  text: ownProps.text,
-  enableInputColors: ownProps.enableInputColors
+  ...ownProps
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddClick: (text) => dispatch(addItem(text))
+  onAddClick: (text) => dispatch(addNewItem(text))
 });
 
 const ItemToAddContainer = connect(mapStateToProps, mapDispatchToProps)(ItemToAdd);

@@ -8,7 +8,7 @@ export class TodoList extends React.PureComponent {
   static displayName = 'TodoList';
 
   static propTypes = {
-    itemIds: PropTypes.array.isRequired
+    itemIds: PropTypes.object.isRequired
   };
 
   render() {

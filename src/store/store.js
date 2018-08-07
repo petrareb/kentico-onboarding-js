@@ -1,10 +1,11 @@
 import { OrderedMap } from "immutable";
 import { initialValues } from '../constants/initialListValues';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from '../reducers/rootReducer';
+import logger from 'redux-logger';
 
-const initialState = {
+export const initialState = {
   items: OrderedMap(initialValues)
 };
 
-export const store = createStore(rootReducer, initialState);
+export const store = createStore(rootReducer, initialState, applyMiddleware(logger));

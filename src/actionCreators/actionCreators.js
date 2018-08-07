@@ -1,6 +1,6 @@
 import { ADD_NEW_ITEM, DELETE_ITEM, SAVE_ITEM, TOGGLE_EDITED } from '../constants/actionTypes';
 
-export const addItem = newText => ({
+export const addNewItem = newText => ({
   type: ADD_NEW_ITEM,
   text: newText
 });

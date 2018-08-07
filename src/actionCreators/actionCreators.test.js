@@ -1,10 +1,10 @@
-import { addItem, deleteItem, toggleEdited, saveItem } from './actionCreators';
+import { addNewItem, deleteItem, toggleEdited, saveItem } from './actionCreators';
 import { ADD_NEW_ITEM, DELETE_ITEM, TOGGLE_EDITED, SAVE_ITEM } from '../constants/actionTypes';
 
-describe('Action creator addItem', () => {
+describe('Action creator addNewItem', () => {
   it('generates valid action', () => {
     const text = 'aaa';
-    const addItemAction = addItem(text);
+    const addItemAction = addNewItem(text);
     expect(addItemAction.text === text
       && addItemAction.type === ADD_NEW_ITEM);
   });

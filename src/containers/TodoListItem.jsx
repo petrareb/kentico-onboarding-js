@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import { TodoListItem } from '../components/TodoListItem';
 
 const mapStateToProps = (state, ownProps) => ({
-  // ...ownProps,
-  index: ownProps.index,
+  ...ownProps,
   item: state.items.get(ownProps.id)
 });
 
