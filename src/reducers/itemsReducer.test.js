@@ -1,6 +1,8 @@
 import { createNewItem, items } from './items';
 import { initialState } from '../store/store';
-import { addNewItem, deleteItem, saveItem, toggleEdited } from '../actionCreators/actionCreators';
+import { addNewItem, deleteItem, saveItem, toggleEdited } from '../actionCreators/publicActionCreator';
+import { initialValues } from '../constants/initialListValues';
+import { OrderedMap } from "immutable";
 
 describe('createNewItem function ', () => {
   it('creates valid item', () => {
@@ -12,7 +14,7 @@ describe('createNewItem function ', () => {
   });
 });
 
-describe('RootReducer ', () => {
+describe('Items reducer ', () => {
   it('returns previous state when action is out of switch range', () => {
     const invalidAction = { type: 'INVALID ACTION' };
     const originalState = initialState;
@@ -22,54 +24,55 @@ describe('RootReducer ', () => {
     expect(originalState).toEqual(newState);
   });
 
-  // TODO
   it('adds new item correctly (ADD_NEW_ITEM action)', () => {
     const text = 'something';
-    const originalState = initialState;
+    const originalStateItems = initialState.items;
     const addingAction = addNewItem(text);
-    const newState = items(originalState, addingAction);
-    expect(newState.items.length).toEqual(originalState.items.length + 1);
-    expect((newState.items.filter(item => item.text === text)).length > 0);
+    const newStateItems = items(originalStateItems, addingAction);
+    expect(newStateItems.size).toEqual(originalStateItems.size + 1);
+    expect((newStateItems.filter(item => item.text === text)).size > 0);
   });
 
   it('deletes item correctly (DELETE_ITEM action)', () => {
-    const originalState = initialState;
-    const itemToDelete = originalState.items.first();
+    const originalStateItems = initialState.items;
+    const itemToDelete = originalStateItems.first();
     const deletingAction = deleteItem(itemToDelete.id);
 
-    const newState = items(originalState, deletingAction);
+    const newStateItems = items(originalStateItems, deletingAction);
 
-    expect(newState.items.length).toEqual(originalState.items.length - 1);
-    expect((newState.items.filter(item => item.id === itemToDelete.id)).length).toEqual(0);
+    expect(newStateItems.size).toEqual(originalStateItems.size - 1);
+    expect((newStateItems.filter(item => item.id === itemToDelete.id)).size).toEqual(0);
   });
 
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
-    const originalState = initialState;
-    const itemToToggle = originalState.items.first();
+    const originalStateItems = initialState.items;
+    const itemToToggle = originalStateItems.first();
     const togglingAction = toggleEdited(itemToToggle.id);
 
-    const newState = items(originalState, togglingAction);
+    const newStateItems = items(originalStateItems, togglingAction);
 
-    expect(newState.items.length).toEqual(originalState.items.length);
-    expect(newState.items.get(itemToToggle.id).isEdited).toEqual(!itemToToggle.isEdited);
+    expect(newStateItems.size).toEqual(originalStateItems.size);
+    expect(newStateItems.get(itemToToggle.id).isEdited).toEqual(!itemToToggle.isEdited);
   });
 
   it('edits item correctly (SAVE_ITEM action)', () => {
-    const originalState = initialState;
-    const itemToEdit = originalState.items.first();
+    const originalStateItems = initialState.items;
+    const itemToEdit = originalStateItems.first();
     const newText = 'newText';
     const editingAction = saveItem(itemToEdit.id, newText);
 
-    const newState = items(originalState, editingAction);
+    const newStateItems = items(originalStateItems, editingAction);
 
-    expect(newState.items.length).toEqual(originalState.items.length);
-    expect(newState.items.get(itemToEdit.id).text).toEqual(newText);
+    expect(newStateItems.size).toEqual(originalStateItems.size);
+    expect(newStateItems.get(itemToEdit.id).text).toEqual(newText);
   });
 
   it('uses default state in case null state is given as a param', () => {
-    const originalState = null;
-   
+    const invalidAction = { type: 'INVALID ACTION' };
+    const defaultState = OrderedMap(initialValues);
+
+    const newStateItems = items(undefined, invalidAction);
+
+    expect(newStateItems).toEqual(defaultState);
   });
 });
-
-// TODO: otestuj state = default value

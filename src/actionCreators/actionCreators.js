@@ -5,23 +5,31 @@ import {
   TOGGLE_EDITED
 } from '../constants/actionTypes';
 
-export const addNewItem =  newText => ({
+export const addNewItemAction = text => ({
   type: ADD_NEW_ITEM,
-  text: newText
+  payload: {
+    text
+  }
 });
 
-export const toggleEdited = itemId => ({
+export const toggleEditedAction = id => ({
   type: TOGGLE_EDITED,
-  id: itemId
+  payload: {
+    id
+  }
 });
 
-export const deleteItem = itemId => ({
+export const deleteItemAction = id => ({
   type: DELETE_ITEM,
-  id: itemId
+  payload: {
+    id
+  }
 });
 
-export const saveItem = (itemId, text) => ({
+export const saveItemAction = (id, text) => ({
   type: SAVE_ITEM,
-  id: itemId,
-  text,
+  payload: {
+    id,
+    text
+  }
 });

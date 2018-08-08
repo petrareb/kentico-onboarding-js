@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { EditItem } from '../components/EditItem';
-import { deleteItem, saveItem, toggleEdited } from '../actionCreators/actionCreators';
+import { deleteItem, saveItem, toggleEdited } from '../actionCreators/publicActionCreator';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps

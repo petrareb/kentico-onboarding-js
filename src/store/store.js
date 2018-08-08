@@ -11,6 +11,6 @@ export const initialState = {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const x = combineReducers({ items });
+const reducers = combineReducers({ items });
 
-export const store = createStore(x, initialState, composeEnhancers(applyMiddleware(logger)));
+export const store = createStore(reducers, initialState, composeEnhancers(applyMiddleware(logger)));

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { toggleEdited } from '../actionCreators/actionCreators';
 import { ViewItem } from '../components/ViewItem';
+import { toggleEdited } from '../actionCreators/publicActionCreator';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps

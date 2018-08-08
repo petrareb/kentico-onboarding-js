@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { addNewItem } from '../actionCreators/actionCreators';
 import { ItemToAdd } from '../components/ItemToAdd';
+import { addNewItem } from '../actionCreators/publicActionCreator';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps
