@@ -10,36 +10,42 @@ export class ItemToAdd extends React.PureComponent {
     onAddClick: PropTypes.func.isRequired
   };
 
-  state = { text: '' };
+  state = {
+    text: '',
+    enableInputColors: false
+  };
 
-  _changedTextInput = (event) =>
+  _changedTextInput = event =>
     this.setState({
-      text: event.target.value
+      text: event.target.value,
+      enableInputColors: true
     });
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);
     this.setState({
-      text: ''
+      text: '',
+      enableInputColors: false
     });
   };
 
   render() {
+    const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
         <li className={classNames({
           "input-group": true,
-          "has-error": !isValidText(this.state.text),
-          "has-success": isValidText(this.state.text)
+          "has-error": !validText && this.state.enableInputColors,
+          "has-success": validText && this.state.enableInputColors
         })}
         >
-           <input
-             type="text"
-             className="form-control"
-             name="itemToAddTextBox"
-             value={this.state.text}
-             onChange={this._changedTextInput}
-           />
+          <input
+            type="text"
+            className="form-control"
+            name="itemToAddTextBox"
+            value={this.state.text}
+            onChange={this._changedTextInput}
+          />
 
           <div className="input-group-append input-group-btn">
             <button
@@ -48,7 +54,7 @@ export class ItemToAdd extends React.PureComponent {
               name="itemToAddSubmitButton"
               value="Add"
               onClick={this._addNewItem}
-              disabled={!isValidText(this.state.text)}
+              disabled={!validText}
             >
               Add
             </button>

@@ -1,0 +1,33 @@
+import { isValidText } from './validateText';
+
+describe('isValidText function', () => {
+  it('accepts nonempty string', () => {
+    const nonemptyText = 'hello world ';
+    expect(isValidText(nonemptyText))
+      .toBeTruthy();
+  });
+
+  it('rejects string containing only whitespace characters', () => {
+    const whiteSpaceText = '    ';
+    expect(isValidText(whiteSpaceText))
+      .toBeFalsy();
+  });
+
+  it('rejects empty string', () => {
+    const emptyText = '';
+    expect(isValidText(emptyText))
+      .toBeFalsy();
+  });
+
+  it('rejects undefined as input', () => {
+    const undefinedValue = undefined;
+    expect(isValidText(undefinedValue))
+      .toBeFalsy();
+  });
+
+  it('rejects null as input', () => {
+    const nullValue = null;
+    expect(isValidText(nullValue))
+      .toBeFalsy();
+  });
+});
