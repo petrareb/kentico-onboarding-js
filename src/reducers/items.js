@@ -29,12 +29,10 @@ export const items = (state = OrderedMap(initialValues), action) => {
     }
     case TOGGLE_EDITED: {
       const editedItem = item(state.get(action.payload.id), action);
-      // memo(editedItem);
       return state.update(action.payload.id, () => editedItem);
     }
     case SAVE_ITEM: {
       const editedItem = item(state.get(action.payload.id), action);
-      // memo(editedItem);
       return state.update(action.payload.id, () => editedItem);
     }
     default:

@@ -4,7 +4,7 @@ import { generateGuid } from '../utils/generateId';
 const makeCoffeeItem = new ListItemRecord({
   text: 'Make coffee',
   id: generateGuid(),
-  isEdited: true
+  isEdited: false
 });
 
 const sleepItem = new ListItemRecord({
