@@ -1,3 +1,4 @@
+import { OrderedMap } from "immutable";
 import {
   ADD_NEW_ITEM,
   DELETE_ITEM,
@@ -6,15 +7,13 @@ import {
 } from '../constants/actionTypes';
 import { generateGuid } from '../utils/generateId';
 import { ListItemRecord } from '../models/ListItemRecord';
-import { OrderedMap } from "immutable";
 import { initialValues } from '../constants/initialListValues';
 import { item } from './item';
 
-export const newItemFactory = (generatingIdFunction) => (text) =>
-  new ListItemRecord({
-    id: generatingIdFunction(),
-    text
-  });
+export const newItemFactory = (generatingIdFunction) => (text) => new ListItemRecord({
+  id: generatingIdFunction(),
+  text
+});
 
 export const createNewItem = newItemFactory(generateGuid);
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isValidText } from '../utils/validateText';
 import classNames from 'classnames';
+import { isValidText } from '../utils/validateText';
 
 export class EditItem extends React.PureComponent {
   static displayName = 'EditItem';
+
   static propTypes = {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -24,19 +25,15 @@ export class EditItem extends React.PureComponent {
     };
   }
 
-  _cancelEditing = () =>
-    this.props.onCancelClick(this.props.item.id);
+  _cancelEditing = () => this.props.onCancelClick(this.props.item.id);
 
-  _deleteItem = () =>
-    this.props.onDeleteClick(this.props.item.id);
+  _deleteItem = () => this.props.onDeleteClick(this.props.item.id);
 
-  _editItem = () =>
-    this.props.onSaveClick(this.props.item.id, this.state.text);
+  _editItem = () => this.props.onSaveClick(this.props.item.id, this.state.text);
 
-  _updateText = event =>
-    this.setState({
-      text: event.target.value
-    });
+  _updateText = event => this.setState({
+    text: event.target.value
+  });
 
   render() {
     const validText = isValidText(this.state.text);

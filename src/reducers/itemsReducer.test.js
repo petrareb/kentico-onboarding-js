@@ -1,8 +1,16 @@
-import { createNewItem, items } from './items';
-import { initialState } from '../store/store';
-import { addNewItem, deleteItem, saveItem, toggleEdited } from '../actionCreators/publicActionCreator';
-import { initialValues } from '../constants/initialListValues';
 import { OrderedMap } from "immutable";
+import {
+  createNewItem,
+  items
+} from './items';
+import { initialState } from '../store/store';
+import {
+  addNewItem,
+  deleteItem,
+  saveItem,
+  toggleEdited
+} from '../actionCreators/publicActionCreator';
+import { initialValues } from '../constants/initialListValues';
 
 describe('createNewItem function ', () => {
   it('creates valid item', () => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export class ViewItem extends React.PureComponent {
   static displayName = 'ViewItem';
+
   static propTypes = {
     item: PropTypes.shape({
       id: PropTypes.string.isRequired,

@@ -1,4 +1,7 @@
-import { SAVE_ITEM, TOGGLE_EDITED } from '../constants/actionTypes';
+import {
+  SAVE_ITEM,
+  TOGGLE_EDITED
+} from '../constants/actionTypes';
 import { ListItemRecord } from '../models/ListItemRecord';
 
 export const item = (state = new ListItemRecord(), action) => {

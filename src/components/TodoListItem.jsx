@@ -8,14 +8,18 @@ export const TodoListItem = ({
   index
 }) => (
   (item.isEdited)
-    ? <EditItem
-      item={item}
-      index={index}
-    />
-    : <ViewItem
-      item={item}
-      index={index}
-    />
+    ? (
+      <EditItem
+        item={item}
+        index={index}
+      />
+    )
+    : (
+      <ViewItem
+        item={item}
+        index={index}
+      />
+    )
 );
 
 TodoListItem.propTypes = {

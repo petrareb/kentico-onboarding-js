@@ -1,6 +1,9 @@
 import { ListItemRecord } from '../models/ListItemRecord';
 import { generateGuid } from '../utils/generateId';
-import { saveItem, toggleEdited } from '../actionCreators/publicActionCreator';
+import {
+  saveItem,
+  toggleEdited
+} from '../actionCreators/publicActionCreator';
 import { item } from './item';
 
 describe('Item reducer ', () => {

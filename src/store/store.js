@@ -1,9 +1,14 @@
 import { OrderedMap } from "immutable";
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  compose
+} from 'redux';
+import logger from 'redux-logger';
 import { initialValues } from '../constants/initialListValues';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { items } from '../reducers/items';
 
-import logger from 'redux-logger';
 
 export const initialState = {
   items: OrderedMap(initialValues)
