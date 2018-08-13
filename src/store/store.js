@@ -20,6 +20,6 @@ const reducers = combineReducers({ items });
 
 export const store = createStore(
   reducers,
-  initialState,
+  // initialState,
   composeEnhancers(applyMiddleware(logger))
 );

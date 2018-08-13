@@ -1,8 +1,8 @@
-import './sticky-footer.css';
+import '../sticky-footer.css';
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
-import { TodoList } from './containers/TodoList';
-import { store } from './store/store';
+import { TodoList } from '../containers/TodoList';
+import { store } from '../store/store';
 
 export class App extends PureComponent {
   render() {

@@ -4,24 +4,14 @@ import {
   DELETE_ITEM,
   SAVE_ITEM,
   TOGGLE_EDITED
-} from '../constants/actionTypes';
-import { generateGuid } from '../utils/generateId';
-import { ListItemRecord } from '../models/ListItemRecord';
+} from '../constants/todoActionTypes';
 import { initialValues } from '../constants/initialListValues';
 import { item } from './item';
-
-export const newItemFactory = (generatingIdFunction) => (text) => new ListItemRecord({
-  id: generatingIdFunction(),
-  text
-});
-
-export const createNewItem = newItemFactory(generateGuid);
 
 export const items = (state = OrderedMap(initialValues), action) => {
   switch (action.type) {
     case ADD_NEW_ITEM: {
-      const newItem = createNewItem(action.payload.text);
-      return state.set(newItem.id, newItem);
+      return state.set(action.payload.item.id, action.payload.item);
     }
     case DELETE_ITEM: {
       return state.delete(action.payload.id);

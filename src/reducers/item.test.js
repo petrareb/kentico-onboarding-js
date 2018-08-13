@@ -3,7 +3,7 @@ import { generateGuid } from '../utils/generateId';
 import {
   saveItem,
   toggleEdited
-} from '../actionCreators/publicActionCreator';
+} from '../actions/todoActions';
 import { item } from './item';
 
 describe('Item reducer ', () => {
@@ -13,12 +13,12 @@ describe('Item reducer ', () => {
       id: generateGuid(),
       isEdited: false
     });
+    const expectedItem = itemToEdit.merge({ isEdited: !itemToEdit.isEdited });
     const action = toggleEdited(itemToEdit.id);
 
     const editedItem = item(itemToEdit, action);
 
-    expect(editedItem.isEdited)
-      .toEqual(!itemToEdit.isEdited);
+    expect(editedItem).toEqual(expectedItem);
   });
 
   it('saves item correctly (SAVE_ITEM action)', () => {
@@ -28,14 +28,15 @@ describe('Item reducer ', () => {
       isEdited: false
     });
     const newText = 'newText';
+    const expectedItem = itemToEdit.merge({
+      text: newText,
+      isEdited: false
+    });
     const action = saveItem(itemToEdit.id, newText);
 
     const editedItem = item(itemToEdit, action);
 
-    expect(editedItem.isEdited)
-      .toEqual(false);
-    expect(editedItem.text)
-      .toEqual(newText);
+    expect(editedItem).toEqual(expectedItem);
   });
 
   it('uses default state in case null state is given as a param', () => {

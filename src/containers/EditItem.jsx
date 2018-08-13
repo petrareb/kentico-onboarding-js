@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import { EditItem } from '../components/EditItem';
-import { deleteItem, saveItem, toggleEdited } from '../actionCreators/publicActionCreator';
-
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps
-});
+import {
+  deleteItem,
+  saveItem,
+  toggleEdited
+} from '../actions/todoActions';
 
 const mapDispatchToProps = (dispatch) => ({
   onCancelClick: (itemId) => dispatch(toggleEdited(itemId)),
@@ -13,5 +13,5 @@ const mapDispatchToProps = (dispatch) => ({
   onDeleteClick: (itemId) => dispatch(deleteItem(itemId))
 });
 
-const EditItemContainer = connect(mapStateToProps, mapDispatchToProps)(EditItem);
+const EditItemContainer = connect(null, mapDispatchToProps)(EditItem);
 export { EditItemContainer as EditItem };
