@@ -39,7 +39,7 @@ describe('Item reducer ', () => {
     expect(editedItem).toEqual(expectedItem);
   });
 
-  it('uses default state in case null state is given as a param', () => {
+  it('returns default state in case invalid action is given as a param', () => {
     const invalidAction = { type: 'INVALID ACTION' };
     const defaultState = new ListItemRecord();
 
