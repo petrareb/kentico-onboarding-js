@@ -2,7 +2,6 @@ import { OrderedMap } from "immutable";
 import {
   items
 } from './items';
-import { initialState } from '../store/store';
 import {
   addNewItem,
   deleteItem,
@@ -11,17 +10,6 @@ import {
 } from '../actions/todoActions';
 import { initialValues } from '../constants/initialListValues';
 import { ListItemRecord } from '../models/ListItemRecord';
-import { item } from './item';
-
-// describe('createNewItem function ', () => {
-//   it('creates valid item', () => {
-//     const text = 'text';
-//
-//     const newItem = createNewItem(text);
-//
-//     expect(newItem.text).toEqual(text);
-//   });
-// });
 
 describe('Items reducer ', () => {
   const originalState = OrderedMap(initialValues);
@@ -76,7 +64,10 @@ describe('Items reducer ', () => {
     const itemToEdit = originalState.first();
     const newText = 'newText';
     const editingAction = saveItem(itemToEdit.id, newText);
-    const editedItem = itemToEdit.merge({ isEdited: false, text: newText });
+    const editedItem = itemToEdit.merge({
+      isEdited: false,
+      text: newText
+    });
     const expectedState = originalState.update(itemToEdit.id, () => editedItem);
 
     const newState = items(originalState, editingAction);

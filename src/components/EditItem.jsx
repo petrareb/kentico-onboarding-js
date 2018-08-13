@@ -39,11 +39,12 @@ export class EditItem extends React.PureComponent {
     const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
-        <li className={classNames({
-          "input-group": true,
-          "has-error": !validText,
-          "has-success": validText
-        })}
+        <li
+          className={classNames({
+            "input-group": true,
+            "has-error": !validText,
+            "has-success": validText
+          })}
         >
           <p className="input-group-addon">
             {this.props.index}

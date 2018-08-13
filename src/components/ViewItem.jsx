@@ -19,13 +19,13 @@ export class ViewItem extends React.PureComponent {
   render() {
     return (
       <li className="list-group-item">
-          <span
-            className="text-left"
-            onClick={this._enableEditing}
-          >
-            {this.props.index}.&nbsp;
-            {this.props.item.text}
-          </span>
+        <span
+          className="text-left"
+          onClick={this._enableEditing}
+        >
+          {this.props.index}.&nbsp;
+          {this.props.item.text}
+        </span>
       </li>
     );
   }
