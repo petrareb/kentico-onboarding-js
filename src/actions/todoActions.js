@@ -1,21 +1,12 @@
 import {
-  ADD_NEW_ITEM,
   DELETE_ITEM,
   SAVE_ITEM,
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
 import { generateGuid } from '../utils/generateId';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { addNewItemActionFactory } from './addNewItemActionFactory';
 
-export const addNewItem = (text, id = generateGuid()) => ({
-  type: ADD_NEW_ITEM,
-  payload: {
-    item: new ListItemRecord({
-      id,
-      text
-    })
-  }
-});
+export const addNewItem = addNewItemActionFactory(generateGuid);
 
 export const toggleEdited = id => ({
   type: TOGGLE_EDITED,

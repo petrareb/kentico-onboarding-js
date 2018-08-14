@@ -25,13 +25,12 @@ describe('Items reducer ', () => {
 
   it('adds new item correctly (ADD_NEW_ITEM action)', () => {
     const text = 'something';
-    const id = '1';
+    const addingAction = addNewItem(text);
     const newItem = new ListItemRecord({
-      id,
-      text
+      id: addingAction.payload.id,
+      text: addingAction.payload.text
     });
-    const addingAction = addNewItem(text, id);
-    const expectedItems = originalState.set(id, newItem);
+    const expectedItems = originalState.set(newItem.id, newItem);
 
     const newItems = items(originalState, addingAction);
 
@@ -76,12 +75,14 @@ describe('Items reducer ', () => {
     expect(newState).toEqual(expectedState);
   });
 
-  it('uses default state in case null state is given as a param', () => {
-    const invalidAction = { type: 'INVALID ACTION' };
-    const defaultState = OrderedMap(initialValues);
+  it('uses default state in case undefined state is given as a param', () => {
+    const defaultStateOfReducer = OrderedMap(initialValues);
+    const itemToDelete = defaultStateOfReducer.first();
+    const deletingAction = deleteItem(itemToDelete.id);
+    const expectedState = defaultStateOfReducer.delete(itemToDelete.id);
 
-    const newState = items(undefined, invalidAction);
+    const newState = items(undefined, deletingAction);
 
-    expect(newState).toEqual(defaultState);
+    expect(newState).toEqual(expectedState);
   });
 });

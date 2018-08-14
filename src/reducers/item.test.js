@@ -5,6 +5,7 @@ import {
   toggleEdited
 } from '../actions/todoActions';
 import { item } from './item';
+import { items } from './items';
 
 describe('Item reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
@@ -46,5 +47,18 @@ describe('Item reducer ', () => {
     const newState = item(undefined, invalidAction);
 
     expect(newState).toEqual(defaultState);
+  });
+
+  it('returns previous state when action is unknown', () => {
+    const invalidAction = { type: 'INVALID ACTION' };
+    const expectedState = new ListItemRecord({
+      text: 'text',
+      id: generateGuid(),
+      isEdited: false
+    });
+
+    const newState = items(expectedState, invalidAction);
+
+    expect(expectedState).toEqual(newState);
   });
 });

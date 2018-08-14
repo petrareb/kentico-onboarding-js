@@ -7,11 +7,16 @@ import {
 } from '../constants/todoActionTypes';
 import { initialValues } from '../constants/initialListValues';
 import { item } from './item';
+import { ListItemRecord } from '../models/ListItemRecord';
 
 export const items = (state = OrderedMap(initialValues), action) => {
   switch (action.type) {
     case ADD_NEW_ITEM: {
-      return state.set(action.payload.item.id, action.payload.item);
+      const newItem = new ListItemRecord({
+        id: action.payload.id,
+        text: action.payload.text
+      });
+      return state.set(action.payload.id, newItem);
     }
     case DELETE_ITEM: {
       return state.delete(action.payload.id);
