@@ -5,7 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import ReactDom from 'react-dom';
 import React from 'react';
 
-import { App } from './components/App.jsx';
+import { App } from './components/App.tsx';
 import { store } from './store/store';
 
 // ReactDom.render(
