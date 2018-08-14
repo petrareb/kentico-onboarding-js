@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { TodoList } from '../components/TodoList';
 import { memoizedIds } from '../selectors/memoizeIds';
 
-const mapStateToProps = state => ({
+const mapStateToProps = state: => ({
   itemIds: memoizedIds(state.items.keySeq().toArray())
 });
 

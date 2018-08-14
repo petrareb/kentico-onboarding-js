@@ -1,24 +1,24 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isValidText } from '../utils/validateText';
+import { itemInterface } from '../constants/itemInterface';
 
-export class EditItem extends React.PureComponent {
+export interface EditItemProps {
+  item: itemInterface,
+  index: number,
+  onCancelClick: Function,
+  onSaveClick: Function,
+  onDeleteClick: Function
+}
+
+export interface EditItemState {
+  text: string
+}
+
+export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
   static displayName = 'EditItem';
 
-  static propTypes = {
-    item: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired,
-    index: PropTypes.number.isRequired,
-
-    onCancelClick: PropTypes.func.isRequired,
-    onSaveClick: PropTypes.func.isRequired,
-    onDeleteClick: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
+  constructor(props: EditItemProps) {
     super(props);
     this.state = {
       text: props.item.text

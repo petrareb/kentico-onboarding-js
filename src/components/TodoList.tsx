@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 
-export class TodoList extends React.PureComponent {
-  static displayName = 'TodoList';
+export interface todoListProps {
+  itemIds: Array<string>
+}
 
-  static propTypes = {
-    itemIds: PropTypes.array.isRequired
-  };
+export class TodoList extends React.PureComponent<todoListProps> {
+  static displayName = 'TodoList';
 
   render() {
     const table_rows = this

@@ -1,18 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { itemInterface } from '../constants/itemInterface';
 
-export class ViewItem extends React.PureComponent {
+export interface viewItemProps {
+  item: itemInterface,
+  index: number,
+  onRowClick: Function
+}
+
+export class ViewItem extends React.PureComponent<viewItemProps> {
   static displayName = 'ViewItem';
-
-  static propTypes = {
-    item: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired,
-    index: PropTypes.number.isRequired,
-
-    onRowClick: PropTypes.func.isRequired
-  };
 
   _enableEditing = () => this.props.onRowClick(this.props.item.id);
 

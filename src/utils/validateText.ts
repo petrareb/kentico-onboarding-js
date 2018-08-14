@@ -1,1 +1,1 @@
-export const isValidText = text => text && text.trim && !!text.trim();
+export const isValidText = (text: string):boolean => text && text.trim && !!text.trim();

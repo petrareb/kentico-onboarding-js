@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { EditItem } from '../containers/EditItem';
 import { ViewItem } from '../containers/ViewItem';
+import { itemInterface } from '../constants/itemInterface';
 
-export const TodoListItem = ({
-  item,
-  index
-}) => (
+export interface TodoListItemInterface {
+  item: itemInterface,
+  index: number,
+  //displayName?: string
+}
+
+export const TodoListItem = ({item, index}: TodoListItemInterface) => (
   (item.isEdited)
     ? (
       <EditItem
@@ -22,13 +25,4 @@ export const TodoListItem = ({
     )
 );
 
-TodoListItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    isEdited: PropTypes.bool.isRequired
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-};
-
-TodoListItem.displayName = 'TodoListItem';
+//TodoListItem.displayName = 'TodoListItem';

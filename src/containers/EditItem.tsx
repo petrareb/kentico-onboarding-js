@@ -7,7 +7,7 @@ import {
   toggleEdited
 } from '../actions/todoActions';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   onCancelClick: (itemId: string) => dispatch(toggleEdited(itemId)),
   onSaveClick: (itemId: string, text: string) => dispatch(saveItem(itemId, text)),
   onDeleteClick: (itemId: string) => dispatch(deleteItem(itemId))

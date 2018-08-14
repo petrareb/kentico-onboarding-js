@@ -1,14 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from 'classnames';
 import { isValidText } from '../utils/validateText';
 
-export class ItemToAdd extends React.PureComponent {
-  static displayName = 'ItemToAdd';
+export interface itemToAddProps {
+  onAddClick: Function
+}
 
-  static propTypes = {
-    onAddClick: PropTypes.func.isRequired
-  };
+export interface itemToAddState {
+  text: string,
+  enableInputColors: boolean
+}
+
+export class ItemToAdd extends React.PureComponent<itemToAddProps, itemToAddState> {
+  static displayName = 'ItemToAdd';
 
   state = {
     text: '',
