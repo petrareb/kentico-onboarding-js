@@ -1,13 +1,14 @@
 import { ListItemRecord } from '../models/ListItemRecord';
 import { generateGuid } from '../utils/generateId';
+import { itemInterface } from './itemInterface';
 
-const makeCoffeeItem = new ListItemRecord({
+const makeCoffeeItem: itemInterface = new ListItemRecord({
   text: 'Make coffee',
   id: generateGuid(),
   isEdited: false
 });
 
-const sleepItem = new ListItemRecord({
+const sleepItem: itemInterface = new ListItemRecord({
   text: 'Sleep',
   id: generateGuid(),
   isEdited: false

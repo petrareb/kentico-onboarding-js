@@ -1,5 +1,5 @@
 import '../sticky-footer.css';
-import React from 'react';
+import * as React from 'react';
 import { TodoList } from '../containers/TodoList';
 
 export const App = () => (

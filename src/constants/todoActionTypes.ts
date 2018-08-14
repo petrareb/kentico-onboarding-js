@@ -9,4 +9,3 @@ export type TOGGLE_EDITED = typeof TOGGLE_EDITED;
 export type SAVE_ITEM = typeof SAVE_ITEM;
 
 export type ACTION_TYPE = ADD_NEW_ITEM | DELETE_ITEM | TOGGLE_EDITED | SAVE_ITEM;
-// TODO: KA-308 use as type of switch

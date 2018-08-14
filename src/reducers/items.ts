@@ -8,8 +8,9 @@ import {
 import { initialValues } from '../constants/initialListValues';
 import { item } from './item';
 import { ListItemRecord } from '../models/ListItemRecord';
+import { actionInterface } from '../actions/actionInterface';
 
-export const items = (state = OrderedMap(initialValues), action) => {
+export const items = (state = OrderedMap(initialValues), action: actionInterface) => {
   switch (action.type) {
     case ADD_NEW_ITEM: {
       const newItem = new ListItemRecord({

@@ -8,9 +8,9 @@ import {
 } from '../actions/todoActions';
 
 const mapDispatchToProps = (dispatch) => ({
-  onCancelClick: (itemId) => dispatch(toggleEdited(itemId)),
-  onSaveClick: (itemId, text) => dispatch(saveItem(itemId, text)),
-  onDeleteClick: (itemId) => dispatch(deleteItem(itemId))
+  onCancelClick: (itemId: string) => dispatch(toggleEdited(itemId)),
+  onSaveClick: (itemId: string, text: string) => dispatch(saveItem(itemId, text)),
+  onDeleteClick: (itemId: string) => dispatch(deleteItem(itemId))
 });
 
 const EditItemContainer = connect(null, mapDispatchToProps)(EditItem);
