@@ -1,12 +1,21 @@
+import { Provider } from 'react-redux';
+
 require.context('../public/', true);
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import ReactDom from 'react-dom';
 import React from 'react';
 
-import { App } from './App.jsx';
+import { App } from './components/App.jsx';
+import { store } from './store/store';
+
+// ReactDom.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('app-root'));
 
 ReactDom.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('app-root'));

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isValidText } from '../utils/validateText';
 import classNames from 'classnames';
-
+import { isValidText } from '../utils/validateText';
 
 export class ItemToAdd extends React.PureComponent {
   static displayName = 'ItemToAdd';
+
   static propTypes = {
     onAddClick: PropTypes.func.isRequired
   };
@@ -15,11 +15,10 @@ export class ItemToAdd extends React.PureComponent {
     enableInputColors: false
   };
 
-  _changedTextInput = event =>
-    this.setState({
-      text: event.target.value,
-      enableInputColors: true
-    });
+  _changedTextInput = event => this.setState({
+    text: event.target.value,
+    enableInputColors: true
+  });
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);
@@ -33,11 +32,12 @@ export class ItemToAdd extends React.PureComponent {
     const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
-        <li className={classNames({
-          "input-group": true,
-          "has-error": !validText && this.state.enableInputColors,
-          "has-success": validText && this.state.enableInputColors
-        })}
+        <li
+          className={classNames({
+            "input-group": true,
+            "has-error": !validText && this.state.enableInputColors,
+            "has-success": validText && this.state.enableInputColors
+          })}
         >
           <input
             type="text"
