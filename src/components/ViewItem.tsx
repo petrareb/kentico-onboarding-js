@@ -1,14 +1,28 @@
 import * as React from 'react';
-import { itemInterface } from '../constants/itemInterface';
+import * as PropTypes from 'prop-types';
+import { IItem } from '../constants/IItem';
+import { ListItemRecord } from '../models/ListItemRecord';
 
-export interface viewItemProps {
-  item: itemInterface,
-  index: number,
+export type IViewItemStateProps = {
+  item: IItem,
+  index: number
+}
+// TODO Function
+export type IViewItemDispatchProps = {
   onRowClick: Function
 }
 
-export class ViewItem extends React.PureComponent<viewItemProps> {
+export interface IViewItemProps extends IViewItemDispatchProps, IViewItemStateProps {}
+
+export class ViewItem extends React.PureComponent<IViewItemProps> {
   static displayName = 'ViewItem';
+
+  static propTypes = {
+    item: PropTypes.instanceOf(ListItemRecord).isRequired,
+    index: PropTypes.number.isRequired,
+
+    onRowClick: PropTypes.func.isRequired
+  };
 
   _enableEditing = () => this.props.onRowClick(this.props.item.id);
 

@@ -1,24 +1,41 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { itemInterface } from '../constants/itemInterface';
+import { IItem } from '../constants/IItem';
+import { ListItemRecord } from '../models/ListItemRecord';
 
-export interface EditItemProps {
-  item: itemInterface,
-  index: number,
-  onCancelClick: Function,
-  onSaveClick: Function,
-  onDeleteClick: Function
+export type IEditItemStateProps = {
+  readonly item: IItem,
+  readonly index: number
 }
 
-export interface EditItemState {
+// TODO: () => ?
+export type IEditItemDispatchProps = {
+  readonly onCancelClick: (text: string) => void,
+  readonly onSaveClick: (text: string, id: string) => void,
+  readonly onDeleteClick: (id: string) => void
+}
+
+export interface IEditItemProps extends IEditItemDispatchProps, IEditItemStateProps {}
+
+export interface IEditItemState {
   text: string
 }
 
-export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
+export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState> {
   static displayName = 'EditItem';
 
-  constructor(props: EditItemProps) {
+  static propTypes = {
+    item: PropTypes.instanceOf(ListItemRecord).isRequired,
+    index: PropTypes.number.isRequired,
+
+    onCancelClick: PropTypes.func.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
+  };
+
+  constructor(props: IEditItemProps) {
     super(props);
     this.state = {
       text: props.item.text
@@ -31,9 +48,12 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
 
   _editItem = () => this.props.onSaveClick(this.props.item.id, this.state.text);
 
-  _updateText = event => this.setState({
-    text: event.target.value
+  _updateText = (event: React.FormEvent<HTMLInputElement>)  => this.setState({
+    text: event.currentTarget.value
   });
+  //_updateText = (event: ChangeEvent)  => this.setState({
+  //  text: event.target.value
+  //});
 
   render() {
     const validText = isValidText(this.state.text);

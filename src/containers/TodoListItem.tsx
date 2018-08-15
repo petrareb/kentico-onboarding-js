@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
-import { TodoListItem } from '../components/TodoListItem';
+import { ITodoListItemStateProps, TodoListItem } from '../components/TodoListItem';
+import { IAppState } from '../store/IAppState';
 
-export interface todoListItemProps {
-  id: string
+export interface ITodoListContainerProps {
+  id: string,
+  index: number
 }
 
-export interface todoListItemState {
-
-}
-
-const mapStateToProps = (state, ownProps) => ({
-  item: state.items.get(ownProps.id)
+const mapStateToProps = (state: IAppState, ownProps: ITodoListContainerProps): ITodoListItemStateProps => ({
+  item: state.items.get(ownProps.id),
+  index: ownProps.index
 });
 
 const TodoListItemContainer = connect(mapStateToProps)(TodoListItem);

@@ -1,8 +1,14 @@
 import { connect } from 'react-redux';
-import { TodoList } from '../components/TodoList';
+import { ITodoListStateProps, TodoList } from '../components/TodoList';
 import { memoizedIds } from '../selectors/memoizeIds';
+import { IItem } from '../constants/IItem';
+import { OrderedMap } from 'immutable';
 
-const mapStateToProps = state: => ({
+export type ITodoListState = {
+  readonly items: OrderedMap<string, IItem>
+}
+
+const mapStateToProps = (state: ITodoListState): ITodoListStateProps => ({
   itemIds: memoizedIds(state.items.keySeq().toArray())
 });
 

@@ -1,7 +1,7 @@
 import { Record } from 'immutable';
-import { itemInterface } from '../constants/itemInterface';
+import { IItem } from '../constants/IItem';
 
-const defaultRecord: itemInterface = {
+const defaultRecord: IItem = {
   text: '',
   id: '',
   isEdited: false

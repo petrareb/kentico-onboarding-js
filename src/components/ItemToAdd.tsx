@@ -1,28 +1,40 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
 
-export interface itemToAddProps {
-  onAddClick: Function
+export type IItemToAddDispatchProps = {
+  readonly onAddClick: (text: string) => void
 }
 
-export interface itemToAddState {
-  text: string,
-  enableInputColors: boolean
+export interface IItemToAddProps extends IItemToAddDispatchProps {}
+
+export type IItemToAddState = {
+  readonly text: string,
+  readonly enableInputColors: boolean
 }
 
-export class ItemToAdd extends React.PureComponent<itemToAddProps, itemToAddState> {
+export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddState> {
   static displayName = 'ItemToAdd';
+
+  static propTypes = {
+    onAddClick: PropTypes.func.isRequired
+  };
 
   state = {
     text: '',
     enableInputColors: false
   };
 
-  _changedTextInput = event => this.setState({
-    text: event.target.value,
+  _changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState({
+    text: event.currentTarget.value,
     enableInputColors: true
   });
+
+  //_changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState({
+  //  text: event.target.value,
+  //  enableInputColors: true
+  //});
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);

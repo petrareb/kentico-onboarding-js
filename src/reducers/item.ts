@@ -3,9 +3,9 @@ import {
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
 import { ListItemRecord } from '../models/ListItemRecord';
-import { actionInterface } from '../actions/actionInterface';
+import { IAction } from '../actions/IAction';
 
-export const item = (state = new ListItemRecord(), action: actionInterface) => {
+export const item = (state = new ListItemRecord(), action: IAction) => {
   switch (action.type) {
     case TOGGLE_EDITED: {
       return state.merge({
