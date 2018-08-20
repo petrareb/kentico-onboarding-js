@@ -10,7 +10,7 @@ import { item } from './item';
 import { ListItemRecord } from '../models/ListItemRecord';
 import { IAction } from '../actions/IAction';
 
-export const items = (state = OrderedMap(initialValues), action: IAction) => {
+export const items = (state = OrderedMap<string, ListItemRecord>(initialValues), action: IAction): OrderedMap<string, ListItemRecord> => {
   switch (action.type) {
     case ADD_NEW_ITEM: {
       const newItem = new ListItemRecord({

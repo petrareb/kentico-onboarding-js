@@ -16,7 +16,7 @@ describe('Item reducer ', () => {
       isEdited: false
     });
     const expectedItem = itemToEdit.merge({isEdited: !itemToEdit.isEdited});
-    const action = toggleEdited(itemToEdit.id);
+    const action: IAction = toggleEdited(itemToEdit.id);
 
     const editedItem = item(itemToEdit, action);
 
@@ -34,7 +34,7 @@ describe('Item reducer ', () => {
       text: newText,
       isEdited: false
     });
-    const action = saveItem(itemToEdit.id, newText);
+    const action: IAction= saveItem(itemToEdit.id, newText);
 
     const editedItem = item(itemToEdit, action);
 

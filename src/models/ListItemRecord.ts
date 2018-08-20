@@ -7,10 +7,13 @@ const defaultRecord: IItem = {
   isEdited: false
 };
 
-const ItemRecord = Record(defaultRecord, 'ItemRecord');
+// const ItemRecord = ;
 
-export class ListItemRecord extends ItemRecord {
+export class ListItemRecord extends Record(defaultRecord, 'ItemRecord') {
   readonly id: string;
   readonly text: string;
   readonly isEdited: boolean;
+
+  with = (x) =>
+    this.merge(x) as any as ListItemRecord;
 }

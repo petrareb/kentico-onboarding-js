@@ -13,5 +13,6 @@ const reducers = combineReducers({ items });
 
 export const store = createStore(
   reducers,
+  //TODO: add default values,
   composeEnhancers(applyMiddleware(logger))
 );
