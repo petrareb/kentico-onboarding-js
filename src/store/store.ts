@@ -7,7 +7,7 @@ import {
 import logger from 'redux-logger';
 import { items } from '../reducers/items';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducers = combineReducers({ items });
 

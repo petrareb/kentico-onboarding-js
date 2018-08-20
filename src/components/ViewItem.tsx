@@ -1,24 +1,25 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { IItem } from '../constants/IItem';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListRecord } from '../models/ListItemRecord';
+import { IAction } from '../actions/IAction';
+import { ReactNode } from 'react';
 
 export type IViewItemStateProps = {
-  item: IItem,
+  item: ListRecord,
   index: number
-}
-// TODO Function
-export type IViewItemDispatchProps = {
-  onRowClick: Function
-}
+};
 
-export interface IViewItemProps extends IViewItemDispatchProps, IViewItemStateProps {}
+export type IViewItemDispatchProps = {
+  onRowClick: (id: string) => IAction
+};
+
+export type IViewItemProps = IViewItemDispatchProps & IViewItemStateProps;
 
 export class ViewItem extends React.PureComponent<IViewItemProps> {
   static displayName = 'ViewItem';
 
   static propTypes = {
-    item: PropTypes.instanceOf(ListItemRecord).isRequired,
+    item: PropTypes.instanceOf(ListRecord).isRequired,
     index: PropTypes.number.isRequired,
 
     onRowClick: PropTypes.func.isRequired
@@ -26,7 +27,7 @@ export class ViewItem extends React.PureComponent<IViewItemProps> {
 
   _enableEditing = () => this.props.onRowClick(this.props.item.id);
 
-  render() {
+  render(): ReactNode {
     return (
       <li className="list-group-item">
         <span

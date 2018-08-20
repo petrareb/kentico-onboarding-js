@@ -1,18 +1,18 @@
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { ViewItem } from '../components/ViewItem';
+import { IViewItemDispatchProps, ViewItem } from '../components/ViewItem';
 import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
-import { IItem } from '../constants/IItem';
+import { ListRecord } from '../models/ListItemRecord';
 
-export interface IViewItemContainerProps {
+export type IViewItemContainerProps = {
   index: number,
-  item: IItem
-  onRowClick: Function
-}
+  item: ListRecord,
+};
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): IViewItemDispatchProps => ({
   onRowClick: (itemId: string) => dispatch(toggleEdited(itemId))
 });
 
-const ViewItemContainer = connect(null, mapDispatchToProps)(ViewItem);
+const ViewItemContainer: React.ComponentClass<IViewItemContainerProps> = connect(null, mapDispatchToProps)(ViewItem);
 export { ViewItemContainer as ViewItem };

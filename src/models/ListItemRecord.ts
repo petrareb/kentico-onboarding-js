@@ -8,3 +8,9 @@ const defaultRecord: IItem = {
 };
 
 export const ListItemRecord = Record(defaultRecord, 'ListItemRecord');
+
+export class ListRecord extends ListItemRecord {
+  readonly id: string;
+  readonly text: string;
+  readonly isEdited: boolean;
+}

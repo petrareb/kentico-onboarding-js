@@ -1,4 +1,4 @@
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListRecord } from '../models/ListItemRecord';
 import { generateGuid } from '../utils/generateId';
 import {
   saveItem,
@@ -6,15 +6,16 @@ import {
 } from '../actions/todoActions';
 import { item } from './item';
 import { items } from './items';
+import { IAction } from '../actions/IAction';
 
 describe('Item reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
-    const itemToEdit = new ListItemRecord({
+    const itemToEdit: ListRecord = new ListRecord({
       text: 'text',
       id: generateGuid(),
       isEdited: false
     });
-    const expectedItem = itemToEdit.merge({ isEdited: !itemToEdit.isEdited });
+    const expectedItem = itemToEdit.merge({isEdited: !itemToEdit.isEdited});
     const action = toggleEdited(itemToEdit.id);
 
     const editedItem = item(itemToEdit, action);
@@ -23,7 +24,7 @@ describe('Item reducer ', () => {
   });
 
   it('saves item correctly (SAVE_ITEM action)', () => {
-    const itemToEdit = new ListItemRecord({
+    const itemToEdit: ListRecord = new ListRecord({
       text: 'text',
       id: generateGuid(),
       isEdited: false
@@ -41,8 +42,8 @@ describe('Item reducer ', () => {
   });
 
   it('returns default state in case invalid action is given as a param', () => {
-    const invalidAction = { type: 'INVALID ACTION' };
-    const defaultState = new ListItemRecord();
+    const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
+    const defaultState = new ListRecord();
 
     const newState = item(undefined, invalidAction);
 
@@ -50,8 +51,8 @@ describe('Item reducer ', () => {
   });
 
   it('returns previous state when action is unknown', () => {
-    const invalidAction = { type: 'INVALID ACTION' };
-    const expectedState = new ListItemRecord({
+    const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
+    const expectedState = new ListRecord({
       text: 'text',
       id: generateGuid(),
       isEdited: false

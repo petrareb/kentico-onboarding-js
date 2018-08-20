@@ -2,10 +2,10 @@ import {
   SAVE_ITEM,
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListRecord } from '../models/ListItemRecord';
 import { IAction } from '../actions/IAction';
 
-export const item = (state = new ListItemRecord(), action: IAction) => {
+export const item = (state: ListRecord = new ListRecord(), action: IAction) => {
   switch (action.type) {
     case TOGGLE_EDITED: {
       return state.merge({

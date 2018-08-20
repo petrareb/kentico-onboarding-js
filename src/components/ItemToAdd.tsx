@@ -2,17 +2,18 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
+import { ReactNode } from 'react';
 
 export type IItemToAddDispatchProps = {
   readonly onAddClick: (text: string) => void
-}
+};
 
-export interface IItemToAddProps extends IItemToAddDispatchProps {}
+export type IItemToAddProps = IItemToAddDispatchProps;
 
 export type IItemToAddState = {
   readonly text: string,
   readonly enableInputColors: boolean
-}
+};
 
 export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddState> {
   static displayName = 'ItemToAdd';
@@ -26,33 +27,28 @@ export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddSt
     enableInputColors: false
   };
 
-  _changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState({
+  _changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState(() => ({
     text: event.currentTarget.value,
     enableInputColors: true
-  });
-
-  //_changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState({
-  //  text: event.target.value,
-  //  enableInputColors: true
-  //});
+  }));
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);
-    this.setState({
+    this.setState(() => ({
       text: '',
       enableInputColors: false
-    });
+    }));
   };
 
-  render() {
+  render(): ReactNode {
     const validText = isValidText(this.state.text);
     return (
       <div className="list-group-item">
         <li
           className={classNames({
-            "input-group": true,
-            "has-error": !validText && this.state.enableInputColors,
-            "has-success": validText && this.state.enableInputColors
+            'input-group': true,
+            'has-error': !validText && this.state.enableInputColors,
+            'has-success': validText && this.state.enableInputColors
           })}
         >
           <input

@@ -20,13 +20,13 @@ describe('isValidText function', () => {
   });
 
   it('rejects undefined as input', () => {
-    const undefinedValue = undefined;
+    const undefinedValue: any = undefined;
     expect(isValidText(undefinedValue))
       .toBeFalsy();
   });
 
   it('rejects null as input', () => {
-    const nullValue = null;
+    const nullValue: any = null;
     expect(isValidText(nullValue))
       .toBeFalsy();
   });
