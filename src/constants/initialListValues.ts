@@ -1,13 +1,13 @@
 import { generateGuid } from '../utils/generateId';
-import { ListRecord } from '../models/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 
-const makeCoffeeItem = new ListRecord({
+const makeCoffeeItem = new ListItemRecord({
   text: 'Make coffee',
   id: generateGuid(),
   isEdited: false
 });
 
-const sleepItem = new ListRecord({
+const sleepItem = new ListItemRecord({
   text: 'Sleep',
   id: generateGuid(),
   isEdited: false

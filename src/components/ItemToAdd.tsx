@@ -27,10 +27,13 @@ export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddSt
     enableInputColors: false
   };
 
-  _changedTextInput = (event: React.FormEvent<HTMLInputElement>) => this.setState(() => ({
-    text: event.currentTarget.value,
-    enableInputColors: true
-  }));
+  _changedTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.persist();
+    return this.setState(() => ({
+      text: event.target.value,
+      enableInputColors: true
+    }));
+  };
 
   _addNewItem = () => {
     this.props.onAddClick(this.state.text);
@@ -41,15 +44,16 @@ export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddSt
   };
 
   render(): ReactNode {
-    const validText = isValidText(this.state.text);
+    const validText: boolean = isValidText(this.state.text);
+    const classes = classNames({
+      'input-group': true,
+      'has-error': !validText && this.state.enableInputColors,
+      'has-success': validText && this.state.enableInputColors
+    });
     return (
       <div className="list-group-item">
         <li
-          className={classNames({
-            'input-group': true,
-            'has-error': !validText && this.state.enableInputColors,
-            'has-success': validText && this.state.enableInputColors
-          })}
+          className={classes}
         >
           <input
             type="text"

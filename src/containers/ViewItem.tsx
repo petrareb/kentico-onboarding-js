@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { IViewItemDispatchProps, ViewItem } from '../components/ViewItem';
 import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
-import { ListRecord } from '../models/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 
 export type IViewItemContainerProps = {
   index: number,
-  item: ListRecord,
+  item: ListItemRecord
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IViewItemDispatchProps => ({

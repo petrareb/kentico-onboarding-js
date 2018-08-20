@@ -1,8 +1,9 @@
 import '../sticky-footer.css';
 import * as React from 'react';
 import { TodoList } from '../containers/TodoList';
+import { StatelessComponent } from 'react';
 
-export const App = () => (
+export const App: StatelessComponent = () => (
   <div>
     <div className="container">
       <div className="header clearfix">

@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { IItem } from '../constants/IItem';
+import { IItem } from './IItem';
 
 const defaultRecord: IItem = {
   text: '',
@@ -7,9 +7,9 @@ const defaultRecord: IItem = {
   isEdited: false
 };
 
-export const ListItemRecord = Record(defaultRecord, 'ListItemRecord');
+const ItemRecord = Record(defaultRecord, 'ItemRecord');
 
-export class ListRecord extends ListItemRecord {
+export class ListItemRecord extends ItemRecord {
   readonly id: string;
   readonly text: string;
   readonly isEdited: boolean;

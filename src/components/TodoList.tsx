@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
-import { ReactNode } from 'react';
+import { ReactNode, ReactNodeArray } from 'react';
 
 export type ITodoListStateProps = {
   itemIds: Array<string>
@@ -18,7 +18,7 @@ export class TodoList extends React.PureComponent<ITodoListProps> {
   };
 
   render(): ReactNode {
-    const table_rows = this
+    const table_rows: ReactNodeArray = this
       .props
       .itemIds
       .map((itemId, i) => (

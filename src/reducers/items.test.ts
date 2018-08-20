@@ -9,7 +9,7 @@ import {
   toggleEdited
 } from '../actions/todoActions';
 import { initialValues } from '../constants/initialListValues';
-import { ListRecord } from '../models/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 import { IAction } from '../actions/IAction';
 
 describe('Items reducer ', () => {
@@ -27,7 +27,7 @@ describe('Items reducer ', () => {
   it('adds new item correctly (ADD_NEW_ITEM action)', () => {
     const text = 'something';
     const addingAction = addNewItem(text);
-    const newItem = new ListRecord({
+    const newItem = new ListItemRecord({
       id: addingAction.payload.id,
       text: addingAction.payload.text
     });
@@ -39,7 +39,7 @@ describe('Items reducer ', () => {
   });
 
   it('deletes item correctly (DELETE_ITEM action)', () => {
-    const itemToDelete = new ListRecord(originalState.first());
+    const itemToDelete = new ListItemRecord(originalState.first());
     const deletingAction = deleteItem(itemToDelete.id);
     const expectedState = originalState.delete(itemToDelete.id);
 
@@ -49,7 +49,7 @@ describe('Items reducer ', () => {
   });
 
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
-    const itemToToggle = new ListRecord(originalState.first());
+    const itemToToggle = new ListItemRecord(originalState.first());
     const togglingAction = toggleEdited(itemToToggle.id);
     const toggledItem = itemToToggle.merge({ isEdited: !itemToToggle.isEdited });
     const expectedState = originalState.update(itemToToggle.id, () => toggledItem);
@@ -61,7 +61,7 @@ describe('Items reducer ', () => {
   });
 
   it('edits item correctly (SAVE_ITEM action)', () => {
-    const itemToEdit = new ListRecord(originalState.first());
+    const itemToEdit = new ListItemRecord(originalState.first());
     const newText = 'newText';
     const editingAction = saveItem(itemToEdit.id, newText);
     const editedItem = itemToEdit.merge({
@@ -78,7 +78,7 @@ describe('Items reducer ', () => {
 
   it('uses default state in case undefined state is given as a param', () => {
     const defaultStateOfReducer = OrderedMap(initialValues);
-    const itemToDelete = new ListRecord(defaultStateOfReducer.first());
+    const itemToDelete = new ListItemRecord(defaultStateOfReducer.first());
     const deletingAction = deleteItem(itemToDelete.id);
     const expectedState = defaultStateOfReducer.delete(itemToDelete.id);
 

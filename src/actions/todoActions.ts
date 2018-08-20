@@ -7,7 +7,7 @@ import { generateGuid } from '../utils/generateId';
 import { addNewItemActionFactory } from './addNewItemActionFactory';
 import { IAction } from './IAction';
 
-export const addNewItem = addNewItemActionFactory(generateGuid);
+export const addNewItem: (text: string) => IAction = addNewItemActionFactory(generateGuid);
 
 export const toggleEdited = (id: string): IAction => ({
   type: TOGGLE_EDITED,

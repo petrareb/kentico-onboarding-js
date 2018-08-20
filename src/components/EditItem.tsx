@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
 import { IAction } from '../actions/IAction';
-import { ListRecord } from '../models/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 import { ReactNode } from 'react';
 
 export type IEditItemStateProps = {
-  readonly item: ListRecord,
+  readonly item: ListItemRecord,
   readonly index: number
 };
 
@@ -27,7 +27,7 @@ export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState
   static displayName = 'EditItem';
 
   static propTypes = {
-    item: PropTypes.instanceOf(ListRecord).isRequired,
+    item: PropTypes.instanceOf(ListItemRecord).isRequired,
     index: PropTypes.number.isRequired,
 
     onCancelClick: PropTypes.func.isRequired,
@@ -42,26 +42,31 @@ export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState
     };
   }
 
-  _cancelEditing = () => this.props.onCancelClick(this.props.item.id);
+  _cancelEditing = (): IAction => this.props.onCancelClick(this.props.item.id);
 
-  _deleteItem = () => this.props.onDeleteClick(this.props.item.id);
+  _deleteItem = (): IAction => this.props.onDeleteClick(this.props.item.id);
 
-  _editItem = () => this.props.onSaveClick(this.props.item.id, this.state.text);
+  _editItem = (): IAction => this.props.onSaveClick(this.props.item.id, this.state.text);
 
-  _updateText = (event: React.FormEvent<HTMLInputElement>) => this.setState(() => ({
-    text: event.currentTarget.value
-  }));
+  _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    event.persist();
+    this.setState(() => ({
+      text: event.target.value
+    }));
+  };
 
   render(): ReactNode {
-    const validText = isValidText(this.state.text);
+    const validText: boolean = isValidText(this.state.text);
+
+    const classes = classNames({
+      'input-group': true,
+      'has-error': !validText,
+      'has-success': validText
+    });
     return (
       <div className="list-group-item">
         <li
-          className={classNames({
-            'input-group': true,
-            'has-error': !validText,
-            'has-success': validText
-          })}
+          className={classes}
         >
           <p className="input-group-addon">
             {this.props.index}

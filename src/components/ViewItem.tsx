@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ListRecord } from '../models/ListItemRecord';
+import { ListItemRecord } from '../models/ListItemRecord';
 import { IAction } from '../actions/IAction';
 import { ReactNode } from 'react';
 
 export type IViewItemStateProps = {
-  item: ListRecord,
+  item: ListItemRecord,
   index: number
 };
 
@@ -19,13 +19,13 @@ export class ViewItem extends React.PureComponent<IViewItemProps> {
   static displayName = 'ViewItem';
 
   static propTypes = {
-    item: PropTypes.instanceOf(ListRecord).isRequired,
+    item: PropTypes.instanceOf(ListItemRecord).isRequired,
     index: PropTypes.number.isRequired,
 
     onRowClick: PropTypes.func.isRequired
   };
 
-  _enableEditing = () => this.props.onRowClick(this.props.item.id);
+  _enableEditing = (): IAction => this.props.onRowClick(this.props.item.id);
 
   render(): ReactNode {
     return (
