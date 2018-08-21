@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
 import { IAction } from '../actions/IAction';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
 
 export type IEditItemStateProps = {
-  readonly item: ListItemRecord,
+  readonly item: ListItem,
   readonly index: number
 };
 
@@ -27,7 +27,7 @@ export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState
   static displayName = 'EditItem';
 
   static propTypes = {
-    item: PropTypes.instanceOf(ListItemRecord).isRequired,
+    item: PropTypes.instanceOf(ListItem).isRequired,
     index: PropTypes.number.isRequired,
 
     onCancelClick: PropTypes.func.isRequired,

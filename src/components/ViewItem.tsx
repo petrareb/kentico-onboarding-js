@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 import { IAction } from '../actions/IAction';
 import { ReactNode } from 'react';
 
 export type IViewItemStateProps = {
-  item: ListItemRecord,
+  item: ListItem,
   index: number
 };
 
@@ -19,7 +19,7 @@ export class ViewItem extends React.PureComponent<IViewItemProps> {
   static displayName = 'ViewItem';
 
   static propTypes = {
-    item: PropTypes.instanceOf(ListItemRecord).isRequired,
+    item: PropTypes.instanceOf(ListItem).isRequired,
     index: PropTypes.number.isRequired,
 
     onRowClick: PropTypes.func.isRequired

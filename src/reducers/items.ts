@@ -5,17 +5,17 @@ import {
   SAVE_ITEM,
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
-import { initialValues } from '../constants/initialListValues';
 import { item } from './item';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 import { IAction } from '../actions/IAction';
 
-export const items = (state = OrderedMap<string, ListItemRecord>(initialValues), action: IAction): OrderedMap<string, ListItemRecord> => {
+export const items = (state = OrderedMap<string, ListItem>(), action: IAction): OrderedMap<string, ListItem> => {
   switch (action.type) {
     case ADD_NEW_ITEM: {
-      const newItem = new ListItemRecord({
+      const newItem = new ListItem({
         id: action.payload.id,
-        text: action.payload.text
+        text: action.payload.text,
+        isEdited: false
       });
       return state.set(action.payload.id, newItem);
     }
@@ -24,7 +24,7 @@ export const items = (state = OrderedMap<string, ListItemRecord>(initialValues),
     }
     case TOGGLE_EDITED:
     case SAVE_ITEM: {
-      const itemToEdit = new ListItemRecord(state.get(action.payload.id));
+      const itemToEdit = new ListItem(state.get(action.payload.id));
       const editedItem = item(itemToEdit, action);
       return state.update(action.payload.id, () => editedItem);
     }

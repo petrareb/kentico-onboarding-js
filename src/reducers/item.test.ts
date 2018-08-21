@@ -1,64 +1,63 @@
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 import { generateGuid } from '../utils/generateId';
 import {
   saveItem,
   toggleEdited
 } from '../actions/todoActions';
 import { item } from './item';
-import { items } from './items';
 import { IAction } from '../actions/IAction';
 
-describe('Item reducer ', () => {
+describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
-    const itemToEdit = new ListItemRecord({
+    const itemToEdit = new ListItem({
       text: 'text',
       id: generateGuid(),
       isEdited: false
     });
-    const expectedItem = itemToEdit.merge({isEdited: !itemToEdit.isEdited});
+    const expectedItem: ListItem = itemToEdit.with({isEdited: !itemToEdit.isEdited});
     const action: IAction = toggleEdited(itemToEdit.id);
 
-    const editedItem = item(itemToEdit, action);
+    const editedItem: ListItem = item(itemToEdit, action);
 
     expect(editedItem).toEqual(expectedItem);
   });
 
   it('saves item correctly (SAVE_ITEM action)', () => {
-    const itemToEdit: ListItemRecord = new ListItemRecord({
+    const itemToEdit: ListItem = new ListItem({
       text: 'text',
       id: generateGuid(),
       isEdited: false
     });
     const newText = 'newText';
-    const expectedItem = itemToEdit.merge({
+    const expectedItem: ListItem = itemToEdit.with({
       text: newText,
       isEdited: false
     });
     const action: IAction= saveItem(itemToEdit.id, newText);
 
-    const editedItem = item(itemToEdit, action);
+    const editedItem: ListItem = item(itemToEdit, action);
 
     expect(editedItem).toEqual(expectedItem);
   });
 
   it('returns default state in case invalid action is given as a param', () => {
     const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
-    const defaultState = new ListItemRecord();
+    const defaultState = new ListItem();
 
-    const newState = item(undefined, invalidAction);
+    const newState: ListItem = item(undefined, invalidAction);
 
     expect(newState).toEqual(defaultState);
   });
 
   it('returns previous state when action is unknown', () => {
     const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
-    const expectedState = new ListItemRecord({
+    const expectedState = new ListItem({
       text: 'text',
       id: generateGuid(),
       isEdited: false
     });
 
-    const newState = items(expectedState, invalidAction);
+    const newState: ListItem = item(expectedState, invalidAction);
 
     expect(expectedState).toEqual(newState);
   });

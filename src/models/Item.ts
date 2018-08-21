@@ -1,5 +1,6 @@
 import { Record } from 'immutable';
 import { IItem } from './IItem';
+import { Guid } from '../utils/ownTypes';
 
 const defaultRecord: IItem = {
   text: '',
@@ -7,13 +8,12 @@ const defaultRecord: IItem = {
   isEdited: false
 };
 
-// const ItemRecord = ;
-
-export class ListItemRecord extends Record(defaultRecord, 'ItemRecord') {
-  readonly id: string;
+export class Item extends Record(defaultRecord, 'Item') {
+  readonly id: Guid;
   readonly text: string;
   readonly isEdited: boolean;
 
-  with = (x) =>
-    this.merge(x) as any as ListItemRecord;
+  constructor(props: IItem = defaultRecord) {
+    super(props);
+  }
 }

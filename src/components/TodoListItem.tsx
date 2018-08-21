@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ViewItem } from '../containers/ViewItem';
 import { EditItem } from '../containers/EditItem';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 
 export type ITodoListItemStateProps = {
-  item: ListItemRecord,
+  item: ListItem,
   index: number
 };
 
@@ -30,6 +30,6 @@ export const TodoListItem: React.StatelessComponent<ITodoListItemStateProps> = (
 TodoListItem.displayName = 'TodoListItem';
 
 TodoListItem.propTypes = {
-  item: PropTypes.instanceOf(ListItemRecord).isRequired,
+  item: PropTypes.instanceOf(ListItem).isRequired,
   index: PropTypes.number.isRequired,
 };

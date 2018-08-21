@@ -9,10 +9,10 @@ import {
 } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 import { IAction } from '../actions/IAction';
-import { ListItemRecord } from '../models/ListItemRecord';
+import { ListItem } from '../models/ListItem';
 
 export type IEditItemContainerProps = {
-  readonly item: ListItemRecord,
+  readonly item: ListItem,
   readonly index: number
 };
 
