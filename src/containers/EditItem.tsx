@@ -10,6 +10,7 @@ import {
 import { Dispatch } from 'redux';
 import { IAction } from '../actions/IAction';
 import { ListItem } from '../models/ListItem';
+import { Guid } from '../utils/ownTypes';
 
 export type IEditItemContainerProps = {
   readonly item: ListItem,
@@ -17,9 +18,9 @@ export type IEditItemContainerProps = {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IEditItemDispatchProps => ({
-  onCancelClick: (itemId: string): IAction => dispatch(toggleEdited(itemId)),
-  onSaveClick: (itemId: string, text: string): IAction => dispatch(saveItem(itemId, text)),
-  onDeleteClick: (itemId: string): IAction => dispatch(deleteItem(itemId))
+  onCancelClick: (itemId: Guid): IAction => dispatch(toggleEdited(itemId)),
+  onSaveClick: (itemId: Guid, text: string): IAction => dispatch(saveItem(itemId, text)),
+  onDeleteClick: (itemId: Guid): IAction => dispatch(deleteItem(itemId))
 });
 
 const EditItemContainer: React.ComponentClass<IEditItemContainerProps> =

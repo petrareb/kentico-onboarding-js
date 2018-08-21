@@ -4,6 +4,7 @@ import { IViewItemDispatchProps, ViewItem } from '../components/ViewItem';
 import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 import { ListItem } from '../models/ListItem';
+import { Guid } from '../utils/ownTypes';
 
 export type IViewItemContainerProps = {
   index: number,
@@ -11,7 +12,7 @@ export type IViewItemContainerProps = {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IViewItemDispatchProps => ({
-  onRowClick: (itemId: string) => dispatch(toggleEdited(itemId))
+  onRowClick: (itemId: Guid) => dispatch(toggleEdited(itemId))
 });
 
 const ViewItemContainer: React.ComponentClass<IViewItemContainerProps> = connect(null, mapDispatchToProps)(ViewItem);

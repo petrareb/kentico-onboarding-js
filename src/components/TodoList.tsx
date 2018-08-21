@@ -3,9 +3,10 @@ import * as PropTypes from 'prop-types';
 import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 import { ReactNode, ReactNodeArray } from 'react';
+import { Guid } from '../utils/ownTypes';
 
 export type ITodoListStateProps = {
-  itemIds: Array<string>
+  itemIds: Array<Guid>
 };
 
 export type ITodoListProps = ITodoListStateProps;

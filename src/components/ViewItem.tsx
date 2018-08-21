@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { ListItem } from '../models/ListItem';
 import { IAction } from '../actions/IAction';
 import { ReactNode } from 'react';
+import { Guid } from '../utils/ownTypes';
 
 export type IViewItemStateProps = {
   item: ListItem,
@@ -10,7 +11,7 @@ export type IViewItemStateProps = {
 };
 
 export type IViewItemDispatchProps = {
-  onRowClick: (id: string) => IAction
+  onRowClick: (id: Guid) => IAction
 };
 
 export type IViewItemProps = IViewItemDispatchProps & IViewItemStateProps;

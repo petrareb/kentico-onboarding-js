@@ -5,6 +5,7 @@ import { isValidText } from '../utils/validateText';
 import { IAction } from '../actions/IAction';
 import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
+import { Guid } from '../utils/ownTypes';
 
 export type IEditItemStateProps = {
   readonly item: ListItem,
@@ -12,9 +13,9 @@ export type IEditItemStateProps = {
 };
 
 export type IEditItemDispatchProps = {
-  onCancelClick: (itemId: string) => IAction,
-  onSaveClick: (itemId: string, text: string) => IAction,
-  onDeleteClick: (itemId: string) => IAction
+  onCancelClick: (itemId: Guid) => IAction,
+  onSaveClick: (itemId: Guid, text: string) => IAction,
+  onDeleteClick: (itemId: Guid) => IAction
 };
 
 export type IEditItemProps = IEditItemDispatchProps & IEditItemStateProps;
