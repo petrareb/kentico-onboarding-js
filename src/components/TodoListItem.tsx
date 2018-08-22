@@ -4,14 +4,14 @@ import { ViewItem } from '../containers/ViewItem';
 import { EditItem } from '../containers/EditItem';
 import { ListItem } from '../models/ListItem';
 
-export type ITodoListItemStateProps = {
+export type TodoListItemStateProps = {
   item: ListItem,
   index: number
 };
 
-export type ITodoListItemProps = ITodoListItemStateProps;
+export type TodoListItemProps = TodoListItemStateProps;
 
-export const TodoListItem: React.StatelessComponent<ITodoListItemStateProps> = ({ item, index }: ITodoListItemProps) => (
+export const TodoListItem: React.StatelessComponent<TodoListItemStateProps> = ({ item, index }: TodoListItemProps) => (
   (item.isEdited)
     ? (
       <EditItem

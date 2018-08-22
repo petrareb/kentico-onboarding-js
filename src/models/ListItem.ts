@@ -1,14 +1,14 @@
 import { Item } from './Item';
-import { IItem } from './IItem';
+import { ItemType } from './ItemType';
 
-const defaultRecord: IItem = {
+const defaultRecord: ItemType = {
   text: '',
   id: '',
   isEdited: false
 };
 
 export class ListItem extends Item {
-  constructor(props: IItem = defaultRecord) {
+  constructor(props: ItemType = defaultRecord) {
     super(props);
   }
 

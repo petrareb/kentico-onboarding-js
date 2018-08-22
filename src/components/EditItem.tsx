@@ -2,28 +2,28 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
 
-export type IEditItemStateProps = {
+export type EditItemStateProps = {
   readonly item: ListItem,
   readonly index: number
 };
 
-export type IEditItemDispatchProps = {
+export type EditItemDispatchProps = {
   onCancelClick: (itemId: Guid) => Action,
   onSaveClick: (itemId: Guid, text: string) => Action,
   onDeleteClick: (itemId: Guid) => Action
 };
 
-export type IEditItemProps = IEditItemDispatchProps & IEditItemStateProps;
+export type EditItemProps = EditItemDispatchProps & EditItemStateProps;
 
-export type IEditItemState = {
+export type EditItemState = {
   text: string
 };
 
-export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState> {
+export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
   static displayName = 'EditItem';
 
   static propTypes = {
@@ -35,7 +35,7 @@ export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState
     onDeleteClick: PropTypes.func.isRequired
   };
 
-  constructor(props: IEditItemProps) {
+  constructor(props: EditItemProps) {
     super(props);
     this.state = {
       text: props.item.text

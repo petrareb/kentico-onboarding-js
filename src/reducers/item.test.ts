@@ -5,7 +5,7 @@ import {
   toggleEdited
 } from '../actions/todoActions';
 import { item } from './item';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {

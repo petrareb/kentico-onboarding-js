@@ -1,7 +1,7 @@
 import { Record } from 'immutable';
-import { IItem } from './IItem';
+import { ItemType } from './ItemType';
 
-const defaultRecord: IItem = {
+const defaultRecord: ItemType = {
   text: '',
   id: '',
   isEdited: false
@@ -12,7 +12,7 @@ export class Item extends Record(defaultRecord, 'Item') {
   readonly text: string;
   readonly isEdited: boolean;
 
-  constructor(props: IItem = defaultRecord) {
+  constructor(props: ItemType = defaultRecord) {
     super(props);
   }
 }

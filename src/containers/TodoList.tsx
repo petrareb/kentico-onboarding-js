@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ITodoListStateProps, TodoList } from '../components/TodoList';
+import { TodoListStateProps, TodoList } from '../components/TodoList';
 import { memoizedIds } from '../selectors/memoizeIds';
-import { IAppState } from '../store/IAppState';
+import { AppState } from '../store/AppState';
 
-const mapStateToProps = (state: IAppState): ITodoListStateProps => ({
+const mapStateToProps = (state: AppState): TodoListStateProps => ({
   itemIds: memoizedIds(state.items.keySeq().toArray())
 });
 

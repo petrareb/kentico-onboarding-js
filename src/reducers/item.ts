@@ -3,7 +3,7 @@ import {
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
 import { ListItem } from '../models/ListItem';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 
 export const item = (state: ListItem = new ListItem(), action: Action): ListItem => {
   switch (action.type) {

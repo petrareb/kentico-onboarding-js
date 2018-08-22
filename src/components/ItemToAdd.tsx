@@ -4,18 +4,18 @@ import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
 import { ReactNode } from 'react';
 
-export type IItemToAddDispatchProps = {
+export type ItemToAddDispatchProps = {
   readonly onAddClick: (text: string) => void
 };
 
-export type IItemToAddProps = IItemToAddDispatchProps;
+export type ItemToAddProps = ItemToAddDispatchProps;
 
-export type IItemToAddState = {
+export type ItemToAddState = {
   readonly text: string,
   readonly enableInputColors: boolean
 };
 
-export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddState> {
+export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddState> {
   static displayName = 'ItemToAdd';
 
   static propTypes = {

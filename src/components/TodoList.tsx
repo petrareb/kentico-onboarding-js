@@ -4,13 +4,13 @@ import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 import { ReactNode, ReactNodeArray } from 'react';
 
-export type ITodoListStateProps = {
+export type TodoListStateProps = {
   itemIds: Array<Guid>
 };
 
-export type ITodoListProps = ITodoListStateProps;
+export type TodoListProps = TodoListStateProps;
 
-export class TodoList extends React.PureComponent<ITodoListProps> {
+export class TodoList extends React.PureComponent<TodoListProps> {
   static displayName = 'TodoList';
 
   static propTypes = {

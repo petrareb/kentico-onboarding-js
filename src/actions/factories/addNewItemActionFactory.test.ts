@@ -1,8 +1,8 @@
 import {
   ADD_NEW_ITEM,
-} from '../constants/todoActionTypes';
+} from '../../constants/todoActionTypes';
 import { addNewItemActionFactory } from './addNewItemActionFactory';
-import { Action } from './Action';
+import { Action } from '../types/Action';
 
 describe('AddNewItemActionFactory ', () => {
   it('creates correct action according to given parameters', () => {

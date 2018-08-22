@@ -10,7 +10,7 @@ import {
 } from '../actions/todoActions';
 import { initialValues } from '../constants/initialListValues';
 import { ListItem } from '../models/ListItem';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 
 describe('Items reducer ', () => {
   const originalState = OrderedMap<Guid, ListItem>(initialValues);

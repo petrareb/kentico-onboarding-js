@@ -7,7 +7,7 @@ import {
 } from '../constants/todoActionTypes';
 import { item } from './item';
 import { ListItem } from '../models/ListItem';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 
 export const items = (state = OrderedMap<string, ListItem>(), action: Action): OrderedMap<string, ListItem> => {
   switch (action.type) {

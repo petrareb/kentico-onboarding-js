@@ -1,21 +1,21 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ListItem } from '../models/ListItem';
-import { Action } from '../actions/Action';
+import { Action } from '../actions/types/Action';
 import { ReactNode } from 'react';
 
-export type IViewItemStateProps = {
+export type ViewItemStateProps = {
   item: ListItem,
   index: number
 };
 
-export type IViewItemDispatchProps = {
+export type ViewItemDispatchProps = {
   onRowClick: (id: Guid) => Action
 };
 
-export type IViewItemProps = IViewItemDispatchProps & IViewItemStateProps;
+export type ViewItemProps = ViewItemDispatchProps & ViewItemStateProps;
 
-export class ViewItem extends React.PureComponent<IViewItemProps> {
+export class ViewItem extends React.PureComponent<ViewItemProps> {
   static displayName = 'ViewItem';
 
   static propTypes = {

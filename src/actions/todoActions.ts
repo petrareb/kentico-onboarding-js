@@ -4,8 +4,8 @@ import {
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
 import { generateGuid } from '../utils/generateId';
-import { addNewItemActionFactory } from './addNewItemActionFactory';
-import { Action } from './Action';
+import { addNewItemActionFactory } from './factories/addNewItemActionFactory';
+import { Action } from './types/Action';
 
 export const addNewItem: (text: string) => Action = addNewItemActionFactory(generateGuid);
 
