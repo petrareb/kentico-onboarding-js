@@ -11,7 +11,7 @@ export type ITodoListItemStateProps = {
 
 export type ITodoListItemProps = ITodoListItemStateProps;
 
-export const TodoListItem: React.StatelessComponent<ITodoListItemStateProps> = ({item, index}: ITodoListItemProps) => (
+export const TodoListItem: React.StatelessComponent<ITodoListItemStateProps> = ({ item, index }: ITodoListItemProps) => (
   (item.isEdited)
     ? (
       <EditItem

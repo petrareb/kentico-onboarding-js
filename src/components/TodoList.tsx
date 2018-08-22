@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
 import { ReactNode, ReactNodeArray } from 'react';
-import { Guid } from '../utils/ownTypes';
 
 export type ITodoListStateProps = {
   itemIds: Array<Guid>
@@ -19,7 +18,7 @@ export class TodoList extends React.PureComponent<ITodoListProps> {
   };
 
   render(): ReactNode {
-    const table_rows: ReactNodeArray = this
+    const todoItems: ReactNodeArray = this
       .props
       .itemIds
       .map((itemId, i) => (
@@ -33,7 +32,7 @@ export class TodoList extends React.PureComponent<ITodoListProps> {
     return (
       <div>
         <ul className="list-group">
-          {table_rows}
+          {todoItems}
           <ItemToAdd />
         </ul>
       </div>

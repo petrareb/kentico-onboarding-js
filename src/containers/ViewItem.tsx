@@ -4,7 +4,6 @@ import { IViewItemDispatchProps, ViewItem } from '../components/ViewItem';
 import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 import { ListItem } from '../models/ListItem';
-import { Guid } from '../utils/ownTypes';
 
 export type IViewItemContainerProps = {
   index: number,

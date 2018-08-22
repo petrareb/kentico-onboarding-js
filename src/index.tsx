@@ -1,6 +1,6 @@
-import { Provider } from 'react-redux';
-
 require.context('../public/', true);
+
+import { Provider } from 'react-redux';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import * as ReactDom from 'react-dom';
 import * as React from 'react';

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import * as React from 'react';
 import { ITodoListItemStateProps, TodoListItem } from '../components/TodoListItem';
 import { IAppState } from '../store/IAppState';
-import { Guid } from '../utils/ownTypes';
 
 export type ITodoListItemContainerProps = {
   id: Guid,

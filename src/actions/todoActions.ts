@@ -5,25 +5,25 @@ import {
 } from '../constants/todoActionTypes';
 import { generateGuid } from '../utils/generateId';
 import { addNewItemActionFactory } from './addNewItemActionFactory';
-import { IAction } from './IAction';
+import { Action } from './Action';
 
-export const addNewItem: (text: string) => IAction = addNewItemActionFactory(generateGuid);
+export const addNewItem: (text: string) => Action = addNewItemActionFactory(generateGuid);
 
-export const toggleEdited = (id: string): IAction => ({
+export const toggleEdited = (id: string): Action => ({
   type: TOGGLE_EDITED,
   payload: {
     id
   }
 });
 
-export const deleteItem = (id: string): IAction => ({
+export const deleteItem = (id: string): Action => ({
   type: DELETE_ITEM,
   payload: {
     id
   }
 });
 
-export const saveItem = (id: string, text: string): IAction => ({
+export const saveItem = (id: string, text: string): Action => ({
   type: SAVE_ITEM,
   payload: {
     id,

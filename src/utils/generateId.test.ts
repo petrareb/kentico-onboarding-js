@@ -1,5 +1,4 @@
 import { generateGuid } from './generateId';
-import { Guid } from './ownTypes';
 
 describe('generateGuid function', () => {
   it('generates valid format of guid', () => {

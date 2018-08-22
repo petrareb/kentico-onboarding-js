@@ -1,7 +1,7 @@
 import '../sticky-footer.css';
 import * as React from 'react';
-import { TodoList } from '../containers/TodoList';
 import { StatelessComponent } from 'react';
+import { TodoList } from '../containers/TodoList';
 
 export const App: StatelessComponent = () => (
   <div>
@@ -24,3 +24,5 @@ export const App: StatelessComponent = () => (
     </footer>
   </div>
 );
+
+App.displayName = 'App';

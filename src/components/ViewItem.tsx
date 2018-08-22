@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ListItem } from '../models/ListItem';
-import { IAction } from '../actions/IAction';
+import { Action } from '../actions/Action';
 import { ReactNode } from 'react';
-import { Guid } from '../utils/ownTypes';
 
 export type IViewItemStateProps = {
   item: ListItem,
@@ -11,7 +10,7 @@ export type IViewItemStateProps = {
 };
 
 export type IViewItemDispatchProps = {
-  onRowClick: (id: Guid) => IAction
+  onRowClick: (id: Guid) => Action
 };
 
 export type IViewItemProps = IViewItemDispatchProps & IViewItemStateProps;
@@ -26,7 +25,7 @@ export class ViewItem extends React.PureComponent<IViewItemProps> {
     onRowClick: PropTypes.func.isRequired
   };
 
-  _enableEditing = (): IAction => this.props.onRowClick(this.props.item.id);
+  _enableEditing = (): Action => this.props.onRowClick(this.props.item.id);
 
   render(): ReactNode {
     return (

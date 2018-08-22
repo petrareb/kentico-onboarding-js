@@ -1,6 +1,5 @@
 import { Record } from 'immutable';
 import { IItem } from './IItem';
-import { Guid } from '../utils/ownTypes';
 
 const defaultRecord: IItem = {
   text: '',

@@ -10,14 +10,13 @@ import {
 } from '../actions/todoActions';
 import { initialValues } from '../constants/initialListValues';
 import { ListItem } from '../models/ListItem';
-import { IAction } from '../actions/IAction';
-import { Guid, ListValues } from '../utils/ownTypes';
+import { Action } from '../actions/Action';
 
 describe('Items reducer ', () => {
   const originalState = OrderedMap<Guid, ListItem>(initialValues);
 
   it('returns previous state when action is unknown', () => {
-    const invalidAction: IAction = { type: 'INVALID ACTION', payload: '' };
+    const invalidAction: Action = { type: 'INVALID ACTION', payload: '' };
     const expectedState = originalState;
 
     const newState = items(originalState, invalidAction);
@@ -52,7 +51,7 @@ describe('Items reducer ', () => {
 
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
     const itemToToggle = new ListItem(originalState.first());
-    const togglingAction: IAction = toggleEdited(itemToToggle.id);
+    const togglingAction: Action = toggleEdited(itemToToggle.id);
     const toggledItem: ListItem = itemToToggle.with({ isEdited: !itemToToggle.isEdited });
     const expectedState: ListValues = originalState.update(itemToToggle.id, () => toggledItem);
 
@@ -65,7 +64,7 @@ describe('Items reducer ', () => {
   it('edits item correctly (SAVE_ITEM action)', () => {
     const itemToEdit = new ListItem(originalState.first());
     const newText = 'newText';
-    const editingAction: IAction = saveItem(itemToEdit.id, newText);
+    const editingAction: Action = saveItem(itemToEdit.id, newText);
     const editedItem: ListItem = itemToEdit.with({
       isEdited: false,
       text: newText
@@ -81,7 +80,7 @@ describe('Items reducer ', () => {
   it('uses default state in case undefined state is given as a param', () => {
     const defaultStateOfReducer = OrderedMap<Guid, ListItem>();
     const text = 'something';
-    const addingAction: IAction = addNewItem(text);
+    const addingAction: Action = addNewItem(text);
     const expectedState: ListValues = defaultStateOfReducer.set(addingAction.payload.id, new ListItem(addingAction.payload));
     const newState: ListValues = items(undefined, addingAction);
 

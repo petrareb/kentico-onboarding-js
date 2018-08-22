@@ -5,7 +5,7 @@ import {
   toggleEdited
 } from '../actions/todoActions';
 import { item } from './item';
-import { IAction } from '../actions/IAction';
+import { Action } from '../actions/Action';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
@@ -15,7 +15,7 @@ describe('ListItem reducer ', () => {
       isEdited: false
     });
     const expectedItem: ListItem = itemToEdit.with({isEdited: !itemToEdit.isEdited});
-    const action: IAction = toggleEdited(itemToEdit.id);
+    const action: Action = toggleEdited(itemToEdit.id);
 
     const editedItem: ListItem = item(itemToEdit, action);
 
@@ -33,7 +33,7 @@ describe('ListItem reducer ', () => {
       text: newText,
       isEdited: false
     });
-    const action: IAction= saveItem(itemToEdit.id, newText);
+    const action: Action= saveItem(itemToEdit.id, newText);
 
     const editedItem: ListItem = item(itemToEdit, action);
 
@@ -41,7 +41,7 @@ describe('ListItem reducer ', () => {
   });
 
   it('returns default state in case invalid action is given as a param', () => {
-    const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
+    const invalidAction: Action = {type: 'INVALID ACTION', payload: ''};
     const defaultState = new ListItem();
 
     const newState: ListItem = item(undefined, invalidAction);
@@ -50,7 +50,7 @@ describe('ListItem reducer ', () => {
   });
 
   it('returns previous state when action is unknown', () => {
-    const invalidAction: IAction = {type: 'INVALID ACTION', payload: ''};
+    const invalidAction: Action = {type: 'INVALID ACTION', payload: ''};
     const expectedState = new ListItem({
       text: 'text',
       id: generateGuid(),

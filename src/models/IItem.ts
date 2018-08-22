@@ -1,5 +1,3 @@
-import { Guid } from '../utils/ownTypes';
-
 export type IItem = {
   readonly id: Guid,
   readonly text: string,

@@ -27,15 +27,15 @@ export class ItemToAdd extends React.PureComponent<IItemToAddProps, IItemToAddSt
     enableInputColors: false
   };
 
-  _changedTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  _changedTextInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();
-    return this.setState(() => ({
+    this.setState(() => ({
       text: event.target.value,
       enableInputColors: true
     }));
   };
 
-  _addNewItem = () => {
+  _addNewItem = (): void => {
     this.props.onAddClick(this.state.text);
     this.setState(() => ({
       text: '',

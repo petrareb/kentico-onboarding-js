@@ -3,9 +3,9 @@ import {
   TOGGLE_EDITED
 } from '../constants/todoActionTypes';
 import { ListItem } from '../models/ListItem';
-import { IAction } from '../actions/IAction';
+import { Action } from '../actions/Action';
 
-export const item = (state: ListItem = new ListItem(), action: IAction): ListItem => {
+export const item = (state: ListItem = new ListItem(), action: Action): ListItem => {
   switch (action.type) {
     case TOGGLE_EDITED: {
       return state.with({

@@ -2,10 +2,9 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { IAction } from '../actions/IAction';
+import { Action } from '../actions/Action';
 import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
-import { Guid } from '../utils/ownTypes';
 
 export type IEditItemStateProps = {
   readonly item: ListItem,
@@ -13,9 +12,9 @@ export type IEditItemStateProps = {
 };
 
 export type IEditItemDispatchProps = {
-  onCancelClick: (itemId: Guid) => IAction,
-  onSaveClick: (itemId: Guid, text: string) => IAction,
-  onDeleteClick: (itemId: Guid) => IAction
+  onCancelClick: (itemId: Guid) => Action,
+  onSaveClick: (itemId: Guid, text: string) => Action,
+  onDeleteClick: (itemId: Guid) => Action
 };
 
 export type IEditItemProps = IEditItemDispatchProps & IEditItemStateProps;
@@ -43,11 +42,11 @@ export class EditItem extends React.PureComponent<IEditItemProps, IEditItemState
     };
   }
 
-  _cancelEditing = (): IAction => this.props.onCancelClick(this.props.item.id);
+  _cancelEditing = (): Action => this.props.onCancelClick(this.props.item.id);
 
-  _deleteItem = (): IAction => this.props.onDeleteClick(this.props.item.id);
+  _deleteItem = (): Action => this.props.onDeleteClick(this.props.item.id);
 
-  _editItem = (): IAction => this.props.onSaveClick(this.props.item.id, this.state.text);
+  _editItem = (): Action => this.props.onSaveClick(this.props.item.id, this.state.text);
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();

@@ -1,5 +1,4 @@
 import { memoizedIds } from './memoizeIds';
-import { Guid } from '../utils/ownTypes';
 
 describe('Function memoizeIds ', () => {
   it('returns the same values it takes as a parameter', () => {
