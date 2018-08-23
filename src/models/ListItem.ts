@@ -1,4 +1,4 @@
-import { baseItem } from './Item';
+import { baseItem } from './baseItem';
 import { ItemType } from './ItemType';
 
 const defaultRecord: ItemType = {
