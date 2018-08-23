@@ -3,15 +3,15 @@ import * as React from 'react';
 import { TodoListItemStateProps, TodoListItem } from '../components/TodoListItem';
 import { AppState } from '../store/AppState';
 
-export type TodoListItemContainerProps = {
-  id: Guid,
-  index: number
+export type TodoListItemOwnProps = {
+  readonly id: Guid,
+  readonly index: number
 };
 
-const mapStateToProps = (state: AppState, ownProps: TodoListItemContainerProps): TodoListItemStateProps => ({
+const mapStateToProps = (state: AppState, ownProps: TodoListItemOwnProps): TodoListItemStateProps => ({
   item: state.items.get(ownProps.id),
   index: ownProps.index
 });
 
-const TodoListItemContainer: React.ComponentClass<TodoListItemContainerProps> = connect(mapStateToProps)(TodoListItem);
+const TodoListItemContainer: React.ComponentClass<TodoListItemOwnProps> = connect(mapStateToProps)(TodoListItem);
 export { TodoListItemContainer as TodoListItem };

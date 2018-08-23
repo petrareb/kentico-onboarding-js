@@ -1,11 +1,11 @@
-import { ListItem } from '../models/ListItem';
-import { generateGuid } from '../utils/generateId';
+import { ListItem } from '../../models/ListItem';
+import { generateGuid } from '../../utils/generateId';
 import {
   saveItem,
   toggleEdited
-} from '../actions/todoActions';
+} from '../../actions/todoActions';
 import { item } from './item';
-import { Action } from '../actions/types/Action';
+import { Action } from '../../actions/types/Action';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {

@@ -20,7 +20,7 @@ export type EditItemDispatchProps = {
 export type EditItemProps = EditItemDispatchProps & EditItemStateProps;
 
 export type EditItemState = {
-  text: string
+  readonly text: string
 };
 
 export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {

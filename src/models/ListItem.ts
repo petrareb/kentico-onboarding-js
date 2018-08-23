@@ -1,4 +1,4 @@
-import { Item } from './Item';
+import { baseItem } from './Item';
 import { ItemType } from './ItemType';
 
 const defaultRecord: ItemType = {
@@ -7,11 +7,12 @@ const defaultRecord: ItemType = {
   isEdited: false
 };
 
-export class ListItem extends Item {
+export class ListItem extends baseItem<ItemType>(defaultRecord, 'ListItem') {
+  readonly id: Guid;
+  readonly text: string;
+  readonly isEdited: boolean;
+
   constructor(props: ItemType = defaultRecord) {
     super(props);
   }
-
-  with = (item: object) =>
-    this.merge(item) as any as ListItem;
 }

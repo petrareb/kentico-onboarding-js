@@ -6,8 +6,8 @@ import { Dispatch } from 'redux';
 import { ListItem } from '../models/ListItem';
 
 export type ViewItemContainerProps = {
-  index: number,
-  item: ListItem
+  readonly index: number,
+  readonly item: ListItem
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): ViewItemDispatchProps => ({

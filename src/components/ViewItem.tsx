@@ -5,8 +5,8 @@ import { Action } from '../actions/types/Action';
 import { ReactNode } from 'react';
 
 export type ViewItemStateProps = {
-  item: ListItem,
-  index: number
+  readonly item: ListItem,
+  readonly index: number
 };
 
 export type ViewItemDispatchProps = {

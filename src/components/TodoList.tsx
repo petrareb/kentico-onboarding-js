@@ -5,7 +5,7 @@ import { TodoListItem } from '../containers/TodoListItem';
 import { ReactNode, ReactNodeArray } from 'react';
 
 export type TodoListStateProps = {
-  itemIds: Array<Guid>
+  readonly itemIds: Array<Guid>
 };
 
 export type TodoListProps = TodoListStateProps;
