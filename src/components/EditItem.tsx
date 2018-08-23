@@ -6,6 +6,11 @@ import { Action } from '../actions/types/Action';
 import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
 
+export type EditItemOwnProps = {
+  readonly item: ListItem,
+  readonly index: number
+};
+
 export type EditItemStateProps = {
   readonly item: ListItem,
   readonly index: number

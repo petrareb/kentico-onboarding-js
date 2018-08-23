@@ -4,6 +4,11 @@ import { ListItem } from '../models/ListItem';
 import { Action } from '../actions/types/Action';
 import { ReactNode } from 'react';
 
+export type ViewItemOwnProps = {
+  readonly index: number,
+  readonly item: ListItem
+};
+
 export type ViewItemStateProps = {
   readonly item: ListItem,
   readonly index: number

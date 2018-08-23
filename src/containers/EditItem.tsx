@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { EditItem, EditItemDispatchProps } from '../components/EditItem';
+import { EditItem, EditItemDispatchProps, EditItemOwnProps } from '../components/EditItem';
 import {
   deleteItem,
   saveItem,
@@ -9,12 +9,6 @@ import {
 } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 import { Action } from '../actions/types/Action';
-import { ListItem } from '../models/ListItem';
-
-export type EditItemContainerProps = {
-  readonly item: ListItem,
-  readonly index: number
-};
 
 const mapDispatchToProps = (dispatch: Dispatch): EditItemDispatchProps => ({
   onCancelClick: (itemId: Guid): Action => dispatch(toggleEdited(itemId)),
@@ -22,6 +16,6 @@ const mapDispatchToProps = (dispatch: Dispatch): EditItemDispatchProps => ({
   onDeleteClick: (itemId: Guid): Action => dispatch(deleteItem(itemId))
 });
 
-const EditItemContainer: React.ComponentClass<EditItemContainerProps> =
+const EditItemContainer: React.ComponentClass<EditItemOwnProps> =
   connect(null, mapDispatchToProps)(EditItem);
 export { EditItemContainer as EditItem };
