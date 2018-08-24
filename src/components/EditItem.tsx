@@ -11,18 +11,13 @@ export type EditItemOwnProps = {
   readonly index: number
 };
 
-export type EditItemStateProps = {
-  readonly item: ListItem,
-  readonly index: number
-};
-
 export type EditItemDispatchProps = {
   onCancelClick: (itemId: Guid) => Action,
   onSaveClick: (itemId: Guid, text: string) => Action,
   onDeleteClick: (itemId: Guid) => Action
 };
 
-export type EditItemProps = EditItemDispatchProps & EditItemStateProps;
+export type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
 
 export type EditItemState = {
   readonly text: string
