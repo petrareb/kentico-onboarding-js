@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ViewItemDispatchProps, ViewItem, ViewItemOwnProps } from '../components/ViewItem';
+import {
+  ViewItemDispatchProps,
+  ViewItem,
+  ViewItemOwnProps
+} from '../components/ViewItem';
 import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 

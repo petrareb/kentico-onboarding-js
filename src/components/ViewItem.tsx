@@ -9,16 +9,11 @@ export type ViewItemOwnProps = {
   readonly item: ListItem
 };
 
-export type ViewItemStateProps = {
-  readonly item: ListItem,
-  readonly index: number
-};
-
 export type ViewItemDispatchProps = {
   onRowClick: (id: Guid) => Action
 };
 
-export type ViewItemProps = ViewItemDispatchProps & ViewItemStateProps;
+export type ViewItemProps = ViewItemDispatchProps & ViewItemOwnProps;
 
 export class ViewItem extends React.PureComponent<ViewItemProps> {
   static displayName = 'ViewItem';

@@ -3,20 +3,19 @@ import * as PropTypes from 'prop-types';
 import { ViewItem } from '../containers/ViewItem';
 import { EditItem } from '../containers/EditItem';
 import { ListItem } from '../models/ListItem';
+import { ITodoListItemContainerOwnProps } from '../containers/TodoListItem';
 
 export type TodoListItemOwnProps = {
-  readonly id: Guid,
   readonly index: number
 };
 
 export type TodoListItemStateProps = {
-  readonly item: ListItem,
-  readonly index: number
+  readonly item: ListItem
 };
 
-export type TodoListItemProps = TodoListItemStateProps & TodoListItemOwnProps;
+export type TodoListItemProps = TodoListItemStateProps & ITodoListItemContainerOwnProps;
 
-export const TodoListItem: React.StatelessComponent<TodoListItemStateProps> = ({ item, index }: TodoListItemProps) => (
+export const TodoListItem: React.StatelessComponent<TodoListItemProps> = ({ item, index }: TodoListItemProps) => (
   (item.isEdited)
     ? (
       <EditItem
@@ -37,4 +36,5 @@ TodoListItem.displayName = 'TodoListItem';
 TodoListItem.propTypes = {
   item: PropTypes.instanceOf(ListItem).isRequired,
   index: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired
 };
