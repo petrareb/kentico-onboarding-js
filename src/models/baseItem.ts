@@ -6,8 +6,8 @@ export function baseItem<T>(defaultValues: T, name: string): any {
       super(props);
     }
 
-    with = (item: Partial<T>) =>
-      this.merge(item) as any;
+    with = (entity: Partial<T>) =>
+      this.merge(entity) as any;
   }
 
   return BaseItem;

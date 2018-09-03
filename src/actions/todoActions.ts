@@ -9,21 +9,21 @@ import { Action } from './types/Action';
 
 export const addNewItem: (text: string) => Action = addNewItemActionFactory(generateGuid);
 
-export const toggleEdited = (id: string): Action => ({
+export const toggleEdited = (id: Guid): Action => ({
   type: TOGGLE_EDITED,
   payload: {
     id
   }
 });
 
-export const deleteItem = (id: string): Action => ({
+export const deleteItem = (id: Guid): Action => ({
   type: DELETE_ITEM,
   payload: {
     id
   }
 });
 
-export const saveItem = (id: string, text: string): Action => ({
+export const saveItem = (id: Guid, text: string): Action => ({
   type: SAVE_ITEM,
   payload: {
     id,

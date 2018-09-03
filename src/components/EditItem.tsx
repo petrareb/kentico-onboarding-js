@@ -12,14 +12,14 @@ export type EditItemOwnProps = {
 };
 
 export type EditItemDispatchProps = {
-  onCancelClick: (itemId: Guid) => Action,
-  onSaveClick: (itemId: Guid, text: string) => Action,
-  onDeleteClick: (itemId: Guid) => Action
+  onCancelClick: () => Action,
+  onSaveClick: (text: string) => Action,
+  onDeleteClick: () => Action
 };
 
 export type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
 
-export type EditItemState = {
+type EditItemState = {
   readonly text: string
 };
 
@@ -42,11 +42,11 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
     };
   }
 
-  _cancelEditing = (): Action => this.props.onCancelClick(this.props.item.id);
+  _cancelEditing = (): Action => this.props.onCancelClick();
 
-  _deleteItem = (): Action => this.props.onDeleteClick(this.props.item.id);
+  _deleteItem = (): Action => this.props.onDeleteClick();
 
-  _editItem = (): Action => this.props.onSaveClick(this.props.item.id, this.state.text);
+  _editItem = (): Action => this.props.onSaveClick(this.state.text);
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();

@@ -13,7 +13,7 @@ export type TodoListItemStateProps = {
   readonly item: ListItem
 };
 
-export type TodoListItemProps = TodoListItemStateProps & ITodoListItemContainerOwnProps;
+type TodoListItemProps = TodoListItemStateProps & ITodoListItemContainerOwnProps;
 
 export const TodoListItem: React.StatelessComponent<TodoListItemProps> = ({ item, index }: TodoListItemProps) => (
   (item.isEdited)

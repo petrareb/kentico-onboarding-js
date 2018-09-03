@@ -10,7 +10,7 @@ export type ViewItemOwnProps = {
 };
 
 export type ViewItemDispatchProps = {
-  onRowClick: (id: Guid) => Action
+  readonly onRowClick: () => Action
 };
 
 export type ViewItemProps = ViewItemDispatchProps & ViewItemOwnProps;
@@ -25,7 +25,8 @@ export class ViewItem extends React.PureComponent<ViewItemProps> {
     onRowClick: PropTypes.func.isRequired
   };
 
-  _enableEditing = (): Action => this.props.onRowClick(this.props.item.id);
+  _enableEditing = (): Action => this.props.onRowClick();
+
 
   render(): ReactNode {
     return (

@@ -7,7 +7,7 @@ const defaultRecord: ItemType = {
   isEdited: false
 };
 
-export class ListItem extends baseItem<ItemType>(defaultRecord, 'ListItem') {
+export class ListItem extends baseItem<ItemType>(defaultRecord, 'ListItem') implements ItemType {
   readonly id: Guid;
   readonly text: string;
   readonly isEdited: boolean;
