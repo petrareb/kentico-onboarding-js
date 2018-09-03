@@ -1,4 +1,4 @@
-import { baseItem } from './baseItem';
+import { baseRecord } from './baseRecord';
 import { ItemType } from './ItemType';
 
 const defaultRecord: ItemType = {
@@ -7,7 +7,7 @@ const defaultRecord: ItemType = {
   isEdited: false
 };
 
-export class ListItem extends baseItem<ItemType>(defaultRecord, 'ListItem') implements ItemType {
+export class ListItem extends baseRecord<ItemType>(defaultRecord, 'ListItem') implements ItemType {
   readonly id: Guid;
   readonly text: string;
   readonly isEdited: boolean;
