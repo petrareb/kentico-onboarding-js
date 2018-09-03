@@ -11,9 +11,9 @@ import { Dispatch } from 'redux';
 import { Action } from '../actions/types/Action';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: EditItemOwnProps): EditItemDispatchProps => ({
-  onCancelClick: (): Action => dispatch(toggleEdited(ownProps.item.id)),
-  onSaveClick: (text: string): Action => dispatch(saveItem(ownProps.item.id, text)),
-  onDeleteClick: (): Action => dispatch(deleteItem(ownProps.item.id))
+  cancelEditing: (): Action => dispatch(toggleEdited(ownProps.item.id)),
+  saveItem: (text: string): Action => dispatch(saveItem(ownProps.item.id, text)),
+  deleteItem: (): Action => dispatch(deleteItem(ownProps.item.id))
 });
 
 const EditItemContainer: React.ComponentClass<EditItemOwnProps> =

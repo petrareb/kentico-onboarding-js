@@ -5,12 +5,12 @@ import { isValidText } from '../utils/validateText';
 import { ReactNode } from 'react';
 
 export type ItemToAddDispatchProps = {
-  readonly onAddClick: (text: string) => void
+  readonly addItem: (text: string) => void
 };
 
 export type ItemToAddProps = ItemToAddDispatchProps;
 
-export type ItemToAddState = {
+type ItemToAddState = {
   readonly text: string,
   readonly enableInputColors: boolean
 };
@@ -19,7 +19,7 @@ export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddStat
   static displayName = 'ItemToAdd';
 
   static propTypes = {
-    onAddClick: PropTypes.func.isRequired
+    addItem: PropTypes.func.isRequired
   };
 
   state = {
@@ -36,7 +36,7 @@ export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddStat
   };
 
   _addNewItem = (): void => {
-    this.props.onAddClick(this.state.text);
+    this.props.addItem(this.state.text);
     this.setState(() => ({
       text: '',
       enableInputColors: false

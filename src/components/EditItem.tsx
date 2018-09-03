@@ -12,9 +12,9 @@ export type EditItemOwnProps = {
 };
 
 export type EditItemDispatchProps = {
-  onCancelClick: () => Action,
-  onSaveClick: (text: string) => Action,
-  onDeleteClick: () => Action
+  readonly cancelEditing: () => Action,
+  readonly saveItem: (text: string) => Action,
+  readonly deleteItem: () => Action
 };
 
 export type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
@@ -30,9 +30,9 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
     item: PropTypes.instanceOf(ListItem).isRequired,
     index: PropTypes.number.isRequired,
 
-    onCancelClick: PropTypes.func.isRequired,
-    onSaveClick: PropTypes.func.isRequired,
-    onDeleteClick: PropTypes.func.isRequired
+    cancelEditing: PropTypes.func.isRequired,
+    saveItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired
   };
 
   constructor(props: EditItemProps) {
@@ -42,11 +42,11 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
     };
   }
 
-  _cancelEditing = (): Action => this.props.onCancelClick();
+  _cancelEditing = (): Action => this.props.cancelEditing();
 
-  _deleteItem = (): Action => this.props.onDeleteClick();
+  _deleteItem = (): Action => this.props.deleteItem();
 
-  _editItem = (): Action => this.props.onSaveClick(this.state.text);
+  _editItem = (): Action => this.props.saveItem(this.state.text);
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();

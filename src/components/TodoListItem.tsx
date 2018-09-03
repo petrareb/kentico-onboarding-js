@@ -3,10 +3,13 @@ import * as PropTypes from 'prop-types';
 import { ViewItem } from '../containers/ViewItem';
 import { EditItem } from '../containers/EditItem';
 import { ListItem } from '../models/ListItem';
-import { ITodoListItemContainerOwnProps } from '../containers/TodoListItem';
 
-export type TodoListItemOwnProps = {
+type TodoListItemOwnProps = {
   readonly index: number
+};
+
+export type ITodoListItemContainerOwnProps = TodoListItemOwnProps & {
+  readonly id: Guid;
 };
 
 export type TodoListItemStateProps = {

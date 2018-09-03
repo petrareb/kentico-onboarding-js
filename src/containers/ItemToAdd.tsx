@@ -5,7 +5,7 @@ import { addNewItem } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 
 const mapDispatchToProps = (dispatch: Dispatch): ItemToAddDispatchProps => ({
-  onAddClick: (text: string) => dispatch(addNewItem(text))
+  addItem: (text: string) => dispatch(addNewItem(text))
 });
 
 const ItemToAddContainer: React.ComponentClass = connect(null, mapDispatchToProps)(ItemToAdd);
