@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ItemToAdd } from '../containers/ItemToAdd';
 import { TodoListItem } from '../containers/TodoListItem';
-import { ReactNode, ReactNodeArray } from 'react';
+import { ReactNodeArray } from 'react';
 
 export type TodoListStateProps = {
   readonly itemIds: Array<Guid>
@@ -10,32 +10,28 @@ export type TodoListStateProps = {
 
 type TodoListProps = TodoListStateProps;
 
-export class TodoList extends React.PureComponent<TodoListProps> {
-  static displayName = 'TodoList';
+export const TodoList: React.StatelessComponent<TodoListProps> = ({ itemIds }) => {
+  const todoItems: ReactNodeArray = itemIds
+    .map((itemId: Guid, itemIndex: number) => (
+      <TodoListItem
+        id={itemId}
+        index={itemIndex + 1}
+        key={itemId}
+      />
+    ));
 
-  static propTypes = {
-    itemIds: PropTypes.array.isRequired
-  };
+  return (
+    <div>
+      <ul className="list-group">
+        {todoItems}
+        <ItemToAdd />
+      </ul>
+    </div>
+  );
+};
 
-  render(): ReactNode {
-    const todoItems: ReactNodeArray = this
-      .props
-      .itemIds
-      .map((itemId, i) => (
-        <TodoListItem
-          id={itemId}
-          index={i + 1}
-          key={itemId}
-        />
-      ));
+TodoList.displayName = 'TodoList';
 
-    return (
-      <div>
-        <ul className="list-group">
-          {todoItems}
-          <ItemToAdd />
-        </ul>
-      </div>
-    );
-  }
-}
+TodoList.propTypes = {
+  itemIds: PropTypes.array.isRequired
+};

@@ -3,9 +3,10 @@ import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
 import { ReactNode } from 'react';
+import { Action } from '../actions/types/Action';
 
 export type ItemToAddDispatchProps = {
-  readonly addItem: (text: string) => void
+  readonly addItem: (text: string) => Action
 };
 
 type ItemToAddProps = ItemToAddDispatchProps;

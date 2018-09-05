@@ -9,7 +9,7 @@ import { toggleEdited } from '../actions/todoActions';
 import { Dispatch } from 'redux';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ViewItemOwnProps): ViewItemDispatchProps => ({
-  onRowClick: () => dispatch(toggleEdited(ownProps.item.id))
+  onItemClick: () => dispatch(toggleEdited(ownProps.item.id))
 });
 
 const ViewItemContainer: React.ComponentClass<ViewItemOwnProps> = connect(null, mapDispatchToProps)(ViewItem);
