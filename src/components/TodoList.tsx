@@ -8,7 +8,7 @@ export type TodoListStateProps = {
   readonly itemIds: Array<Guid>
 };
 
-export type TodoListProps = TodoListStateProps;
+type TodoListProps = TodoListStateProps;
 
 export class TodoList extends React.PureComponent<TodoListProps> {
   static displayName = 'TodoList';

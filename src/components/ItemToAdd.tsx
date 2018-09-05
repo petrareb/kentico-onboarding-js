@@ -8,7 +8,7 @@ export type ItemToAddDispatchProps = {
   readonly addItem: (text: string) => void
 };
 
-export type ItemToAddProps = ItemToAddDispatchProps;
+type ItemToAddProps = ItemToAddDispatchProps;
 
 type ItemToAddState = {
   readonly text: string,
@@ -22,7 +22,7 @@ export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddStat
     addItem: PropTypes.func.isRequired
   };
 
-  state = {
+  state: ItemToAddState = {
     text: '',
     enableInputColors: false
   };

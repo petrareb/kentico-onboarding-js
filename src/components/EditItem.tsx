@@ -17,7 +17,7 @@ export type EditItemDispatchProps = {
   readonly deleteItem: () => Action
 };
 
-export type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
+type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
 
 type EditItemState = {
   readonly text: string
