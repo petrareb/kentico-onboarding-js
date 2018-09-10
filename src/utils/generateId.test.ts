@@ -5,7 +5,7 @@ describe('generateGuid function', () => {
     const guidRegex = RegExp('[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-'
       + '[89ab][0-9a-f]{3}-[0-9a-f]{12}');
     const generatedId = generateGuid();
-    const result = guidRegex.test(generatedId);
+    const result: boolean = guidRegex.test(generatedId);
 
     expect(result)
       .toBeTruthy();
@@ -16,7 +16,7 @@ describe('generateGuid function', () => {
     const guid2 = generateGuid();
     const guid3 = generateGuid();
 
-    const result = guid1 !== guid2
+    const result: boolean = guid1 !== guid2
       && guid1 !== guid3
       && guid2 !== guid3;
 

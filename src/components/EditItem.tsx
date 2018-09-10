@@ -1,50 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
+import { Action } from '../actions/types/Action';
+import { ListItem } from '../models/ListItem';
+import { ReactNode } from 'react';
 
-export class EditItem extends React.PureComponent {
+export type EditItemOwnProps = {
+  readonly item: ListItem,
+  readonly index: number
+};
+
+export type EditItemDispatchProps = {
+  readonly cancelEditing: () => Action,
+  readonly saveItem: (text: string) => Action,
+  readonly deleteItem: () => Action
+};
+
+type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
+
+type EditItemState = {
+  readonly text: string
+};
+
+export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
   static displayName = 'EditItem';
 
   static propTypes = {
-    item: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired,
+    item: PropTypes.instanceOf(ListItem).isRequired,
     index: PropTypes.number.isRequired,
 
-    onCancelClick: PropTypes.func.isRequired,
-    onSaveClick: PropTypes.func.isRequired,
-    onDeleteClick: PropTypes.func.isRequired
+    cancelEditing: PropTypes.func.isRequired,
+    saveItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired
   };
 
-  constructor(props) {
+  constructor(props: EditItemProps) {
     super(props);
     this.state = {
       text: props.item.text
     };
   }
 
-  _cancelEditing = () => this.props.onCancelClick(this.props.item.id);
+  _cancelEditing = (): Action => this.props.cancelEditing();
 
-  _deleteItem = () => this.props.onDeleteClick(this.props.item.id);
+  _deleteItem = (): Action => this.props.deleteItem();
 
-  _editItem = () => this.props.onSaveClick(this.props.item.id, this.state.text);
+  _editItem = (): Action => this.props.saveItem(this.state.text);
 
-  _updateText = event => this.setState({
-    text: event.target.value
-  });
+  _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    event.persist();
+    this.setState(() => ({
+      text: event.target.value
+    }));
+  };
 
-  render() {
-    const validText = isValidText(this.state.text);
+  render(): ReactNode {
+    const validText: boolean = isValidText(this.state.text);
+
+    const classes = classNames({
+      'input-group': true,
+      'has-error': !validText,
+      'has-success': validText
+    });
     return (
       <div className="list-group-item">
         <li
-          className={classNames({
-            "input-group": true,
-            "has-error": !validText,
-            "has-success": validText
-          })}
+          className={classes}
         >
           <p className="input-group-addon">
             {this.props.index}
@@ -55,7 +77,7 @@ export class EditItem extends React.PureComponent {
             name="itemToModify"
             onChange={this._updateText}
             value={this.state.text}
-            required
+            required={true}
           />
           <div className="input-group-append input-group-btn">
             <button
