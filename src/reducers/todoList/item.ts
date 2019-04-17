@@ -1,13 +1,13 @@
 import {
   SAVE_ITEM,
-  TOGGLE_EDITED
+  ListItem_ToggleEdited
 } from '../../constants/todoActionTypes';
 import { ListItem } from '../../models/ListItem';
-import { Action } from '../../actions/types/Action';
+import { TodoListAction } from '../../actions/types/TodoListAction';
 
-export const item = (state: ListItem = new ListItem(), action: Action): ListItem => {
+export const item = (state: ListItem = new ListItem(), action: TodoListAction): ListItem => {
   switch (action.type) {
-    case TOGGLE_EDITED: {
+    case ListItem_ToggleEdited: {
       return state.with({
         isEdited: !state.isEdited
       });
@@ -15,7 +15,8 @@ export const item = (state: ListItem = new ListItem(), action: Action): ListItem
     case SAVE_ITEM: {
       return state.with({
         isEdited: false,
-        text: action.payload.text
+        text: action.payload.text,
+        isFetching: true,
       });
     }
     default:

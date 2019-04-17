@@ -5,7 +5,7 @@ import {
   ViewItem,
   ViewItemOwnProps
 } from '../components/ViewItem';
-import { toggleEdited } from '../actions/todoActions';
+import { toggleEdited } from '../actions/baseActions';
 import { Dispatch } from 'redux';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ViewItemOwnProps): ViewItemDispatchProps => ({

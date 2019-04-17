@@ -1,8 +1,8 @@
 import { ADD_NEW_ITEM } from '../../constants/todoActionTypes';
-import { Action } from '../types/Action';
+import { TodoListAction } from '../types/TodoListAction';
 
 export const addNewItemActionFactory = (generatingIdFunction: () => string) =>
-  (text: string): Action => ({
+  (text: string): TodoListAction => ({
     type: ADD_NEW_ITEM,
     payload: {
       text,

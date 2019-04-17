@@ -6,14 +6,14 @@ import {
   deleteItem,
   saveItem,
   toggleEdited
-} from '../actions/todoActions';
+} from '../actions/baseActions';
 import { Dispatch } from 'redux';
-import { Action } from '../actions/types/Action';
+import { TodoListAction } from '../actions/types/TodoListAction';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: EditItemOwnProps): EditItemDispatchProps => ({
-  cancelEditing: (): Action => dispatch(toggleEdited(ownProps.item.id)),
-  saveItem: (text: string): Action => dispatch(saveItem(ownProps.item.id, text)),
-  deleteItem: (): Action => dispatch(deleteItem(ownProps.item.id))
+  cancelEditing: (): TodoListAction => dispatch(toggleEdited(ownProps.item.id)),
+  saveItem: (text: string): TodoListAction => dispatch(saveItem(ownProps.item.id, text)),
+  deleteItem: (): TodoListAction => dispatch(deleteItem(ownProps.item.id))
 });
 
 const EditItemContainer: React.ComponentClass<EditItemOwnProps> =

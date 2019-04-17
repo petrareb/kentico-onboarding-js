@@ -3,19 +3,20 @@ import { generateGuid } from '../../utils/generateId';
 import {
   saveItem,
   toggleEdited
-} from '../../actions/todoActions';
+} from '../../actions/baseActions';
 import { item } from './item';
-import { Action } from '../../actions/types/Action';
+import { TodoListAction } from '../../actions/types/TodoListAction';
 
 describe('ListItem reducer ', () => {
-  it('toggles property isEdited correctly (TOGGLE_EDITED action)', () => {
+  it('toggles property isEdited correctly (ListItem_ToggleEdited action)', () => {
     const itemToEdit = new ListItem({
       text: 'text',
       id: generateGuid(),
-      isEdited: false
+      isEdited: false,
+      isFetching: false,
     });
     const expectedItem: ListItem = itemToEdit.with({isEdited: !itemToEdit.isEdited});
-    const action: Action = toggleEdited(itemToEdit.id);
+    const action: TodoListAction = toggleEdited(itemToEdit.id);
 
     const editedItem: ListItem = item(itemToEdit, action);
 
@@ -26,14 +27,16 @@ describe('ListItem reducer ', () => {
     const itemToEdit: ListItem = new ListItem({
       text: 'text',
       id: generateGuid(),
-      isEdited: false
+      isEdited: false,
+      isFetching: false,
     });
     const newText = 'newText';
     const expectedItem: ListItem = itemToEdit.with({
       text: newText,
-      isEdited: false
+      isEdited: false,
+      isFetching: true,
     });
-    const action: Action= saveItem(itemToEdit.id, newText);
+    const action: TodoListAction= saveItem(itemToEdit.id, newText);
 
     const editedItem: ListItem = item(itemToEdit, action);
 
@@ -41,7 +44,7 @@ describe('ListItem reducer ', () => {
   });
 
   it('returns default state in case invalid action is given as a param', () => {
-    const invalidAction: Action = {type: 'INVALID ACTION', payload: ''};
+    const invalidAction: TodoListAction = {type: 'INVALID ACTION', payload: ''};
     const defaultState = new ListItem();
 
     const newState: ListItem = item(undefined, invalidAction);
@@ -50,11 +53,12 @@ describe('ListItem reducer ', () => {
   });
 
   it('returns previous state when action is unknown', () => {
-    const invalidAction: Action = {type: 'INVALID ACTION', payload: ''};
+    const invalidAction: TodoListAction = {type: 'INVALID ACTION', payload: ''};
     const expectedState = new ListItem({
       text: 'text',
       id: generateGuid(),
-      isEdited: false
+      isEdited: false,
+      isFetching: false,
     });
 
     const newState: ListItem = item(expectedState, invalidAction);

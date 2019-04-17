@@ -2,9 +2,9 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { Action } from '../actions/types/Action';
 import { ListItem } from '../models/ListItem';
 import { ReactNode } from 'react';
+import { TodoListAction } from '../actions/types/TodoListAction';
 
 export type EditItemOwnProps = {
   readonly item: ListItem,
@@ -12,9 +12,9 @@ export type EditItemOwnProps = {
 };
 
 export type EditItemDispatchProps = {
-  readonly cancelEditing: () => Action,
-  readonly saveItem: (text: string) => Action,
-  readonly deleteItem: () => Action
+  readonly cancelEditing: () => TodoListAction,
+  readonly saveItem: (text: string) => TodoListAction,
+  readonly deleteItem: () => TodoListAction
 };
 
 type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
@@ -42,11 +42,11 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
     };
   }
 
-  _cancelEditing = (): Action => this.props.cancelEditing();
+  _cancelEditing = (): TodoListAction => this.props.cancelEditing();
 
-  _deleteItem = (): Action => this.props.deleteItem();
+  _deleteItem = (): TodoListAction => this.props.deleteItem();
 
-  _editItem = (): Action => this.props.saveItem(this.state.text);
+  _editItem = (): TodoListAction => this.props.saveItem(this.state.text);
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();
