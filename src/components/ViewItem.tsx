@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ListItem } from '../models/ListItem';
-import { Action } from '../actions/types/Action';
+import { TodoListAction } from '../actions/types/TodoListAction';
 
 export type ViewItemOwnProps = {
   readonly index: number,
@@ -9,13 +9,13 @@ export type ViewItemOwnProps = {
 };
 
 export type ViewItemDispatchProps = {
-  readonly onItemClick: () => Action
+  readonly onItemClick: () => TodoListAction
 };
 
 export type ViewItemProps = ViewItemDispatchProps & ViewItemOwnProps;
 
 export const ViewItem: React.StatelessComponent<ViewItemProps> = ({ item, index, onItemClick }) => {
-  const _enableEditing = (): Action => onItemClick();
+  const _enableEditing = (): TodoListAction => onItemClick();
   return (
     <li className="list-group-item">
       <span
