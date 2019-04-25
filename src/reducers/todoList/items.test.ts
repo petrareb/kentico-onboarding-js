@@ -3,17 +3,21 @@ import {
   items
 } from './items';
 import {
-  deleteItem,
   toggleEdited
 } from '../../actions/baseActions';
 import { ListItem } from '../../models/ListItem';
 import { TodoListAction } from '../../actions/types/TodoListAction';
 import {
+  ListItem_Delete_Error,
   ListItem_GetAll_Response,
   ListItem_Post_Error,
   ListItem_Post_Response
 } from '../../constants/todoActionTypes';
 import { addNewItem } from '../../actions/thunkActionCreators/postItemActionCreator';
+import {
+  removeItem,
+  removeItemSucceeded
+} from '../../actions/thunkActionCreators/deleteItemActionCreator';
 
 describe('Items reducer ', () => {
   const makeCoffeeItem = new ListItem({
@@ -44,16 +48,6 @@ describe('Items reducer ', () => {
     const newState = items(originalState, invalidAction);
 
     expect(expectedState).toEqual(newState);
-  });
-
-  it('deletes item correctly (DELETE_ITEM action)', () => {
-    const itemToDelete = new ListItem(originalState.first());
-    const deletingAction = deleteItem(itemToDelete.id);
-    const expectedState = originalState.delete(itemToDelete.id);
-
-    const newState = items(originalState, deletingAction);
-
-    expect(newState).toEqual(expectedState);
   });
 
   it('toggles property isEdited correctly (ListItem_ToggleEdited action)', () => {
@@ -100,7 +94,7 @@ describe('Items reducer ', () => {
   });
 
   it('add loading item to list - optimistic update (ListItem_Post_Error, ListItem_Put_Error, ListItem_Delete_Error action)', () => {
-    const actionTypes = [ListItem_Post_Error];
+    const actionTypes = [ListItem_Post_Error, ListItem_Delete_Error];
     for (const actionType in actionTypes) {
       const itemId = '2042';
       const itemToAdd = new ListItem({
@@ -157,6 +151,28 @@ describe('Items reducer ', () => {
     const expectedState = prevState.set(updatedItem.id, updatedItem);
 
     const newState = items(prevState, action);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('keeps items the same because of optimistic update, changes only loading state' +
+    '(ListItem_Delete_Request action)', () => {
+    const itemToDelete = new ListItem(originalState.first());
+    const itemWithEditedFetching = itemToDelete.with({isFetching: true});
+    const deletingAction = removeItem(itemToDelete.id);
+    const expectedState = originalState.update(itemToDelete.id, () => itemWithEditedFetching);
+
+    const newState = items(originalState, deletingAction);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('removes item correctly (ListItem_Delete_Response action)', () => {
+    const itemToDelete = new ListItem(originalState.first());
+    const deletingAction = removeItemSucceeded(itemToDelete.id);
+    const expectedState = originalState.delete(itemToDelete.id);
+
+    const newState = items(originalState, deletingAction);
 
     expect(newState).toEqual(expectedState);
   });
