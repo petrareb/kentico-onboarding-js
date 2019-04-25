@@ -23,8 +23,8 @@ export type ViewItemProps = ViewItemDispatchProps & ViewItemOwnProps & ViewItemS
 
 export const ViewItem: React.StatelessComponent<ViewItemProps> = ({item, index, onItemClick, failedAction}) => {
   const classes = classNames(
-    'col-lg-10 col-md-10 col-sm-10 col-xs-12',
-    failedAction && 'has-error'
+    'col-lg-9 col-md-9 col-sm-9 col-xs-9',
+  failedAction && 'has-error'
   );
   return (
     <li className="list-group-item">
@@ -37,7 +37,7 @@ export const ViewItem: React.StatelessComponent<ViewItemProps> = ({item, index, 
           {item.text}
         </div>
         {failedAction &&
-        <div className="input-group-append">
+        <div className="col-md-3 mb-3">
           <ListError
             failedAction={failedAction}
           />
@@ -45,14 +45,16 @@ export const ViewItem: React.StatelessComponent<ViewItemProps> = ({item, index, 
 
         {item.isFetching && (
           <div className="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <PulseLoader size={15} color={'#36D7B7'} />
+            <PulseLoader
+              size={15}
+              color={'#36D7B7'}
+            />
           </div>
         )}
       </div>
     </li>
   );
 };
-
 
 ViewItem.displayName = 'ViewItem';
 
@@ -61,8 +63,9 @@ ViewItem.propTypes = {
   index: PropTypes.number.isRequired,
   // React's d.ts can't handle failedAction property with possible value of undefined
   failedAction: PropTypes.shape({
-    type: PropTypes.string,
-    payload: PropTypes.any}
+      type: PropTypes.string,
+      payload: PropTypes.any
+    }
   ) as any,
   onItemClick: PropTypes.func.isRequired
 };

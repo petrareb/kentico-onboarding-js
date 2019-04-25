@@ -6,7 +6,6 @@ import { isValidText } from '../utils/validateText';
 
 export type ItemToAddDispatchProps = {
   readonly postItem: (text: string) => void;
-
 };
 
 type ItemToAddProps = ItemToAddDispatchProps;

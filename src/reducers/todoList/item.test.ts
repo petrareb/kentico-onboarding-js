@@ -1,7 +1,6 @@
 import { ListItem } from '../../models/ListItem';
 import { generateGuid } from '../../utils/generateId';
 import {
-  saveItem,
   toggleEdited
 } from '../../actions/baseActions';
 import { item } from './item';
@@ -12,6 +11,7 @@ import {
   ListItem_Post_Error,
   ListItem_Post_Response
 } from '../../constants/todoActionTypes';
+import { editItem } from '../../actions/thunkActionCreators/putItemActionCreator';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (ListItem_ToggleEdited action)', () => {
@@ -42,7 +42,7 @@ describe('ListItem reducer ', () => {
       isEdited: false,
       isFetching: true,
     });
-    const action: TodoListAction= saveItem(itemToEdit.id, newText);
+    const action: TodoListAction= editItem(itemToEdit.id, newText);
 
     const editedItem: ListItem = item(itemToEdit, action);
 

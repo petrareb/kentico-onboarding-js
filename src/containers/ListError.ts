@@ -9,9 +9,10 @@ import { postItem } from '../actions/thunkActions/postItem';
 import { TodoListAction } from '../actions/types/TodoListAction';
 import {
   ListItem_Delete_Request,
-  ListItem_Post_Request,
+  ListItem_Post_Request, ListItem_Put_Request,
 } from '../constants/todoActionTypes';
 import { deleteItem } from '../actions/thunkActions/deleteItem';
+import { putItem } from '../actions/thunkActions/putItem';
 
 export type ListErrorOwnProps = {
   failedAction: TodoListAction
@@ -28,6 +29,11 @@ const mapDispatchToProps = (dispatch: ListDispatch, ownProps: ListErrorOwnProps)
     case ListItem_Delete_Request: {
       return {
         onReloadClick: () => dispatch(deleteItem(ownProps.failedAction.payload.id))
+      };
+    }
+    case ListItem_Put_Request: {
+      return {
+        onReloadClick: () => dispatch(putItem(ownProps.failedAction.payload.id, ownProps.failedAction.payload.text))
       };
     }
     default: {
