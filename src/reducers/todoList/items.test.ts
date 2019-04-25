@@ -1,4 +1,4 @@
-import { OrderedMap } from "immutable";
+import { List, OrderedMap } from "immutable";
 import {
   items
 } from './items';
@@ -8,6 +8,12 @@ import {
 } from '../../actions/baseActions';
 import { ListItem } from '../../models/ListItem';
 import { TodoListAction } from '../../actions/types/TodoListAction';
+import {
+  ListItem_GetAll_Response,
+  ListItem_Post_Error,
+  ListItem_Post_Response
+} from '../../constants/todoActionTypes';
+import { addNewItem } from '../../actions/thunkActionCreators/postItemActionCreator';
 
 describe('Items reducer ', () => {
   const makeCoffeeItem = new ListItem({
@@ -59,6 +65,99 @@ describe('Items reducer ', () => {
     const newState: ListValues = items(originalState, togglingAction);
 
     expect(newState.size).toEqual(originalState.size);
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('adds new item correctly (ListItem_Post_Request action)', () => {
+    const text = 'something';
+    const addingAction = addNewItem(text, '14');
+    const newItem = new ListItem({
+      id: '14',
+      text,
+      isEdited: false,
+      isFetching: true,
+    });
+    const expectedItems = originalState.set(newItem.id, newItem);
+
+    const newItems = items(originalState, addingAction);
+
+    expect(newItems).toEqual(expectedItems);
+  });
+
+  it('returns an Ordered Map made of all items included in action (ListItem_GetAll_Response action)', () => {
+    const action: TodoListAction = {
+      type: ListItem_GetAll_Response,
+      payload: {
+        items: List<ListItem>([sleepItem, makeCoffeeItem])
+      }
+    };
+    const prevState = OrderedMap<Guid, ListItem>();
+    const expectedState = OrderedMap<Guid, ListItem>([[sleepItem.id, sleepItem], [makeCoffeeItem.id, makeCoffeeItem]]);
+
+    const newState = items(prevState, action);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('add loading item to list - optimistic update (ListItem_Post_Error, ListItem_Put_Error, ListItem_Delete_Error action)', () => {
+    const actionTypes = [ListItem_Post_Error];
+    for (const actionType in actionTypes) {
+      const itemId = '2042';
+      const itemToAdd = new ListItem({
+        id: itemId,
+        text: 'hippo',
+        isEdited: false,
+        isFetching: false,
+      });
+      const action: TodoListAction = {
+        type: actionType,
+        payload: {
+          id: itemId,
+          failedAction: {},
+        }
+      };
+      const prevState = OrderedMap<Guid, ListItem>([[itemId, itemToAdd]]);
+      const editedItem = new ListItem({
+        isFetching: false,
+        isEdited: false,
+        id: itemId,
+        text: itemToAdd.text
+      });
+      const expectedState = prevState.set(itemId, editedItem);
+
+      const newState = items(prevState, action);
+
+      expect(newState).toEqual(expectedState);
+    }
+  });
+
+  it('successful POST adds item to list - item is not loading anymore (ListItem_Post_Response action)', () => {
+    const oldItemId = '1000';
+    const newItemId = '2000';
+    const fetchedItem = new ListItem({
+      id: newItemId,
+      text: 'hippopotamus',
+      isFetching: true,
+      isEdited: false,
+    });
+    const action: TodoListAction = {
+      type: ListItem_Post_Response,
+      payload: {
+        previousId: oldItemId,
+        item: fetchedItem
+      },
+    };
+    const updatedItem = new ListItem({
+      id: newItemId,
+      text: fetchedItem.text,
+      isEdited: fetchedItem.isEdited,
+      isFetching: fetchedItem.isFetching,
+    });
+    const prevState = OrderedMap<Guid, ListItem>([[fetchedItem.id, fetchedItem]]);
+    const expectedState = prevState.set(updatedItem.id, updatedItem);
+
+    const newState = items(prevState, action);
+
     expect(newState).toEqual(expectedState);
   });
 });

@@ -2,11 +2,11 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { ReactNode } from 'react';
-import { TodoListAction } from '../actions/types/TodoListAction';
+
 
 export type ItemToAddDispatchProps = {
-  readonly addItem: (text: string) => TodoListAction
+  readonly postItem: (text: string) => void;
+
 };
 
 type ItemToAddProps = ItemToAddDispatchProps;
@@ -20,7 +20,7 @@ export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddStat
   static displayName = 'ItemToAdd';
 
   static propTypes = {
-    addItem: PropTypes.func.isRequired
+    postItem: PropTypes.func.isRequired
   };
 
   state: ItemToAddState = {
@@ -37,14 +37,15 @@ export class ItemToAdd extends React.PureComponent<ItemToAddProps, ItemToAddStat
   };
 
   _addNewItem = (): void => {
-    this.props.addItem(this.state.text);
+    const text = this.state.text;
+    this.props.postItem(text);
     this.setState(() => ({
       text: '',
       enableInputColors: false
     }));
   };
 
-  render(): ReactNode {
+  render(): JSX.Element {
     const validText: boolean = isValidText(this.state.text);
     const classes = classNames({
       'input-group': true,

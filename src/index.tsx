@@ -1,4 +1,4 @@
-import { getAllItems } from './actions/thunkActions/getAllActions';
+import { getAllItems } from './actions/thunkActions/getAllItems';
 
 require.context('../public/', true);
 

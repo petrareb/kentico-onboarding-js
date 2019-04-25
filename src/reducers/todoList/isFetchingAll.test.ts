@@ -1,12 +1,11 @@
 import { isFetchingAll } from './isFetchingAll';
 import {
-  ADD_NEW_ITEM,
   DELETE_ITEM,
   ListItem_GetAll_Error,
   ListItem_GetAll_Request,
   ListItem_GetAll_Response,
   SAVE_ITEM,
-  ListItem_ToggleEdited
+  ListItem_ToggleEdited, ListItem_Post_Request
 } from '../../constants/todoActionTypes';
 import { TodoListAction } from '../../actions/types/TodoListAction';
 
@@ -23,17 +22,7 @@ describe('IsFetchingAll reducer ', () => {
     expect(newState).toEqual(expectedState);
   });
 
-  it('sets state property isFetchingAll to false correctly (ADD_NEW_ITEM action)', () => {
-    const initialState = true;
-    const action: TodoListAction = {
-      type: ADD_NEW_ITEM,
-      payload: {},
-    };
-    const expectedState = false;
-    const newState = isFetchingAll(initialState, action);
 
-    expect(newState).toEqual(expectedState);
-  });
 
   it('sets state property isFetchingAll to false correctly (DELETE_ITEM action)', () => {
     const initialState = true;
@@ -106,4 +95,18 @@ describe('IsFetchingAll reducer ', () => {
 
     expect(newState).toEqual(expectedState);
   });
+
+  it('sets state property isFetchingAll to false correctly (ListItem_Post_Request action)', () => {
+    const initialState = true;
+    const action: TodoListAction = {
+      type: ListItem_Post_Request,
+      payload: {},
+    };
+    const expectedState = false;
+    const newState = isFetchingAll(initialState, action);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+
 });

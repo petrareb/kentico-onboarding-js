@@ -1,9 +1,12 @@
 import { OrderedMap } from 'immutable';
 import {
-  ADD_NEW_ITEM,
   DELETE_ITEM,
   SAVE_ITEM,
-  ListItem_ToggleEdited, ListItem_GetAll_Response
+  ListItem_ToggleEdited,
+  ListItem_GetAll_Response,
+  ListItem_Post_Request,
+  ListItem_Post_Error,
+  ListItem_Post_Response
 } from '../../constants/todoActionTypes';
 import { item } from './item';
 import { ListItem } from '../../models/ListItem';
@@ -16,9 +19,20 @@ export const items = (state = OrderedMap<string, ListItem>(), action: TodoListAc
         return [listItem.id, listItem];
       }));
     }
-    case ADD_NEW_ITEM: {
+    case ListItem_Post_Request: {
       return state.set(action.payload.item.id, action.payload.item);
     }
+    case ListItem_Post_Response: {
+      return state
+        .delete(action.payload.previousId)
+        .set(action.payload.item.id, action.payload.item);
+    }
+    case ListItem_Post_Error: {
+      const itemFromDb = state.get(action.payload.id);
+      const editedLoading = item(itemFromDb, action);
+      return state.set(action.payload.id, editedLoading);
+    }
+
     case DELETE_ITEM: {
       return state.delete(action.payload.id);
     }
