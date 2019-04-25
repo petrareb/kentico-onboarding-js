@@ -1,11 +1,10 @@
 import { isFetchingAll } from './isFetchingAll';
 import {
-  DELETE_ITEM,
   ListItem_GetAll_Error,
   ListItem_GetAll_Request,
   ListItem_GetAll_Response,
   SAVE_ITEM,
-  ListItem_ToggleEdited, ListItem_Post_Request
+  ListItem_ToggleEdited, ListItem_Post_Request, ListItem_Delete_Request
 } from '../../constants/todoActionTypes';
 import { TodoListAction } from '../../actions/types/TodoListAction';
 
@@ -27,7 +26,7 @@ describe('IsFetchingAll reducer ', () => {
   it('sets state property isFetchingAll to false correctly (DELETE_ITEM action)', () => {
     const initialState = true;
     const action: TodoListAction = {
-      type: DELETE_ITEM,
+      type: ListItem_Delete_Request,
       payload: {},
     };
     const expectedState = false;

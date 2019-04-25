@@ -14,13 +14,14 @@ export type EditItemOwnProps = {
 export type EditItemDispatchProps = {
   readonly cancelEditing: () => TodoListAction,
   readonly saveItem: (text: string) => TodoListAction,
-  readonly deleteItem: () => TodoListAction
+  readonly deleteItem: () => void
 };
 
 type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
 
 type EditItemState = {
-  readonly text: string
+  readonly text: string,
+  readonly isFetching: boolean,
 };
 
 export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
@@ -38,13 +39,12 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
   constructor(props: EditItemProps) {
     super(props);
     this.state = {
-      text: props.item.text
+      text: props.item.text,
+      isFetching: props.item.isFetching
     };
   }
 
   _cancelEditing = (): TodoListAction => this.props.cancelEditing();
-
-  _deleteItem = (): TodoListAction => this.props.deleteItem();
 
   _editItem = (): TodoListAction => this.props.saveItem(this.state.text);
 
@@ -104,7 +104,7 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
               type="button"
               name="itemToModifyDeleteButton"
               value="Delete"
-              onClick={this._deleteItem}
+              onClick={this.props.deleteItem}
             >
               Delete
             </button>

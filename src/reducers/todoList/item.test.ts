@@ -6,7 +6,12 @@ import {
 } from '../../actions/baseActions';
 import { item } from './item';
 import { TodoListAction } from '../../actions/types/TodoListAction';
-import { ListItem_Post_Error, ListItem_Post_Response } from '../../constants/todoActionTypes';
+import {
+  ListItem_Delete_Error,
+  ListItem_Delete_Request,
+  ListItem_Post_Error,
+  ListItem_Post_Response
+} from '../../constants/todoActionTypes';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (ListItem_ToggleEdited action)', () => {
@@ -111,6 +116,56 @@ describe('ListItem reducer ', () => {
     });
 
     const newState = item(newItem, action);
+
+    expect(newState).toEqual(expectedResult);
+  });
+
+  it('toggles property isFetching and isEdited correctly - optimistic update (ListItem_Delete_Request action)', () => {
+    const id = '23';
+    const action: TodoListAction = {
+      type: ListItem_Delete_Request,
+      payload: {
+        id
+      },
+    };
+    const itemToDelete = new ListItem({
+      id,
+      text: 'text',
+      isFetching: false,
+      isEdited: true,
+    });
+    const expectedResult = new ListItem({
+      id,
+      text: 'text',
+      isFetching: true,
+      isEdited: false,
+    });
+
+    const newState = item(itemToDelete, action);
+
+    expect(newState).toEqual(expectedResult);
+  });
+
+  it('toggles property isFetching correctly - optimistic update (ListItem_Delete_Error action)', () => {
+    const id = '23';
+    const action: TodoListAction = {
+      type: ListItem_Delete_Error,
+      payload: {},
+    };
+    const itemToDelete = new ListItem({
+      id,
+      text: 'text',
+      isFetching: true,
+      isEdited: false,
+    });
+    const expectedResult = new ListItem({
+      id,
+      text: 'text',
+      isEdited: false,
+      isFetching: false,
+    });
+
+    const newState = item(itemToDelete, action);
 
     expect(newState).toEqual(expectedResult);
   });
