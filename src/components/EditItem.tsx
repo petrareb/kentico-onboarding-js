@@ -2,9 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isValidText } from '../utils/validateText';
-import { ListItem } from '../models/ListItem';
-import { ReactNode } from 'react';
 import { TodoListAction } from '../actions/types/TodoListAction';
+import { ListItem } from '../models/ListItem';
 
 export type EditItemOwnProps = {
   readonly item: ListItem,
@@ -13,7 +12,7 @@ export type EditItemOwnProps = {
 
 export type EditItemDispatchProps = {
   readonly cancelEditing: () => TodoListAction,
-  readonly saveItem: (text: string) => TodoListAction,
+  readonly saveItem: (text: string) => void,
   readonly deleteItem: () => void
 };
 
@@ -21,7 +20,7 @@ type EditItemProps = EditItemDispatchProps & EditItemOwnProps;
 
 type EditItemState = {
   readonly text: string,
-  readonly isFetching: boolean,
+  readonly isFetching: boolean
 };
 
 export class EditItem extends React.PureComponent<EditItemProps, EditItemState> {
@@ -44,25 +43,21 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
     };
   }
 
-  _cancelEditing = (): TodoListAction => this.props.cancelEditing();
-
-  _editItem = (): TodoListAction => this.props.saveItem(this.state.text);
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    event.persist();
+    const text = event.target.value;
     this.setState(() => ({
-      text: event.target.value
+      text
     }));
   };
 
-  render(): ReactNode {
-    const validText: boolean = isValidText(this.state.text);
 
-    const classes = classNames({
-      'input-group': true,
-      'has-error': !validText,
-      'has-success': validText
-    });
+  render(): JSX.Element {
+    const isTextValid = isValidText(this.state.text);
+    const classes = classNames(
+      'input-group',
+      isTextValid ? 'has-success' : 'has-error'
+    );
     return (
       <div className="list-group-item">
         <li
@@ -85,8 +80,8 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
               type="button"
               name="itemToModifySaveButton"
               value="Save"
-              onClick={this._editItem}
-              disabled={!validText}
+              onClick={!isTextValid ? undefined : () => this.props.saveItem(this.state.text)}
+              disabled={!isTextValid}
             >
               Save
             </button>
@@ -95,7 +90,7 @@ export class EditItem extends React.PureComponent<EditItemProps, EditItemState> 
               type="button"
               name="itemToModifyCancelButton"
               value="Cancel"
-              onClick={this._cancelEditing}
+              onClick={this.props.cancelEditing}
             >
               Cancel
             </button>

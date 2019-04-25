@@ -1,23 +1,23 @@
 import { List, OrderedMap } from "immutable";
-import {
-  items
-} from './items';
-import {
-  toggleEdited
-} from '../../actions/baseActions';
+
+import { items } from './items';
+import { toggleEdited } from '../../actions/baseActions';
 import { ListItem } from '../../models/ListItem';
 import { TodoListAction } from '../../actions/types/TodoListAction';
 import {
   ListItem_Delete_Error,
   ListItem_GetAll_Response,
   ListItem_Post_Error,
-  ListItem_Post_Response
+  ListItem_Post_Response,
+  ListItem_Put_Error,
+  ListItem_Put_Response
 } from '../../constants/todoActionTypes';
 import { addNewItem } from '../../actions/thunkActionCreators/postItemActionCreator';
 import {
   removeItem,
   removeItemSucceeded
 } from '../../actions/thunkActionCreators/deleteItemActionCreator';
+import { editItem } from '../../actions/thunkActionCreators/putItemActionCreator';
 
 describe('Items reducer ', () => {
   const makeCoffeeItem = new ListItem({
@@ -94,7 +94,7 @@ describe('Items reducer ', () => {
   });
 
   it('add loading item to list - optimistic update (ListItem_Post_Error, ListItem_Put_Error, ListItem_Delete_Error action)', () => {
-    const actionTypes = [ListItem_Post_Error, ListItem_Delete_Error];
+    const actionTypes = [ListItem_Post_Error, ListItem_Delete_Error, ListItem_Put_Error];
     for (const actionType in actionTypes) {
       const itemId = '2042';
       const itemToAdd = new ListItem({
@@ -173,6 +173,51 @@ describe('Items reducer ', () => {
     const expectedState = originalState.delete(itemToDelete.id);
 
     const newState = items(originalState, deletingAction);
+
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('edits item correctly (ListItem_Put_Request action)', () => {
+    const itemToEdit = new ListItem(originalState.first());
+    const newText = 'newText';
+    const editingAction: TodoListAction = editItem(itemToEdit.id, newText);
+    const editedItem: ListItem = itemToEdit.with({
+      isEdited: false,
+      text: newText,
+      isFetching: true
+    });
+    const expectedState: ListValues = originalState.update(itemToEdit.id, () => editedItem);
+
+    const newState: ListValues = items(originalState, editingAction);
+
+    expect(newState.size).toEqual(expectedState.size);
+    expect(newState).toEqual(expectedState);
+  });
+
+  it('cancels loading of item (ListItem_Put_Response action)', () => {
+    const itemId = '5';
+    const editedItem = new ListItem({
+      id: itemId,
+      text: 'happy',
+      isEdited: false,
+      isFetching: true,
+    });
+    const action: TodoListAction = {
+      type: ListItem_Put_Response,
+      payload: {
+        id: itemId
+      }
+    };
+    const changedPropItem = new ListItem({
+      id: itemId,
+      text: editedItem.text,
+      isEdited: false,
+      isFetching: false,
+    });
+    const prevState = OrderedMap<Guid, ListItem>([[editedItem.id, editedItem]]);
+    const expectedState = prevState.set(itemId, changedPropItem);
+
+    const newState = items(prevState, action);
 
     expect(newState).toEqual(expectedState);
   });

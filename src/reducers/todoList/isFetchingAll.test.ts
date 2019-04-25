@@ -3,10 +3,13 @@ import {
   ListItem_GetAll_Error,
   ListItem_GetAll_Request,
   ListItem_GetAll_Response,
-  SAVE_ITEM,
-  ListItem_ToggleEdited, ListItem_Post_Request, ListItem_Delete_Request
+  ListItem_ToggleEdited,
+  ListItem_Post_Request,
+  ListItem_Delete_Request,
+  ListItem_Put_Request
 } from '../../constants/todoActionTypes';
 import { TodoListAction } from '../../actions/types/TodoListAction';
+
 
 describe('IsFetchingAll reducer ', () => {
   it('sets state property isFetchingAll to true correctly (ListItem_GetAll_Request action)', () => {
@@ -21,9 +24,7 @@ describe('IsFetchingAll reducer ', () => {
     expect(newState).toEqual(expectedState);
   });
 
-
-
-  it('sets state property isFetchingAll to false correctly (DELETE_ITEM action)', () => {
+  it('sets state property isFetchingAll to false correctly (ListItem_Delete_Request action)', () => {
     const initialState = true;
     const action: TodoListAction = {
       type: ListItem_Delete_Request,
@@ -39,18 +40,6 @@ describe('IsFetchingAll reducer ', () => {
     const initialState = true;
     const action: TodoListAction = {
       type: ListItem_ToggleEdited,
-      payload: {},
-    };
-    const expectedState = false;
-    const newState = isFetchingAll(initialState, action);
-
-    expect(newState).toEqual(expectedState);
-  });
-
-  it('sets state property isFetchingAll to false correctly (SAVE_ITEM action)', () => {
-    const initialState = true;
-    const action: TodoListAction = {
-      type: SAVE_ITEM,
       payload: {},
     };
     const expectedState = false;
@@ -107,5 +96,15 @@ describe('IsFetchingAll reducer ', () => {
     expect(newState).toEqual(expectedState);
   });
 
+  it('sets state property isFetchingAll to false correctly (ListItem_Put_Request action)', () => {
+    const initialState = true;
+    const action: TodoListAction = {
+      type: ListItem_Put_Request,
+      payload: {},
+    };
+    const expectedState = false;
+    const newState = isFetchingAll(initialState, action);
 
+    expect(newState).toEqual(expectedState);
+  });
 });
