@@ -7,7 +7,7 @@ import {
 } from '../components/TodoList';
 import { memoizedIds } from '../selectors/memoizeIds';
 import { AppState } from '../store/AppState';
-import { getAllItems } from '../actions/thunkActions/getAllActions';
+import { getAllItems } from '../actions/thunkActions/getAllItems';
 
 
 const mapStateToProps = (state: AppState): TodoListStateProps => ({

@@ -6,6 +6,7 @@ import {
 } from '../../actions/baseActions';
 import { item } from './item';
 import { TodoListAction } from '../../actions/types/TodoListAction';
+import { ListItem_Post_Error, ListItem_Post_Response } from '../../constants/todoActionTypes';
 
 describe('ListItem reducer ', () => {
   it('toggles property isEdited correctly (ListItem_ToggleEdited action)', () => {
@@ -64,5 +65,53 @@ describe('ListItem reducer ', () => {
     const newState: ListItem = item(expectedState, invalidAction);
 
     expect(expectedState).toEqual(newState);
+  });
+
+  it('toggles property isFetching correctly - optimistic update (ListItem_Post_Response action)', () => {
+    const id = '23';
+    const action: TodoListAction = {
+      type: ListItem_Post_Response,
+      payload: {},
+    };
+    const addedItem = new ListItem({
+      id,
+      text: 'text',
+      isFetching: true,
+      isEdited: false,
+    });
+    const expectedResult = new ListItem({
+      id,
+      text: 'text',
+      isEdited: false,
+      isFetching: false,
+    });
+
+    const newState = item(addedItem, action);
+
+    expect(newState).toEqual(expectedResult);
+  });
+
+  it('toggles property isFetching correctly - optimistic update (ListItem_Post_Error action)', () => {
+    const id = '23';
+    const action: TodoListAction = {
+      type: ListItem_Post_Error,
+      payload: {},
+    };
+    const newItem = new ListItem({
+      id,
+      text: 'text',
+      isFetching: true,
+      isEdited: false,
+    });
+    const expectedResult = new ListItem({
+      id,
+      text: 'text',
+      isEdited: false,
+      isFetching: false,
+    });
+
+    const newState = item(newItem, action);
+
+    expect(newState).toEqual(expectedResult);
   });
 });
